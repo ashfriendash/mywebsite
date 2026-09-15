@@ -61,3 +61,334 @@ img{
     margin: 25px 0;
     box-shadow: 0 0 20px black;
 }
+#messageBox{
+
+    width:70%;
+    margin:20px auto;
+
+    padding:15px;
+
+    background:rgba(0,0,0,0.7);
+
+    color:gold;
+
+    border:2px solid gold;
+
+    border-radius:12px;
+
+    font-size:24px;
+
+    font-weight:bold;
+
+    text-align:center;
+
+    opacity:0;
+
+    transition:0.5s;
+
+}
+#notification{
+
+    position:fixed;
+
+    top:25px;
+
+    right:-350px;
+
+    width:280px;
+
+    padding:15px;
+
+    background:rgba(25,25,25,.95);
+
+    border-left:5px solid gold;
+
+    border-radius:10px;
+
+    color:white;
+
+    transition:right .5s;
+
+    box-shadow:0 0 20px rgba(0,0,0,.6);
+
+    z-index:9999;
+    backdrop-filter:blur(8px);
+
+}
+#notifTitle{
+
+    color:gold;
+
+    font-size:22px;
+
+    font-weight:bold;
+
+}
+#notifText{
+
+    margin-top:5px;
+
+    color:#ddd;
+
+    font-size:18px;
+
+}
+/* =========================
+   GAME LAYOUT
+   ========================= */
+
+body {
+    margin: 0;
+    min-height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-family: "Lora", serif;
+
+    position: relative;
+}
+
+
+/* =========================
+   ACTION PANEL
+   ========================= */
+
+.action-panel {
+    position: fixed;
+
+    left: 25px;
+    top: 50%;
+    transform: translateY(-50%);
+
+    width: 190px;
+
+    padding: 20px;
+
+    background: rgba(0, 0, 0, 0.65);
+
+    border: 2px solid gold;
+    border-radius: 15px;
+
+    backdrop-filter: blur(5px);
+
+    text-align: center;
+
+    z-index: 10;
+}
+
+.action-panel h2 {
+    color: gold;
+
+    font-family: "Cinzel", serif;
+
+    margin-top: 5px;
+    margin-bottom: 15px;
+}
+
+.action-panel button {
+    display: block;
+
+    width: 100%;
+
+    margin: 10px 0;
+
+    padding: 10px;
+
+    border: none;
+    border-radius: 8px;
+
+    background: #ffd000;
+
+    font-family: "Cinzel", serif;
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.action-panel button:hover {
+    transform: scale(1.05);
+
+    background: #ffe45c;
+}
+
+
+/* =========================
+   STORY BOX
+   ========================= */
+
+.story-box {
+    width: 650px;
+    min-height: 600px;
+
+    padding: 40px;
+
+    box-sizing: border-box;
+
+    text-align: center;
+
+    background: rgba(0, 0, 0, 0.55);
+
+    border: 2px solid gold;
+    border-radius: 20px;
+
+    backdrop-filter: blur(3px);
+
+    position: relative;
+}
+
+
+/* =========================
+   STATS
+   ========================= */
+
+.stats {
+    margin-bottom: 30px;
+}
+
+.stats p {
+    font-size: 22px;
+
+    margin: 12px 0;
+}
+
+
+/* =========================
+   TITLE
+   ========================= */
+
+.story-box h1 {
+    font-family: "Cinzel", serif;
+
+    color: gold;
+
+    font-size: 48px;
+
+    margin: 25px 0;
+}
+
+
+/* =========================
+   STORY TEXT
+   ========================= */
+
+.story-box > p {
+    font-size: 21px;
+
+    line-height: 1.7;
+
+    margin: 25px 0;
+}
+
+
+/* =========================
+   GO LEFT / GO RIGHT
+   ========================= */
+
+.choices {
+    display: flex;
+
+    justify-content: center;
+
+    gap: 50px;
+
+    margin-top: 45px;
+}
+
+.choices a {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    width: 150px;
+    height: 60px;
+
+    background: #ffd000;
+
+    color: black;
+
+    text-decoration: none;
+
+    border-radius: 12px;
+
+    font-family: "Cinzel", serif;
+
+    font-size: 20px;
+    font-weight: bold;
+
+    transition: 0.2s;
+}
+
+.choices a:hover {
+    transform: translateY(-4px) scale(1.05);
+
+    background: #ffe45c;
+}
+
+
+/* =========================
+   STEAM-STYLE NOTIFICATION
+   ========================= */
+
+#notification {
+
+    position: fixed;
+
+    right: 25px;
+    bottom: 30px;
+
+    width: 320px;
+
+    min-height: 80px;
+
+    padding: 15px 20px;
+
+    box-sizing: border-box;
+
+    background: rgba(20, 20, 25, 0.95);
+
+    border-left: 4px solid gold;
+
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.6);
+
+    color: white;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    z-index: 100;
+
+    /* IMPORTANT */
+    right: -380px;
+
+    transition: right 0.4s ease;
+}
+
+
+#notifTitle {
+
+    color: gold;
+
+    font-family: "Cinzel", serif;
+
+    font-size: 18px;
+
+    font-weight: bold;
+
+    margin-bottom: 5px;
+}
+
+
+#notifText {
+
+    color: white;
+
+    font-size: 15px;
+}
