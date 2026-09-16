@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Forest Merchant</title>
+
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Lora:wght@400;500&display=swap"
+          rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+
+<body>
+
+    <div class="story-box merchant-shop">
+
+        <!-- PLAYER STATS -->
+
+        <div class="stats">
+
+            <p id="health">❤️ Health: 100</p>
+
+            <p id="gold">💰 Gold: 0</p>
+
+            <p id="keys">🗝️ Keys: 0</p>
+
+            <p id="potion-count">🧪 Potions: 0</p>
+
+        </div>
+
+
+        <!-- USE POTION -->
+
+        <button class="use-potion-button" onclick="Heal()">
+            🧪 Use Potion
+        </button>
+
+
+        <!-- MERCHANT STORY -->
+
+        <h1>🧙 Forest Merchant</h1>
+
+        <p>
+            The merchant smiles strangely.
+        </p>
+
+        <p>
+            "Potion's only 40 gold," the merchant says.
+        </p>
+
+        <p>
+            "Three potions," he whispers.
+            "Then perhaps you'll discover what lies
+            behind my shop..."
+        </p>
+
+
+        <!-- PURCHASE PROGRESS -->
+
+        <p id="potion-purchases">
+            Potions Purchased: 0 / 3
+        </p>
+
+
+        <!-- SHOP -->
+
+        <div class="shop">
+
+            <button onclick="BuyPotion()">
+                🧪 Buy Potion — 40 Gold
+            </button>
+
+
+            <a
+                id="dark-shop-button"
+                href="darkshop.html"
+                style="display: none;"
+            >
+                🌑 Enter the Dark Shop
+            </a>
+
+        </div>
+
+
+        <!-- BACK -->
+
+        <div class="back-button">
+
+            <a href="left.html">
+                ← Back to Deep Forest
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <!-- STEAM-STYLE NOTIFICATION -->
+
+    <div id="notification">
+
+        <div id="notifTitle"></div>
+
+        <div id="notifText"></div>
+
+    </div>
+
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>

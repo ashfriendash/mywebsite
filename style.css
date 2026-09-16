@@ -1,258 +1,98 @@
-body{
-    background-image: url('images/forest.png');
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-    font-family: "Lora", serif;
-    color: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
-}
-.story-box{
-    width: 700px;
-    background: rgba(0, 0, 0, 0.65);
-    padding: 40px;
-    border-radius: 20px;
-    text-align: center;
-    box-shadow: 0px 0px 25px black;
-    border: 2px solid gold;
-}
-h1{
-    color: gold;
-    font-size: 45px;
-    font-family: "Cinzel", serif;
-    letter-spacing: 2px;
-}
-p{
-    font-size: 22px;
-    line-height: 1.6;
-    font-family: "Lora", serif;
-}
-.choices{
-    margin-top: 30px;
-    display: flex;
-    justify-content: center;
-    gap: 100px;
-    margin-top: 30px;
-}
-.choices a{
-    text-decoration: none;
-    color: black;
-    font-size: 22px;
-    background: gold;
-    padding: 15px 35px;
-    border-radius: 12px;
-    font-weight: bold;
-    transition: 0.3s;
-    font-family: "Cinzel", serif;
-}
-.choices a:hover{
-    background: orange;
-    transform: scale(1.1);
-    transition: 0.3s;
-    box-shadow: 0px 0px 15px gold;
-}
-img{
-    width: 500px;
-    border-radius: 15px;
-    margin: 25px 0;
-    box-shadow: 0 0 20px black;
-}
-#messageBox{
-
-    width:70%;
-    margin:20px auto;
-
-    padding:15px;
-
-    background:rgba(0,0,0,0.7);
-
-    color:gold;
-
-    border:2px solid gold;
-
-    border-radius:12px;
-
-    font-size:24px;
-
-    font-weight:bold;
-
-    text-align:center;
-
-    opacity:0;
-
-    transition:0.5s;
-
-}
-#notification{
-
-    position:fixed;
-
-    top:25px;
-
-    right:-350px;
-
-    width:280px;
-
-    padding:15px;
-
-    background:rgba(25,25,25,.95);
-
-    border-left:5px solid gold;
-
-    border-radius:10px;
-
-    color:white;
-
-    transition:right .5s;
-
-    box-shadow:0 0 20px rgba(0,0,0,.6);
-
-    z-index:9999;
-    backdrop-filter:blur(8px);
-
-}
-#notifTitle{
-
-    color:gold;
-
-    font-size:22px;
-
-    font-weight:bold;
-
-}
-#notifText{
-
-    margin-top:5px;
-
-    color:#ddd;
-
-    font-size:18px;
-
-}
 /* =========================
-   GAME LAYOUT
+   WHOLE PAGE
    ========================= */
 
 body {
     margin: 0;
     min-height: 100vh;
 
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    background-image: url("images/forest.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+
+    color: white;
 
     font-family: "Lora", serif;
 
-    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+
+    padding: 30px 20px;
+
+    box-sizing: border-box;
+
+    overflow-y: auto;
+}
+.back-button {
+    margin-top: 30px;
 }
 
+.back-button a {
+    color: #ddd;
 
-/* =========================
-   ACTION PANEL
-   ========================= */
+    text-decoration: none;
 
-.action-panel {
-    position: fixed;
+    font-family: "Lora", serif;
 
-    left: 25px;
-    top: 50%;
-    transform: translateY(-50%);
-
-    width: 190px;
-
-    padding: 20px;
-
-    background: rgba(0, 0, 0, 0.65);
-
-    border: 2px solid gold;
-    border-radius: 15px;
-
-    backdrop-filter: blur(5px);
-
-    text-align: center;
-
-    z-index: 10;
-}
-
-.action-panel h2 {
-    color: gold;
-
-    font-family: "Cinzel", serif;
-
-    margin-top: 5px;
-    margin-bottom: 15px;
-}
-
-.action-panel button {
-    display: block;
-
-    width: 100%;
-
-    margin: 10px 0;
-
-    padding: 10px;
-
-    border: none;
-    border-radius: 8px;
-
-    background: #ffd000;
-
-    font-family: "Cinzel", serif;
-    font-weight: bold;
-
-    cursor: pointer;
+    font-size: 15px;
 
     transition: 0.2s;
 }
 
-.action-panel button:hover {
-    transform: scale(1.05);
-
-    background: #ffe45c;
+.back-button a:hover {
+    color: gold;
 }
 
 
 /* =========================
-   STORY BOX
+   MAIN GAME WINDOW
    ========================= */
 
 .story-box {
-    width: 650px;
-    min-height: 600px;
+    width: min(720px, 95vw);
 
-    padding: 40px;
+    padding: 30px 45px;
 
     box-sizing: border-box;
 
-    text-align: center;
+    background: rgba(0, 0, 0, 0.58);
 
-    background: rgba(0, 0, 0, 0.55);
+    border: 2px solid rgba(255, 215, 0, 0.8);
 
-    border: 2px solid gold;
     border-radius: 20px;
 
-    backdrop-filter: blur(3px);
+    text-align: center;
 
-    position: relative;
+    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.6);
+
+    backdrop-filter: blur(4px);
 }
 
 
 /* =========================
-   STATS
+   PLAYER STATS
    ========================= */
 
 .stats {
-    margin-bottom: 30px;
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    gap: 35px;
+
+    margin-bottom: 15px;
 }
 
 .stats p {
-    font-size: 22px;
+    margin: 0;
 
-    margin: 12px 0;
+    font-size: 17px;
+
+    white-space: nowrap;
 }
 
 
@@ -261,13 +101,15 @@ body {
    ========================= */
 
 .story-box h1 {
-    font-family: "Cinzel", serif;
+    margin: 15px 0 20px;
 
     color: gold;
 
-    font-size: 48px;
+    font-family: "Cinzel", serif;
 
-    margin: 25px 0;
+    font-size: 46px;
+
+    letter-spacing: 2px;
 }
 
 
@@ -276,16 +118,20 @@ body {
    ========================= */
 
 .story-box > p {
-    font-size: 21px;
+    max-width: 600px;
+
+    margin: 18px auto;
+
+    font-family: "Lora", serif;
+
+    font-size: 19px;
 
     line-height: 1.7;
-
-    margin: 25px 0;
 }
 
 
 /* =========================
-   GO LEFT / GO RIGHT
+   MAIN STORY CHOICES
    ========================= */
 
 .choices {
@@ -293,19 +139,19 @@ body {
 
     justify-content: center;
 
-    gap: 50px;
+    gap: 65px;
 
-    margin-top: 45px;
+    margin-top: 35px;
 }
 
 .choices a {
     display: flex;
 
-    align-items: center;
     justify-content: center;
+    align-items: center;
 
-    width: 150px;
-    height: 60px;
+    width: 155px;
+    height: 55px;
 
     background: #ffd000;
 
@@ -317,16 +163,97 @@ body {
 
     font-family: "Cinzel", serif;
 
-    font-size: 20px;
+    font-size: 19px;
+
     font-weight: bold;
+
+    box-shadow: 0 5px 12px rgba(0, 0, 0, 0.35);
 
     transition: 0.2s;
 }
 
 .choices a:hover {
-    transform: translateY(-4px) scale(1.05);
+    transform: translateY(-3px) scale(1.04);
 
     background: #ffe45c;
+
+    box-shadow: 0 0 18px rgba(255, 215, 0, 0.5);
+}
+
+
+/* =========================
+   SMALL ACTION CONTROLS
+   ========================= */
+
+.action-panel {
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    flex-wrap: wrap;
+
+    gap: 8px;
+
+    margin-top: 25px;
+
+    padding-top: 18px;
+
+    border-top: 1px solid rgba(255, 215, 0, 0.3);
+}
+
+
+/* remove giant headings from action panel */
+
+.action-panel h2 {
+    width: 100%;
+
+    margin: 0 0 5px;
+
+    color: rgba(255, 215, 0, 0.8);
+
+    font-family: "Cinzel", serif;
+
+    font-size: 14px;
+
+    text-transform: uppercase;
+}
+
+
+/* small action buttons */
+
+.action-panel button {
+    width: auto;
+
+    padding: 8px 12px;
+
+    margin: 0;
+
+    background: rgba(15, 15, 15, 0.75);
+
+    color: #ddd;
+
+    border: 1px solid rgba(255, 215, 0, 0.45);
+
+    border-radius: 8px;
+
+    font-family: "Lora", serif;
+
+    font-size: 13px;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.action-panel button:hover {
+    color: gold;
+
+    border-color: gold;
+
+    background: rgba(255, 215, 0, 0.12);
+
+    transform: translateY(-2px);
 }
 
 
@@ -335,15 +262,15 @@ body {
    ========================= */
 
 #notification {
-
     position: fixed;
 
-    right: 25px;
-    bottom: 30px;
+    right: -380px;
+
+    bottom: 25px;
 
     width: 320px;
 
-    min-height: 80px;
+    min-height: 75px;
 
     padding: 15px 20px;
 
@@ -353,27 +280,17 @@ body {
 
     border-left: 4px solid gold;
 
+    border-radius: 6px;
+
     box-shadow: 0 5px 25px rgba(0, 0, 0, 0.6);
 
-    color: white;
-
-    display: flex;
-
-    flex-direction: column;
-
-    justify-content: center;
-
-    z-index: 100;
-
-    /* IMPORTANT */
-    right: -380px;
+    z-index: 1000;
 
     transition: right 0.4s ease;
 }
 
 
 #notifTitle {
-
     color: gold;
 
     font-family: "Cinzel", serif;
@@ -381,14 +298,282 @@ body {
     font-size: 18px;
 
     font-weight: bold;
-
-    margin-bottom: 5px;
 }
 
 
 #notifText {
+    margin-top: 5px;
 
-    color: white;
+    color: #ddd;
+
+    font-family: "Lora", serif;
 
     font-size: 15px;
+}
+
+
+/* =========================
+   MOBILE / SMALL SCREENS
+   ========================= */
+
+@media (max-width: 700px) {
+
+    .story-box {
+        padding: 25px 20px;
+    }
+
+    .stats {
+        gap: 12px;
+
+        flex-wrap: wrap;
+    }
+
+    .stats p {
+        font-size: 15px;
+    }
+
+    .story-box h1 {
+        font-size: 35px;
+    }
+
+    .choices {
+        gap: 20px;
+    }
+
+    .choices a {
+        width: 130px;
+    }
+
+}
+.fight-again,
+.back-link {
+    display: block;
+
+    width: fit-content;
+
+    margin: 15px auto;
+
+    padding: 10px 20px;
+
+    border-radius: 8px;
+
+    text-decoration: none;
+
+    font-family: "Cinzel", serif;
+
+    transition: 0.2s;
+}
+
+.fight-again {
+    background: #ffd000;
+    color: black;
+}
+
+.fight-again:hover {
+    background: #ffe45c;
+    transform: scale(1.05);
+}
+
+.back-link {
+    color: #ddd;
+
+    border: 1px solid rgba(255, 215, 0, 0.4);
+}
+
+.back-link:hover {
+    color: gold;
+}
+.use-potion-button {
+    background: rgba(0, 0, 0, 0.45);
+
+    color: #ddd;
+
+    border: 1px solid rgba(100, 220, 150, 0.6);
+
+    border-radius: 8px;
+
+    padding: 7px 14px;
+
+    margin-top: 5px;
+
+    font-family: "Lora", serif;
+
+    font-size: 14px;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.use-potion-button:hover {
+    background: rgba(100, 220, 150, 0.15);
+
+    color: #9cffb5;
+
+    transform: translateY(-2px);
+}
+./* =========================
+   DARK SHOP PAGE
+   ========================= */
+
+body.dark-shop-page {
+
+    background-image:
+        linear-gradient(
+            rgba(0, 0, 0, 0.45),
+            rgba(0, 0, 0, 0.45)
+        ),
+        url("images/darkshop-bg.png");
+
+    background-size: cover;
+
+    background-position: center;
+
+    background-repeat: no-repeat;
+
+    background-attachment: fixed;
+}
+
+
+/* =========================
+   DARK SHOP STORY BOX
+   ========================= */
+
+body.dark-shop-page {
+    background-image:
+        linear-gradient(
+            rgba(0, 0, 0, 0.45),
+            rgba(0, 0, 0, 0.45)
+        ),
+        url("images/darkshop-bg.png");
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+
+/* =========================
+   DARK SHOP TITLE
+   ========================= */
+
+.dark-shop h1 {
+
+    color: #d94b4b;
+
+    text-shadow:
+        0 0 12px rgba(180, 0, 0, 0.6);
+}
+
+
+/* =========================
+   EVIL MERCHANT IMAGE
+   ========================= */
+
+.merchant-image {
+
+    display: flex;
+
+    justify-content: center;
+
+    margin: 20px 0;
+}
+
+.merchant-image img {
+
+    width: min(380px, 80vw);
+
+    max-height: 300px;
+
+    object-fit: cover;
+
+    object-position: center;
+
+    border-radius: 14px;
+
+    border: 2px solid rgba(180, 40, 40, 0.7);
+
+    box-shadow:
+        0 8px 25px rgba(0, 0, 0, 0.8),
+        0 0 20px rgba(130, 0, 0, 0.35);
+}
+
+
+/* =========================
+   ENEMY BOX
+   ========================= */
+
+#enemy-box {
+
+    margin-top: 20px;
+
+    padding: 20px;
+
+    background: rgba(0, 0, 0, 0.45);
+
+    border-radius: 14px;
+
+    border: 1px solid rgba(180, 40, 40, 0.5);
+}
+
+
+/* =========================
+   COMBAT BUTTONS
+   ========================= */
+
+#combat-buttons {
+
+    display: flex;
+
+    justify-content: center;
+
+    gap: 12px;
+
+    flex-wrap: wrap;
+
+    margin-top: 18px;
+}
+
+#combat-buttons button {
+
+    padding: 10px 16px;
+
+    background: rgba(15, 10, 15, 0.9);
+
+    color: #eee;
+
+    border: 1px solid rgba(180, 40, 40, 0.65);
+
+    border-radius: 8px;
+
+    font-family: "Lora", serif;
+
+    font-size: 15px;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+#combat-buttons button:hover {
+
+    background: rgba(180, 40, 40, 0.25);
+
+    border-color: #d94b4b;
+
+    transform: translateY(-2px);
+}
+.merchant-shop {
+
+    background-image:
+        linear-gradient(
+            rgba(0, 0, 0, 0.45),
+            rgba(0, 0, 0, 0.45)
+        ),
+        url("images/merchant-bg.png");
+
+    background-size: cover;
+
+    background-position: center;
 }

@@ -12,13 +12,70 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
+    <body>
+
     <div class="story-box">
-            <h1>You chose Left!</h1>
-            <p>You walk down the left path and find a sparkling treasure chest.</p>
-            <div class="choices">
-                <a href="treasure.html">Open the treasure chest</a>
-                <a href="index.html">Go back</a>
-            </div>
+
+        <div class="stats">
+
+            <p id="health">❤️ Health: 100</p>
+            <p id="gold">💰 Gold: 0</p>
+            <p id="keys">🗝️ Keys: 0</p>
+            <p id="potion-count">🧪 Potions: 0</p>
+
+        </div>
+
+        <button class="use-potion-button" onclick="Heal()">
+            🧪 Use Potion
+        </button>
+
+        <h1>The Deep Forest</h1>
+
+        <p>
+            You venture deeper into the forest.
+        </p>
+
+        <p>
+            The path divides ahead.
+            You hear growling from one direction,
+            while a warm lantern glows in the other.
+        </p>
+
+        <div class="choices">
+
+            <a href="wolf.html">
+                🐺 Face the Wolf
+            </a>
+
+            <a href="merchant.html">
+                🧙 Visit the Merchant
+            </a>
+
+        </div>
+
+        <div class="back-button">
+
+            <a href="index.html">
+                ← Return to Forest Entrance
+            </a>
+
+        </div>
+
     </div>
+
+
+    <div id="notification">
+
+        <div id="notifTitle"></div>
+        <div id="notifText"></div>
+
+    </div>
+
+
+    <script src="script.js"></script>
+
+</body>
+
 </body>       
 </html>

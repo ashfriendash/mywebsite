@@ -1,104 +1,425 @@
-ShowNotification("Welcome to my Adventure Game!","");
-let health = 100;
-let gold = 0;
-let keys = 0;
-let ChestOpened = false;
-let enemyHealth = 50;
-console.log(health);
-console.log(gold);
-console.log(keys);
-UpdateStats()
-function LooseHealth(amount) {
-    health -= amount;
-    if(health>0){
-        ShowNotification(
-        "Pain! You lost " + amount + " health.", "Ouch!")
-    }
-    if (health<0){
-        health=0;
-    }
-    UpdateStats();
-    if (health==0){
-        ShowNotification("Game Over!","");
-    }
+// =========================
+// PLAYER DATA
+// =========================
+let potionsBought =
+    Number(localStorage.getItem("potionsBought")) || 0;
+
+let health = Number(localStorage.getItem("health")) || 100;
+let gold = Number(localStorage.getItem("gold")) || 0;
+let keys = Number(localStorage.getItem("keys")) || 0;
+let potions = Number(localStorage.getItem("potions")) || 0;
+
+
+let ChestOpened =
+    localStorage.getItem("ChestOpened") === "true";
+
+
+// =========================
+// ENEMY DATA
+// =========================
+
+let enemyType =
+    document.body.dataset.enemy || "wolf";
+
+let enemyHealth;
+
+if (enemyType === "wolf") {
+
+    enemyHealth = 50;
+
+} else if (enemyType === "merchant") {
+
+    enemyHealth = 80;
+
 }
-function GainGold(amount) {
-    gold += amount;
-    UpdateStats();
-    ShowNotification(
-    "💰 Gold Collected!",
-    "You gained " + amount + " gold."
-);
+
+
+// =========================
+// SAVE GAME
+// =========================
+
+function SaveGame() {
+
+    localStorage.setItem("health", health);
+    localStorage.setItem("gold", gold);
+    localStorage.setItem("keys", keys);
+    localStorage.setItem("potions", potions);
+    localStorage.setItem("ChestOpened", ChestOpened);
+    localStorage.setItem("potionsBought", potionsBought);
 }
-function FindKey() {
-    keys ++;
-    UpdateStats();
-    ShowNotification(
-    "🗝️ Key Found",
-    "You picked up a rusty key."
-);
-}
+
+
+// =========================
+// UPDATE PLAYER STATS
+// =========================
+
 function UpdateStats() {
-    document.getElementById("health").textContent = "❤️ Health: " + health;
-    document.getElementById("gold").textContent = "💰 Gold: " + gold;
-    document.getElementById("keys").textContent = "🗝️ Keys: " + keys;
-}
-function Heal() {
-    health += 20;
-    if (health>100){
-        health=100;
+
+    let healthDisplay =
+        document.getElementById("health");
+
+    let goldDisplay =
+        document.getElementById("gold");
+
+    let keysDisplay =
+        document.getElementById("keys");
+
+    let potionDisplay =
+        document.getElementById("potion-count");
+
+    let purchaseDisplay =
+        document.getElementById("potion-purchases");
+
+    let darkButton =
+        document.getElementById("dark-shop-button");
+
+
+    if (healthDisplay) {
+
+        healthDisplay.innerHTML =
+            "❤️ Health: " + health;
     }
-    ShowNotification(
-    "🧪 Potion",
-    "Health restored by 20."
-);
+
+
+    if (goldDisplay) {
+
+        goldDisplay.innerHTML =
+            "💰 Gold: " + gold;
+    }
+
+
+    if (keysDisplay) {
+
+        keysDisplay.innerHTML =
+            "🗝️ Keys: " + keys;
+    }
+
+
+    if (potionDisplay) {
+
+        potionDisplay.innerHTML =
+            "🧪 Potions: " + potions;
+    }
+
+
+    // Merchant purchase progress
+
+    if (purchaseDisplay) {
+
+        purchaseDisplay.innerHTML =
+            "Potions Purchased: " +
+            potionsBought +
+            " / 3";
+    }
+
+
+    // Unlock Dark Shop
+
+    if (darkButton) {
+
+        if (potionsBought >= 3) {
+
+            darkButton.style.display = "block";
+
+        } else {
+
+            darkButton.style.display = "none";
+        }
+    }
+}
+function ResetGame() {
+
+    localStorage.removeItem("health");
+    localStorage.removeItem("gold");
+    localStorage.removeItem("keys");
+    localStorage.removeItem("potions");
+    localStorage.removeItem("potionsBought");
+    localStorage.removeItem("ChestOpened");
+    localStorage.removeItem("merchantDefeated");
+
+    location.reload();
+}
+
+// =========================
+// NOTIFICATIONS
+// =========================
+
+function ShowNotification(title, text) {
+
+    let box = document.getElementById("notification");
+
+    if (!box) {
+        return;
+    }
+
+    let titleBox =
+        document.getElementById("notifTitle");
+
+    let textBox =
+        document.getElementById("notifText");
+
+    if (titleBox) {
+        titleBox.innerHTML = title;
+    }
+
+    if (textBox) {
+        textBox.innerHTML = text;
+    }
+
+    box.style.right = "25px";
+
+    setTimeout(function () {
+
+        box.style.right = "-380px";
+
+    }, 2000);
+}
+
+
+// =========================
+// HEALTH
+// =========================
+
+function LooseHealth(amount) {
+
+    health -= amount;
+
+    if (health < 0) {
+        health = 0;
+    }
+
     UpdateStats();
-}
-function OpenChest(){
-    if (ChestOpened==false){
-        GainGold(100);
-        ChestOpened=true;
+    SaveGame();
+
+    if (health > 0) {
+
         ShowNotification(
-    "💰 Gold Collected!",
-    "Added 100 Gold"
-);
+            "💔 Damage Taken",
+            "You lost " + amount + " health."
+        );
+
+    } else {
+
+        ShowNotification(
+            "💀 Game Over!",
+            "Your health reached zero."
+        );
     }
+}
+
+
+// =========================
+// GOLD
+// =========================
+
+function GainGold(amount) {
+
+    gold += amount;
+
+    UpdateStats();
+    SaveGame();
+
+    ShowNotification(
+        "💰 Gold Collected!",
+        "You gained " + amount + " gold."
+    );
+}
+
+
+// =========================
+// KEY
+// =========================
+
+function FindKey() {
+
+    keys++;
+
+    UpdateStats();
+    SaveGame();
+
+    ShowNotification(
+        "🗝️ Key Found!",
+        "You picked up a rusty key."
+    );
+}
+
+
+// =========================
+// HEAL / POTION
+// =========================
+
+function Heal() {
+
+    if (potions > 0) {
+
+        health += 20;
+
+        if (health > 100) {
+            health = 100;
+        }
+
+        potions--;
+
+        UpdateStats();
+        SaveGame();
+
+        ShowNotification(
+            "🧪 Potion Used",
+            "You restored 20 health."
+        );
+
+    } else {
+
+        ShowNotification(
+            "🧪 No Potions",
+            "You don't have a potion."
+        );
+    }
+}
+
+
+// =========================
+// BUY POTION
+// =========================
+
+function BuyPotion() {
+
+    if (gold >= 40) {
+
+        gold -= 40;
+
+        potions++;
+
+        potionsBought++;
+
+        UpdateStats();
+        SaveGame();
+
+        ShowNotification(
+            "🧪 Potion Purchased!",
+            "You spent 40 gold."
+        );
+
+        let purchaseDisplay =
+            document.getElementById("potion-purchases");
+
+        if (purchaseDisplay) {
+
+            purchaseDisplay.innerHTML =
+                "Potions Purchased: " +
+                potionsBought +
+                " / 3";
+        }
+
+        if (potionsBought === 1) {
+
+            ShowNotification(
+                "🧙 Merchant",
+                "Two more potions..."
+            );
+
+        }
+
+        if (potionsBought === 2) {
+
+            ShowNotification(
+                "🧙 Merchant",
+                "One more..."
+            );
+
+        }
+
+        if (potionsBought >= 3) {
+
+            ShowNotification(
+                "🌑 Secret Unlocked!",
+                "The merchant reveals a hidden door."
+            );
+
+            let darkButton =
+                document.getElementById(
+                    "dark-shop-button"
+                );
+
+            if (darkButton) {
+
+                darkButton.style.display = "block";
+            }
+        }
+
+    }
+
     else {
+
         ShowNotification(
-    "📦 Chest",
-    "The chest is empty."
-);
+            "💰 Not Enough Gold",
+            "You need 40 gold."
+        );
     }
-
 }
-function ShowNotification(title,text){
+// =========================
+// TREASURE CHEST
+// =========================
 
-    let box=document.getElementById("notification");
+function OpenChest() {
 
-    document.getElementById("notifTitle").innerHTML=title;
+    if (ChestOpened === false) {
 
-    document.getElementById("notifText").innerHTML=text;
+        GainGold(100);
 
-    box.style.right="20px";
+        ChestOpened = true;
 
-    setTimeout(function(){
+        SaveGame();
 
-        box.style.right="-350px";
+        ShowNotification(
+            "📦 Treasure Opened!",
+            "You found 100 gold!"
+        );
 
-    },2000);
+    } else {
 
+        ShowNotification(
+            "📦 Chest",
+            "The chest is empty."
+        );
+    }
 }
+
+
+// =========================
+// WOLF ATTACKS PLAYER
+// =========================
 
 function EnemyAttack() {
 
-    LooseHealth(10);
+    if (enemyType === "wolf") {
 
-    ShowNotification(
-        "🐺 Wolf Attack!",
-        "The wolf dealt 10 damage!"
-    );
+        LooseHealth(10);
 
+        ShowNotification(
+            "🐺 Wolf Attack!",
+            "The wolf dealt 10 damage."
+        );
+
+    }
+
+    else if (enemyType === "merchant") {
+
+        LooseHealth(15);
+
+        ShowNotification(
+            "👿 Merchant Attack!",
+            "The Evil Merchant dealt 15 damage."
+        );
+
+    }
 }
+
+
+// =========================
+// SWORD ATTACK
+// =========================
+
 function SwordAttack() {
 
     enemyHealth -= 10;
@@ -107,7 +428,12 @@ function SwordAttack() {
         enemyHealth = 0;
     }
 
-    document.getElementById("enemy-health").innerHTML = enemyHealth;
+    let enemyDisplay =
+        document.getElementById("enemy-health");
+
+    if (enemyDisplay) {
+        enemyDisplay.innerHTML = enemyHealth;
+    }
 
     ShowNotification(
         "🗡️ Sword Slash",
@@ -124,6 +450,12 @@ function SwordAttack() {
 
     }
 }
+
+
+// =========================
+// HEAVY ATTACK
+// =========================
+
 function HeavyAttack() {
 
     enemyHealth -= 20;
@@ -132,7 +464,12 @@ function HeavyAttack() {
         enemyHealth = 0;
     }
 
-    document.getElementById("enemy-health").innerHTML = enemyHealth;
+    let enemyDisplay =
+        document.getElementById("enemy-health");
+
+    if (enemyDisplay) {
+        enemyDisplay.innerHTML = enemyHealth;
+    }
 
     ShowNotification(
         "💥 Heavy Attack",
@@ -149,27 +486,93 @@ function HeavyAttack() {
 
     }
 }
+
+
+// =========================
+// WIN BATTLE
+// =========================
+
 function WinBattle() {
 
-    document.getElementById("enemy-box").innerHTML =
-        "<h2>🏆 Victory!</h2>" +
-        "<p>You defeated the Forest Wolf!</p>";
+    let enemyBox =
+        document.getElementById("enemy-box");
 
-    ShowNotification(
-        "🏆 Victory!",
-        "The Forest Wolf has been defeated!"
-    );
+    if (enemyType === "wolf") {
 
-    GainGold(50);
+        gold += 20;
+
+        UpdateStats();
+        SaveGame();
+
+        if (enemyBox) {
+
+            enemyBox.innerHTML =
+                "<h2>🏆 Wolf Defeated!</h2>" +
+                "<p>You found 20 gold.</p>" +
+                '<a href="wolf.html" class="fight-again">' +
+                "⚔️ Fight Again" +
+                "</a>" +
+                '<a href="left.html" class="back-link">' +
+                "← Back to Deep Forest" +
+                "</a>";
+        }
+
+        ShowNotification(
+            "🐺 Wolf Defeated!",
+            "+20 Gold"
+        );
+
+    }
+
+    else if (enemyType === "merchant") {
+
+        localStorage.setItem(
+            "merchantDefeated",
+            "true"
+        );
+
+        if (enemyBox) {
+
+            enemyBox.innerHTML =
+                "<h2>🏆 Evil Merchant Defeated!</h2>" +
+                "<p>The darkness surrounding the shop fades.</p>" +
+                '<a href="left.html" class="back-link">' +
+                "← Return to Deep Forest" +
+                "</a>";
+        }
+
+        ShowNotification(
+            "👿 Merchant Defeated!",
+            "You have broken the curse."
+        );
+    }
 }
+
+// =========================
+// RUN AWAY
+// =========================
+
 function RunAway() {
 
     ShowNotification(
         "🏃 Escaped!",
-        "You escaped from the Forest Wolf!"
+        "You escaped from the Forest Wolf."
     );
 
-    document.getElementById("enemy-box").innerHTML =
-        "<h2>🌲 You Escaped</h2>" +
-        "<p>You ran deeper into the forest.</p>";
+    let enemyBox =
+        document.getElementById("enemy-box");
+
+    if (enemyBox) {
+
+        enemyBox.innerHTML =
+            "<h2>🌲 You Escaped</h2>" +
+            "<p>You ran deeper into the forest.</p>";
+    }
 }
+
+
+// =========================
+// PAGE START
+// =========================
+
+UpdateStats();

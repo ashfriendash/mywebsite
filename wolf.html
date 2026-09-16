@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Forest Wolf</title>
+
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Lora:wght@400;500&display=swap"
+          rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+<body data-enemy="wolf">
+
+    <div class="story-box">
+
+        <div class="stats">
+
+            <p id="health">❤️ Health: 100</p>
+            <p id="gold">💰 Gold: 0</p>
+            <p id="keys">🗝️ Keys: 0</p>
+
+        </div>
+
+
+        <h1>🐺 Forest Wolf</h1>
+
+        <p>
+            A wild wolf blocks your path.
+        </p>
+
+
+        <div id="enemy-box">
+
+            <h2>Forest Wolf</h2>
+
+            <p>
+                Health:
+                <span id="enemy-health">50</span>
+            </p>
+
+
+            <div id="combat-buttons">
+
+                <button onclick="SwordAttack()">
+                    🗡️ Sword Slash
+                </button>
+
+                <button onclick="HeavyAttack()">
+                    💥 Heavy Attack
+                </button>
+
+                <button onclick="RunAway()">
+                    🏃 Run Away
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <div class="back-button">
+
+            <a href="left.html">
+                ← Back to Deep Forest
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <div id="notification">
+
+        <div id="notifTitle"></div>
+        <div id="notifText"></div>
+
+    </div>
+
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>

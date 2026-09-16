@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<script>
+    enemyHealth = 80;
+</script>
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>The Dark Shop</title>
+
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Lora:wght@400;500&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body class="dark-shop-page" data-enemy="merchant">
+
+    <div class="story-box dark-shop">
+
+        <!-- PLAYER STATS -->
+        <div class="stats">
+
+            <p id="health">❤️ Health: 100</p>
+            <p id="gold">💰 Gold: 0</p>
+            <p id="keys">🗝️ Keys: 0</p>
+            <p id="potion-count">🧪 Potions: 0</p>
+
+        </div>
+
+        <!-- USE POTION -->
+        <button class="use-potion-button" onclick="Heal()">
+            🧪 Use Potion
+        </button>
+
+        <!-- TITLE -->
+        <h1>🌑 The Dark Shop</h1>
+
+        <!-- STORY -->
+        <p>
+            The warm lights disappear.
+        </p>
+
+        <p>
+            The merchant's friendly smile fades.
+            His true form is finally revealed.
+        </p>
+
+        <!-- EVIL MERCHANT IMAGE -->
+        <div class="merchant-image">
+
+            <img
+                src="images/evil-merchant.png"
+                alt="Evil Merchant"
+            >
+
+        </div>
+
+        <!-- ENEMY -->
+        <div id="enemy-box">
+
+            <h2>👿 Evil Merchant</h2>
+
+            <p>
+                Health:
+                <span id="enemy-health">80</span>
+            </p>
+
+            <div id="combat-buttons">
+
+                <button onclick="SwordAttack()">
+                    🗡️ Sword Slash
+                </button>
+
+                <button onclick="HeavyAttack()">
+                    💥 Heavy Attack
+                </button>
+
+                <button onclick="RunAway()">
+                    🏃 Run Away
+                </button>
+
+            </div>
+
+        </div>
+
+        <!-- BACK -->
+        <div class="back-button">
+
+            <a href="merchant.html">
+                ← Back to Merchant
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <!-- STEAM NOTIFICATION -->
+
+    <div id="notification">
+
+        <div id="notifTitle"></div>
+
+        <div id="notifText"></div>
+
+    </div>
+
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>

@@ -12,43 +12,13 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <body>
+<body>
 
-    <!-- LEFT SIDE: GAME ACTIONS -->
-    <div class="action-panel">
-
-        <h2>🎒 Actions</h2>
-
-        <button onclick="LooseHealth(20)">
-            🪨 Touch the Cursed Stone
-        </button>
-
-        <button onclick="GainGold(25)">
-            💰 Pick up Gold
-        </button>
-
-        <button onclick="FindKey()">
-            🗝️ Pick up Key
-        </button>
-
-        <button onclick="Heal()">
-            🧪 Drink Potion
-        </button>
-
-        <h2>💎 Treasure</h2>
-
-        <button onclick="OpenChest()">
-            📦 Open Chest
-        </button>
-
-    </div>
-
-
-    <!-- CENTER: MAIN STORY -->
     <div class="story-box">
 
-        <!-- PLAYER STATS -->
         <div class="stats">
+
+            <div class="stats">
 
             <p id="health">❤️ Health: 100</p>
 
@@ -56,13 +26,20 @@
 
             <p id="keys">🗝️ Keys: 0</p>
 
-        </div>
+            <p id="potion-count">🧪 Potions: 0</p>
 
+            </div>
+
+            <button class="use-potion-button" onclick="Heal()">
+                🧪 Use Potion
+            </button>
+
+        </div>
 
         <h1>The Lost Forest</h1>
 
         <p>
-            You wake up in a mysterious forest
+            You wake up in a mysterious forest.
         </p>
 
         <p>
@@ -71,8 +48,6 @@
             The other glows with warm sunlight.
         </p>
 
-
-        <!-- STORY CHOICES -->
         <div class="choices">
 
             <a href="left.html">Go Left</a>
@@ -81,17 +56,42 @@
 
         </div>
 
+        <div class="action-panel">
+
+            <button onclick="LooseHealth(20)">
+                🪨 Cursed Stone
+            </button>
+
+            <button onclick="GainGold(25)">
+                💰 Pick Up Gold
+            </button>
+
+            <button onclick="FindKey()">
+                🗝️ Find Key
+            </button>
+
+            <button onclick="Heal()">
+                🧪 Drink Potion
+            </button>
+
+            <button onclick="OpenChest()">
+                📦 Open Chest
+            </button>
+
+        </div>
+
     </div>
 
 
-    <!-- NOTIFICATION -->
     <div id="notification">
 
         <div id="notifTitle"></div>
-
         <div id="notifText"></div>
 
     </div>
+    <button class="reset-button" onclick="ResetGame()">
+    🔄 Reset Game
+    </button>
 
 
     <script src="script.js"></script>
