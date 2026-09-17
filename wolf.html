@@ -23,7 +23,10 @@
     <link rel="stylesheet" href="style.css">
 
 </head>
+
 <body data-enemy="wolf">
+
+    <!-- MAIN GAME -->
 
     <div class="story-box">
 
@@ -34,6 +37,18 @@
             <p id="keys">🗝️ Keys: 0</p>
 
         </div>
+        <div class="hp-section">
+
+    <div class="hp-label">
+        ❤️ Your Health
+        <span id="player-health-text">100 / 100</span>
+    </div>
+
+    <div class="hp-bar">
+        <div id="player-health-bar" class="hp-fill"></div>
+    </div>
+
+</div>
 
 
         <h1>🐺 Forest Wolf</h1>
@@ -47,10 +62,18 @@
 
             <h2>Forest Wolf</h2>
 
-            <p>
-                Health:
-                <span id="enemy-health">50</span>
-            </p>
+            <div class="enemy-hp-section">
+
+            <div class="hp-label">
+                🐺 Wolf Health
+                <span id="enemy-health-text">50 / 50</span>
+            </div>
+
+            <div class="hp-bar enemy-bar">
+                <div id="enemy-health-bar" class="hp-fill"></div>
+            </div>
+
+            </div>
 
 
             <div id="combat-buttons">
@@ -83,9 +106,46 @@
     </div>
 
 
+    <!-- GAME OVER SCREEN -->
+
+    <div id="game-over" class="game-over">
+
+        <div class="game-over-card">
+
+            <h1>💀 You Have Fallen</h1>
+
+            <p>
+                Your health has reached zero.
+            </p>
+
+            <p>
+                Don't worry — your gold, keys,
+                potions and other progress are safe.
+            </p>
+
+            <p id="revive-count">
+                Revive Progress: 0 / 10
+            </p>
+
+            <button
+                class="revive-button"
+                onclick="ReviveGame()">
+
+                ✨ Click to Revive
+
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- STEAM-STYLE NOTIFICATION -->
+
     <div id="notification">
 
         <div id="notifTitle"></div>
+
         <div id="notifText"></div>
 
     </div>

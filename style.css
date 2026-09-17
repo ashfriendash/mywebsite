@@ -1,494 +1,1579 @@
-/* =========================
-   WHOLE PAGE
-   ========================= */
+/* =========================================================
+   THE LOST FOREST — CLEAN MASTER STYLESHEET
+   ========================================================= */
+
+/* -------------------------
+   GLOBAL RESET / VIEWPORT
+   ------------------------- */
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html {
+    overflow: hidden;
+}
 
 body {
-    margin: 0;
     min-height: 100vh;
+    height: 100vh;
+    overflow: hidden;
 
-    background-image: url("images/forest.png");
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 18px;
+
+    color: #f5f2e9;
+    font-family: "Lora", serif;
+
+    background-image:
+        linear-gradient(
+            rgba(7, 18, 12, 0.18),
+            rgba(7, 18, 12, 0.28)
+        ),
+        url("images/forest.png");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     background-attachment: fixed;
-
-    color: white;
-
-    font-family: "Lora", serif;
-
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-
-    padding: 30px 20px;
-
-    box-sizing: border-box;
-
-    overflow-y: auto;
-}
-.back-button {
-    margin-top: 30px;
 }
 
-.back-button a {
-    color: #ddd;
-
-    text-decoration: none;
-
-    font-family: "Lora", serif;
-
-    font-size: 15px;
-
-    transition: 0.2s;
+button,
+a {
+    -webkit-tap-highlight-color: transparent;
 }
 
-.back-button a:hover {
-    color: gold;
+button {
+    font: inherit;
 }
 
-
-/* =========================
+/* -------------------------
    MAIN GAME WINDOW
-   ========================= */
+   ------------------------- */
 
 .story-box {
-    width: min(720px, 95vw);
+    position: relative;
+    isolation: isolate;
 
-    padding: 30px 45px;
+    width: min(820px, 94vw);
+    max-height: calc(100vh - 36px);
 
-    box-sizing: border-box;
+    padding: 24px 30px;
 
-    background: rgba(0, 0, 0, 0.58);
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
 
-    border: 2px solid rgba(255, 215, 0, 0.8);
-
-    border-radius: 20px;
+    overflow: hidden;
 
     text-align: center;
 
-    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.6);
+    background:
+        linear-gradient(
+            180deg,
+            rgba(4, 10, 8, 0.78),
+            rgba(3, 8, 6, 0.86)
+        );
 
-    backdrop-filter: blur(4px);
+    border: 2px solid rgba(255, 215, 0, 0.78);
+    border-radius: 22px;
+
+    box-shadow:
+        0 18px 50px rgba(0, 0, 0, 0.52),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.03);
+
+    backdrop-filter: blur(7px);
 }
 
+/* Keep everything above merchant-shop's decorative layer. */
+.story-box > * {
+    position: relative;
+    z-index: 2;
+}
 
-/* =========================
+/* -------------------------
+   TYPOGRAPHY
+   ------------------------- */
+
+.story-box h1,
+.story-box h2,
+.story-box h3 {
+    font-family: "Cinzel", serif;
+}
+
+.story-box h1 {
+    margin: 8px 0 12px;
+
+    color: #ffd51a;
+
+    font-size: clamp(34px, 4.5vw, 50px);
+    line-height: 1.08;
+    letter-spacing: 1.5px;
+
+    text-shadow:
+        0 0 12px rgba(255, 215, 0, 0.20);
+}
+
+.story-box > p {
+    max-width: 680px;
+
+    margin: 8px auto;
+
+    font-size: 17px;
+    line-height: 1.5;
+}
+
+/* -------------------------
    PLAYER STATS
-   ========================= */
+   ------------------------- */
 
 .stats {
     display: flex;
-
-    justify-content: center;
     align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 16px 26px;
 
-    gap: 35px;
-
-    margin-bottom: 15px;
+    margin: 0 0 6px;
 }
 
 .stats p {
     margin: 0;
-
-    font-size: 17px;
-
     white-space: nowrap;
+
+    font-size: 15px;
+    line-height: 1.25;
 }
 
+/* -------------------------
+   UTILITY / POTION BUTTONS
+   ------------------------- */
 
-/* =========================
-   TITLE
-   ========================= */
-
-.story-box h1 {
-    margin: 15px 0 20px;
-
-    color: gold;
-
-    font-family: "Cinzel", serif;
-
-    font-size: 46px;
-
-    letter-spacing: 2px;
-}
-
-
-/* =========================
-   STORY TEXT
-   ========================= */
-
-.story-box > p {
-    max-width: 600px;
-
-    margin: 18px auto;
-
-    font-family: "Lora", serif;
-
-    font-size: 19px;
-
-    line-height: 1.7;
-}
-
-
-/* =========================
-   MAIN STORY CHOICES
-   ========================= */
-
-.choices {
+.utility-row {
     display: flex;
-
-    justify-content: center;
-
-    gap: 65px;
-
-    margin-top: 35px;
-}
-
-.choices a {
-    display: flex;
-
     justify-content: center;
     align-items: center;
 
-    width: 155px;
-    height: 55px;
-
-    background: #ffd000;
-
-    color: black;
-
-    text-decoration: none;
-
-    border-radius: 12px;
-
-    font-family: "Cinzel", serif;
-
-    font-size: 19px;
-
-    font-weight: bold;
-
-    box-shadow: 0 5px 12px rgba(0, 0, 0, 0.35);
-
-    transition: 0.2s;
+    margin: 2px 0 7px;
 }
 
-.choices a:hover {
-    transform: translateY(-3px) scale(1.04);
+.use-potion-button,
+.buy-potion-button {
+    border: 1px solid rgba(109, 224, 146, 0.68);
+    border-radius: 10px;
 
-    background: #ffe45c;
-
-    box-shadow: 0 0 18px rgba(255, 215, 0, 0.5);
-}
-
-
-/* =========================
-   SMALL ACTION CONTROLS
-   ========================= */
-
-.action-panel {
-    display: flex;
-
-    justify-content: center;
-    align-items: center;
-
-    flex-wrap: wrap;
-
-    gap: 8px;
-
-    margin-top: 25px;
-
-    padding-top: 18px;
-
-    border-top: 1px solid rgba(255, 215, 0, 0.3);
-}
-
-
-/* remove giant headings from action panel */
-
-.action-panel h2 {
-    width: 100%;
-
-    margin: 0 0 5px;
-
-    color: rgba(255, 215, 0, 0.8);
-
-    font-family: "Cinzel", serif;
-
-    font-size: 14px;
-
-    text-transform: uppercase;
-}
-
-
-/* small action buttons */
-
-.action-panel button {
-    width: auto;
-
-    padding: 8px 12px;
-
-    margin: 0;
-
-    background: rgba(15, 15, 15, 0.75);
-
-    color: #ddd;
-
-    border: 1px solid rgba(255, 215, 0, 0.45);
-
-    border-radius: 8px;
-
-    font-family: "Lora", serif;
-
-    font-size: 13px;
+    color: #e4ffeb;
 
     cursor: pointer;
 
-    transition: 0.2s;
+    transition:
+        transform 0.18s ease,
+        background 0.18s ease,
+        box-shadow 0.18s ease,
+        border-color 0.18s ease;
+}
+
+.use-potion-button {
+    padding: 7px 14px;
+    margin: 0;
+
+    background: rgba(8, 42, 25, 0.72);
+    font-size: 13px;
+}
+
+.use-potion-button:hover {
+    transform: translateY(-2px);
+    border-color: #a0ffc0;
+    background: rgba(30, 105, 60, 0.58);
+    box-shadow: 0 0 16px rgba(80, 230, 135, 0.28);
+}
+
+.buy-potion-button {
+    display: block;
+    width: 250px;
+
+    margin: 15px auto;
+    padding: 12px 18px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #153b27,
+            #286c46,
+            #153b27
+        );
+
+    font-family: "Cinzel", serif;
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+
+    box-shadow:
+        0 0 12px rgba(80, 215, 130, 0.16),
+        inset 0 0 10px rgba(0, 0, 0, 0.28);
+}
+
+.buy-potion-button:hover {
+    transform: translateY(-2px) scale(1.025);
+    border-color: #a0ffbd;
+    background:
+        linear-gradient(
+            135deg,
+            #1e5935,
+            #32865a,
+            #1e5935
+        );
+    box-shadow: 0 0 20px rgba(90, 235, 145, 0.42);
+}
+
+/* -------------------------
+   MAIN CHOICES
+   ------------------------- */
+
+.choices,
+.left-path-choices {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 24px;
+
+    margin-top: 18px;
+}
+
+.choices a,
+.left-path-choices a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    min-width: 155px;
+    min-height: 54px;
+    padding: 10px 17px;
+
+    border-radius: 12px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ffd000,
+            #ffda28,
+            #ffd000
+        );
+
+    color: #111;
+
+    text-decoration: none;
+    text-align: center;
+
+    font-family: "Cinzel", serif;
+    font-size: 17px;
+    font-weight: 700;
+
+    box-shadow:
+        0 7px 16px rgba(0, 0, 0, 0.32),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.12);
+
+    transition:
+        transform 0.18s ease,
+        box-shadow 0.18s ease,
+        filter 0.18s ease;
+}
+
+.choices a:hover,
+.left-path-choices a:hover {
+    transform: translateY(-3px) scale(1.035);
+    filter: brightness(1.05);
+
+    box-shadow:
+        0 0 20px rgba(255, 215, 0, 0.38),
+        0 8px 18px rgba(0, 0, 0, 0.34);
+}
+
+.choices a:active,
+.left-path-choices a:active {
+    transform: translateY(1px) scale(0.99);
+}
+
+/* -------------------------
+   SMALL ACTION PANEL (INDEX)
+   ------------------------- */
+
+.action-panel {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 8px;
+
+    margin-top: 18px;
+    padding-top: 14px;
+
+    border-top: 1px solid rgba(255, 215, 0, 0.28);
+}
+
+.action-panel h2 {
+    width: 100%;
+    margin: 0 0 2px;
+
+    color: rgba(255, 220, 80, 0.88);
+
+    font-size: 13px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.action-panel button {
+    padding: 8px 12px;
+
+    background: rgba(8, 10, 10, 0.70);
+    color: #e5e0d8;
+
+    border: 1px solid rgba(255, 215, 0, 0.42);
+    border-radius: 9px;
+
+    font-size: 12px;
+    cursor: pointer;
+
+    transition:
+        transform 0.18s ease,
+        background 0.18s ease,
+        color 0.18s ease,
+        border-color 0.18s ease;
 }
 
 .action-panel button:hover {
-    color: gold;
-
-    border-color: gold;
-
-    background: rgba(255, 215, 0, 0.12);
-
     transform: translateY(-2px);
+    color: #ffe56b;
+    border-color: rgba(255, 215, 0, 0.86);
+    background: rgba(255, 215, 0, 0.10);
 }
 
+.reset-area {
+    display: flex;
+    justify-content: center;
 
-/* =========================
-   STEAM-STYLE NOTIFICATION
-   ========================= */
-
-#notification {
-    position: fixed;
-
-    right: -380px;
-
-    bottom: 25px;
-
-    width: 320px;
-
-    min-height: 75px;
-
-    padding: 15px 20px;
-
-    box-sizing: border-box;
-
-    background: rgba(20, 20, 25, 0.95);
-
-    border-left: 4px solid gold;
-
-    border-radius: 6px;
-
-    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.6);
-
-    z-index: 1000;
-
-    transition: right 0.4s ease;
+    margin-top: 10px;
 }
 
+.reset-area button {
+    padding: 6px 11px;
 
-#notifTitle {
-    color: gold;
+    background: rgba(4, 7, 7, 0.58);
+    color: #aaa;
 
-    font-family: "Cinzel", serif;
+    border: 1px solid rgba(255, 215, 0, 0.24);
+    border-radius: 8px;
 
-    font-size: 18px;
+    font-size: 11px;
+    cursor: pointer;
 
-    font-weight: bold;
+    transition: 0.18s ease;
 }
 
+.reset-area button:hover {
+    color: #ffe56b;
+    border-color: rgba(255, 215, 0, 0.68);
+    background: rgba(255, 215, 0, 0.07);
+}
 
-#notifText {
-    margin-top: 5px;
+/* -------------------------
+   BACK LINKS / NAVIGATION
+   ------------------------- */
 
-    color: #ddd;
+.back-button {
+    margin-top: 14px;
+    flex-shrink: 0;
+}
+
+.back-button a,
+.back-link {
+    color: #ddd7cd;
+    text-decoration: none;
 
     font-family: "Lora", serif;
+    font-size: 14px;
 
-    font-size: 15px;
+    transition: color 0.18s ease;
 }
 
-
-/* =========================
-   MOBILE / SMALL SCREENS
-   ========================= */
-
-@media (max-width: 700px) {
-
-    .story-box {
-        padding: 25px 20px;
-    }
-
-    .stats {
-        gap: 12px;
-
-        flex-wrap: wrap;
-    }
-
-    .stats p {
-        font-size: 15px;
-    }
-
-    .story-box h1 {
-        font-size: 35px;
-    }
-
-    .choices {
-        gap: 20px;
-    }
-
-    .choices a {
-        width: 130px;
-    }
-
+.back-button a:hover,
+.back-link:hover {
+    color: #ffe16a;
 }
+
 .fight-again,
 .back-link {
     display: block;
-
     width: fit-content;
 
-    margin: 15px auto;
+    margin: 10px auto;
+    padding: 9px 18px;
 
-    padding: 10px 20px;
-
-    border-radius: 8px;
+    border-radius: 9px;
 
     text-decoration: none;
-
     font-family: "Cinzel", serif;
+    font-size: 14px;
+    font-weight: 700;
 
-    transition: 0.2s;
+    transition:
+        transform 0.18s ease,
+        box-shadow 0.18s ease,
+        background 0.18s ease,
+        border-color 0.18s ease;
 }
 
 .fight-again {
     background: #ffd000;
-    color: black;
+    color: #111;
 }
 
 .fight-again:hover {
+    transform: translateY(-2px);
     background: #ffe45c;
-    transform: scale(1.05);
+    box-shadow: 0 0 16px rgba(255, 215, 0, 0.35);
 }
 
 .back-link {
     color: #ddd;
-
-    border: 1px solid rgba(255, 215, 0, 0.4);
+    border: 1px solid rgba(255, 215, 0, 0.32);
+    background: rgba(0, 0, 0, 0.18);
 }
 
 .back-link:hover {
-    color: gold;
+    transform: translateY(-2px);
+    color: #ffe16a;
+    border-color: rgba(255, 215, 0, 0.7);
 }
-.use-potion-button {
-    background: rgba(0, 0, 0, 0.45);
 
-    color: #ddd;
+/* -------------------------
+   STEAM-STYLE NOTIFICATION
+   ------------------------- */
 
-    border: 1px solid rgba(100, 220, 150, 0.6);
+#notification {
+    position: fixed;
+    right: -390px;
+    bottom: 20px;
+    z-index: 5000;
 
+    width: min(320px, calc(100vw - 30px));
+    min-height: 72px;
+    padding: 14px 18px;
+
+    background: rgba(18, 19, 23, 0.96);
+
+    border-left: 4px solid #ffd43b;
     border-radius: 8px;
 
-    padding: 7px 14px;
+    box-shadow:
+        0 8px 30px rgba(0, 0, 0, 0.6),
+        0 0 16px rgba(255, 212, 59, 0.10);
 
-    margin-top: 5px;
+    transition: right 0.38s ease;
+}
 
-    font-family: "Lora", serif;
+#notifTitle {
+    color: #ffd43b;
 
+    font-family: "Cinzel", serif;
+    font-size: 16px;
+    font-weight: 700;
+}
+
+#notifText {
+    margin-top: 4px;
+
+    color: #ddd;
     font-size: 14px;
+    line-height: 1.4;
+}
+
+/* -------------------------
+   HP BARS
+   ------------------------- */
+
+.hp-section,
+.enemy-hp-section {
+    width: min(520px, 90%);
+    margin: 8px auto;
+    flex-shrink: 0;
+}
+
+.hp-label {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+
+    margin-bottom: 6px;
+
+    color: #ece8df;
+
+    font-family: "Cinzel", serif;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.hp-bar {
+    width: 100%;
+    height: 15px;
+
+    overflow: hidden;
+
+    background: rgba(0, 0, 0, 0.72);
+
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    border-radius: 999px;
+
+    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.72);
+}
+
+.hp-fill {
+    width: 100%;
+    height: 100%;
+
+    background: linear-gradient(90deg, #3acb65, #8cff9e);
+
+    border-radius: inherit;
+
+    transition:
+        width 0.30s ease,
+        background 0.30s ease;
+
+    box-shadow: 0 0 8px rgba(80, 255, 120, 0.30);
+}
+
+.enemy-bar .hp-fill {
+    background: linear-gradient(90deg, #c52d2d, #ff7777);
+    box-shadow: 0 0 8px rgba(255, 60, 60, 0.30);
+}
+
+/* -------------------------
+   ENEMY / COMBAT
+   ------------------------- */
+
+#enemy-box {
+    margin: 10px auto 0;
+    padding: 14px 16px;
+
+    width: min(650px, 100%);
+
+    background: rgba(0, 0, 0, 0.38);
+
+    border: 1px solid rgba(210, 60, 60, 0.48);
+    border-radius: 14px;
+}
+
+#enemy-box h2 {
+    margin: 3px 0 7px;
+    font-size: 22px;
+}
+
+#enemy-box p {
+    margin: 5px 0;
+    font-size: 14px;
+}
+
+#combat-buttons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 8px;
+
+    margin-top: 9px;
+}
+
+#combat-buttons button {
+    padding: 8px 13px;
+
+    background: rgba(13, 10, 14, 0.90);
+    color: #eee;
+
+    border: 1px solid rgba(190, 55, 55, 0.66);
+    border-radius: 9px;
+
+    font-size: 13px;
+    cursor: pointer;
+
+    transition:
+        transform 0.18s ease,
+        background 0.18s ease,
+        box-shadow 0.18s ease,
+        border-color 0.18s ease;
+}
+
+#combat-buttons button:hover {
+    transform: translateY(-2px);
+
+    background: rgba(180, 40, 40, 0.23);
+    border-color: #e05a5a;
+
+    box-shadow: 0 0 14px rgba(220, 60, 60, 0.18);
+}
+
+#combat-buttons button:active {
+    transform: translateY(1px);
+}
+
+/* -------------------------
+   MERCHANT SHOP
+   ------------------------- */
+
+.merchant-shop {
+    position: relative;
+    isolation: isolate;
+
+    background-image:
+        linear-gradient(
+            rgba(0, 0, 0, 0.42),
+            rgba(0, 0, 0, 0.48)
+        ),
+        url("images/merchant-bg.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    overflow: hidden;
+}
+
+.merchant-shop::before {
+    content: "";
+
+    position: absolute;
+    inset: -10px;
+    z-index: 0;
+
+    background: inherit;
+    filter: blur(5px);
+    transform: scale(1.04);
+    opacity: 0.72;
+}
+
+.merchant-shop > * {
+    position: relative;
+    z-index: 2;
+}
+
+.shop {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#dark-shop-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    width: fit-content;
+    margin: 10px auto;
+    padding: 12px 22px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #241034,
+            #4a176d,
+            #241034
+        );
+
+    color: #e1b7ff;
+
+    border: 1px solid #a364d6;
+    border-radius: 10px;
+
+    text-decoration: none;
+
+    font-family: "Cinzel", serif;
+    font-size: 15px;
+    font-weight: 700;
+
+    box-shadow:
+        0 0 12px rgba(150, 75, 220, 0.34),
+        inset 0 0 10px rgba(0, 0, 0, 0.42);
+
+    transition:
+        transform 0.20s ease,
+        background 0.20s ease,
+        box-shadow 0.20s ease,
+        border-color 0.20s ease;
+}
+
+#dark-shop-button:hover {
+    transform: translateY(-2px) scale(1.025);
+    color: #f1d8ff;
+    border-color: #d09aff;
+
+    background:
+        linear-gradient(
+            135deg,
+            #35134c,
+            #68289b,
+            #35134c
+        );
+
+    box-shadow: 0 0 22px rgba(180, 85, 255, 0.60);
+}
+
+/* -------------------------
+   DARK SHOP PAGE
+   ------------------------- */
+
+body.dark-shop-page {
+    background-image:
+        linear-gradient(
+            rgba(0, 0, 0, 0.46),
+            rgba(0, 0, 0, 0.50)
+        ),
+        url("images/darkshop-bg.png");
+}
+
+.dark-shop-page .story-box {
+    width: min(800px, 94vw);
+    padding: 16px 28px;
+}
+
+.dark-shop-page .stats {
+    gap: 10px 20px;
+}
+
+.dark-shop-page .stats p {
+    font-size: 14px;
+}
+
+.dark-shop-page .use-potion-button {
+    padding: 6px 12px;
+    font-size: 12px;
+}
+
+.dark-shop-page .story-box h1,
+.dark-shop h1 {
+    margin: 4px 0 8px;
+
+    color: #e45a5a;
+
+    font-size: clamp(30px, 4vw, 42px);
+    text-shadow: 0 0 14px rgba(190, 0, 0, 0.46);
+}
+
+.dark-shop-page .story-box > p {
+    margin: 5px auto;
+    font-size: 14px;
+    line-height: 1.32;
+}
+
+.dark-shop-page .merchant-image {
+    margin: 7px 0;
+    flex-shrink: 0;
+}
+
+.dark-shop-page .merchant-image img {
+    display: block;
+
+    width: min(300px, 58vw);
+    height: 145px;
+
+    object-fit: cover;
+    object-position: center;
+
+    border-radius: 13px;
+    border: 2px solid rgba(180, 40, 40, 0.70);
+
+    box-shadow:
+        0 8px 24px rgba(0, 0, 0, 0.75),
+        0 0 18px rgba(130, 0, 0, 0.28);
+}
+
+.dark-shop-page #enemy-box {
+    margin-top: 6px;
+    padding: 10px 12px;
+}
+
+.dark-shop-page #enemy-box h2 {
+    margin: 2px 0 5px;
+    font-size: 20px;
+}
+
+.dark-shop-page #enemy-box p {
+    margin: 4px 0;
+    font-size: 13px;
+}
+
+.dark-shop-page #combat-buttons {
+    margin-top: 7px;
+}
+
+.dark-shop-page #combat-buttons button {
+    padding: 7px 11px;
+    font-size: 12px;
+}
+
+/* Ending state */
+
+.peace-ending {
+    display: none;
+
+    width: 100%;
+    margin-top: 8px;
+    padding: 20px;
+
+    background:
+        linear-gradient(
+            rgba(4, 35, 17, 0.90),
+            rgba(3, 19, 10, 0.94)
+        );
+
+    border: 2px solid #6fd28a;
+    border-radius: 15px;
+
+    box-shadow:
+        0 0 28px rgba(80, 220, 120, 0.22);
+
+    text-align: center;
+}
+
+.peace-ending h1 {
+    margin: 0 0 10px;
+
+    color: #9dffb3;
+
+    font-family: "Cinzel", serif;
+    font-size: 28px;
+
+    text-shadow: 0 0 14px rgba(100, 255, 140, 0.42);
+}
+
+.peace-ending p {
+    margin: 6px auto;
+
+    font-size: 15px;
+    line-height: 1.4;
+}
+
+.dark-shop.story-ending {
+    width: min(760px, 92vw);
+    max-height: calc(100vh - 36px);
+    padding: 24px 30px;
+    justify-content: center;
+}
+
+.dark-shop.story-ending .peace-ending {
+    margin-top: 0;
+    padding: 24px;
+}
+
+.restore-peace-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    margin-top: 12px;
+    padding: 12px 24px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #164d29,
+            #2f9a50,
+            #164d29
+        );
+
+    color: #eaffef;
+
+    border: 2px solid #79ff9b;
+    border-radius: 12px;
+
+    text-decoration: none;
+
+    font-family: "Cinzel", serif;
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+
+    box-shadow:
+        0 0 12px rgba(80, 255, 120, 0.45),
+        inset 0 0 10px rgba(0, 0, 0, 0.32);
+
+    transition:
+        transform 0.20s ease,
+        box-shadow 0.20s ease,
+        background 0.20s ease,
+        border-color 0.20s ease;
+}
+
+.restore-peace-button:hover {
+    transform: translateY(-2px) scale(1.035);
+    border-color: #b4ffc7;
+
+    background:
+        linear-gradient(
+            135deg,
+            #216c39,
+            #45c76b,
+            #216c39
+        );
+
+    box-shadow: 0 0 24px rgba(90, 255, 130, 0.75);
+}
+
+/* -------------------------
+   DRAGON PAGE
+   ------------------------- */
+
+body.dragon-page {
+    background-image:
+        linear-gradient(
+            rgba(0, 0, 0, 0.54),
+            rgba(0, 0, 0, 0.58)
+        ),
+        url("images/dragon-cave-bg.png");
+}
+
+.dragon-page .story-box {
+    width: min(820px, 94vw);
+    padding: 18px 28px;
+}
+
+.dragon-page .dragon-image {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin: 8px 0;
+    flex-shrink: 0;
+}
+
+.dragon-page .dragon-image img {
+    display: block;
+
+    width: min(430px, 68vw);
+    height: 165px;
+
+    object-fit: cover;
+    object-position: center;
+
+    border-radius: 14px;
+    border: 2px solid rgba(255, 80, 30, 0.70);
+
+    box-shadow:
+        0 8px 28px rgba(0, 0, 0, 0.78),
+        0 0 24px rgba(180, 40, 20, 0.30);
+}
+
+/* -------------------------
+   DRAGON GATE BUTTON
+   ------------------------- */
+
+#dragon-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    width: fit-content;
+    margin: 12px auto 0;
+    padding: 12px 20px;
+
+    border-radius: 11px;
+
+    text-decoration: none;
+
+    font-family: "Cinzel", serif;
+    font-size: 15px;
+    font-weight: 700;
+
+    transition:
+        transform 0.20s ease,
+        background 0.20s ease,
+        box-shadow 0.20s ease,
+        border-color 0.20s ease;
+}
+
+#dragon-button.locked {
+    background: rgba(80, 20, 20, 0.84);
+    color: #ddd;
+    border: 2px solid #8b3a3a;
+    cursor: not-allowed;
+}
+
+#dragon-button.unlocked {
+    background: rgba(20, 100, 50, 0.88);
+    color: white;
+    border: 2px solid #5cff8a;
+
+    box-shadow: 0 0 16px rgba(92, 255, 138, 0.48);
+}
+
+#dragon-button.unlocked:hover {
+    transform: translateY(-2px) scale(1.035);
+    background: rgba(30, 140, 70, 0.92);
+    box-shadow: 0 0 25px rgba(92, 255, 138, 0.74);
+}
+
+/* -------------------------
+   KEY HUNT
+   ------------------------- */
+
+body.keyhunt-page {
+    background-image:
+        linear-gradient(
+            rgba(0, 0, 0, 0.34),
+            rgba(0, 0, 0, 0.40)
+        ),
+        url("images/keyhunt-bg.png");
+}
+
+.keyhunt-page .story-box {
+    width: min(760px, 94vw);
+    padding: 20px 28px;
+}
+
+.key-hunt {
+    width: min(520px, 100%);
+    margin: 14px auto;
+    padding: 18px;
+
+    background: rgba(0, 0, 0, 0.34);
+
+    border: 1px solid rgba(255, 215, 0, 0.34);
+    border-radius: 15px;
+}
+
+#key-click-progress {
+    margin: 4px 0 10px;
+
+    color: #f5d76e;
+
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.key-button {
+    padding: 13px 25px;
+
+    background: rgba(10, 15, 15, 0.88);
+    color: white;
+
+    border: 2px solid #d4af37;
+    border-radius: 11px;
+
+    font-family: "Cinzel", serif;
+    font-size: 16px;
+    font-weight: 700;
 
     cursor: pointer;
 
-    transition: 0.2s;
+    transition:
+        transform 0.18s ease,
+        background 0.18s ease,
+        color 0.18s ease,
+        box-shadow 0.18s ease;
 }
 
-.use-potion-button:hover {
-    background: rgba(100, 220, 150, 0.15);
+.key-button:hover {
+    transform: translateY(-2px);
+    background: rgba(212, 175, 55, 0.17);
+    color: #ffe66d;
+    box-shadow: 0 0 19px rgba(255, 215, 0, 0.34);
+}
 
-    color: #9cffb5;
+.keyhunt-page .story-box strong {
+    color: #f5d76e;
+}
+
+/* -------------------------
+   GAME OVER
+   ------------------------- */
+
+.game-over {
+    display: none;
+
+    position: fixed;
+    inset: 0;
+    z-index: 9000;
+
+    width: 100vw;
+    height: 100vh;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 20px;
+
+    background: rgba(0, 0, 0, 0.78);
+}
+
+.game-over-card {
+    width: min(440px, 90vw);
+    padding: 28px 26px;
+
+    text-align: center;
+
+    background:
+        linear-gradient(
+            180deg,
+            rgba(38, 7, 12, 0.98),
+            rgba(10, 5, 8, 0.98)
+        );
+
+    border: 2px solid #a33b3b;
+    border-radius: 16px;
+
+    box-shadow:
+        0 15px 42px rgba(0, 0, 0, 0.55),
+        0 0 35px rgba(120, 0, 0, 0.42);
+}
+
+.game-over-card h1 {
+    margin: 0 0 16px;
+
+    color: #e05a5a;
+
+    font-family: "Cinzel", serif;
+    font-size: 31px;
+
+    text-shadow: 0 0 12px rgba(220, 50, 50, 0.48);
+}
+
+.game-over-card p {
+    margin: 9px 0;
+    font-size: 15px;
+    line-height: 1.55;
+}
+
+#revive-count {
+    margin-top: 18px;
+
+    color: #f5d76e;
+
+    font-family: "Cinzel", serif;
+    font-weight: 700;
+}
+
+.revive-button {
+    margin-top: 8px;
+    padding: 12px 24px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #24133f,
+            #4a2380,
+            #24133f
+        );
+
+    color: #e5d7ff;
+
+    border: 2px solid #8d6aff;
+    border-radius: 10px;
+
+    font-family: "Cinzel", serif;
+    font-size: 16px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    box-shadow: 0 0 14px rgba(130, 80, 255, 0.40);
+
+    transition:
+        transform 0.18s ease,
+        box-shadow 0.18s ease,
+        border-color 0.18s ease;
+}
+
+.revive-button:hover {
+    transform: translateY(-2px) scale(1.035);
+    border-color: #b59aff;
+    box-shadow: 0 0 24px rgba(150, 100, 255, 0.70);
+}
+
+.revive-button:active {
+    transform: scale(0.98);
+}
+
+/* -------------------------
+   PEACE ENDING PAGE
+   ------------------------- */
+
+body.peace-page {
+    background-image:
+        linear-gradient(
+            rgba(19, 55, 28, 0.18),
+            rgba(7, 31, 16, 0.28)
+        ),
+        url("images/peace-bg.png");
+}
+
+.peace-screen {
+    width: min(790px, 92vw);
+    max-height: calc(100vh - 40px);
+
+    padding: 34px 44px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    overflow: hidden;
+
+    background: rgba(5, 25, 12, 0.70);
+
+    border: 2px solid rgba(150, 230, 165, 0.72);
+    border-radius: 22px;
+
+    box-shadow:
+        0 15px 45px rgba(0, 0, 0, 0.48),
+        0 0 30px rgba(100, 220, 120, 0.16);
+
+    backdrop-filter: blur(6px);
+
+    text-align: center;
+}
+
+.peace-content {
+    width: 100%;
+}
+
+.peace-icon {
+    margin-bottom: 2px;
+    font-size: 43px;
+}
+
+.peace-content h1 {
+    margin: 0 0 18px;
+
+    color: #d0ffd8;
+
+    font-family: "Cinzel", serif;
+    font-size: clamp(36px, 5vw, 52px);
+    letter-spacing: 2px;
+
+    text-shadow: 0 0 15px rgba(120, 255, 150, 0.44);
+}
+
+.epilogue {
+    max-width: 640px;
+
+    margin: 11px auto;
+
+    color: #f3fff5;
+
+    font-family: "Lora", serif;
+    font-size: 17px;
+    line-height: 1.58;
+}
+
+.epilogue-divider {
+    margin: 18px 0;
+    color: #a7efb2;
+    font-size: 22px;
+}
+
+.final-line {
+    color: #d5ffdc;
+
+    font-family: "Cinzel", serif;
+    font-size: 17px;
+    line-height: 1.65;
+}
+
+.return-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    margin-top: 18px;
+    padding: 11px 23px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #1d6032,
+            #369b52,
+            #1d6032
+        );
+
+    color: white;
+
+    border: 1px solid #8bf0a0;
+    border-radius: 10px;
+
+    text-decoration: none;
+
+    font-family: "Cinzel", serif;
+    font-size: 15px;
+    font-weight: 700;
+
+    box-shadow: 0 0 14px rgba(90, 240, 120, 0.28);
+
+    transition:
+        transform 0.20s ease,
+        box-shadow 0.20s ease,
+        background 0.20s ease;
+}
+
+.return-button:hover {
+    transform: translateY(-2px) scale(1.03);
+
+    background:
+        linear-gradient(
+            135deg,
+            #287b40,
+            #4bc56b,
+            #287b40
+        );
+
+    box-shadow: 0 0 23px rgba(100, 255, 140, 0.60);
+}
+
+/* -------------------------
+   SCREEN-FIT TUNING
+   ------------------------- */
+
+@media (max-height: 820px) {
+
+    body {
+        padding: 10px;
+    }
+
+    .story-box {
+        max-height: calc(100vh - 20px);
+        padding: 18px 24px;
+    }
+
+    .story-box h1 {
+        margin: 5px 0 9px;
+        font-size: clamp(30px, 4vw, 42px);
+    }
+
+    .story-box > p {
+        margin: 5px auto;
+        font-size: 15px;
+        line-height: 1.38;
+    }
+
+    .choices,
+    .left-path-choices {
+        margin-top: 13px;
+        gap: 16px;
+    }
+
+    .choices a,
+    .left-path-choices a {
+        min-height: 48px;
+        min-width: 145px;
+        font-size: 15px;
+    }
+
+    .action-panel {
+        margin-top: 12px;
+        padding-top: 10px;
+    }
+
+    .dark-shop-page .story-box {
+        padding: 12px 22px;
+    }
+
+    .dark-shop-page .merchant-image img {
+        height: 118px;
+    }
+
+    .dragon-page .story-box {
+        padding: 13px 24px;
+    }
+
+    .dragon-page .dragon-image img {
+        height: 125px;
+    }
+
+    .keyhunt-page .story-box {
+        padding: 15px 24px;
+    }
+
+    .peace-screen {
+        max-height: calc(100vh - 20px);
+        padding: 25px 32px;
+    }
+}
+
+@media (max-width: 700px) {
+
+    body {
+        padding: 8px;
+    }
+
+    .story-box {
+        width: 96vw;
+        max-height: calc(100vh - 16px);
+        padding: 15px 18px;
+        border-radius: 17px;
+    }
+
+    .stats {
+        gap: 8px 13px;
+    }
+
+    .stats p {
+        font-size: 12px;
+    }
+
+    .story-box h1 {
+        font-size: 29px;
+    }
+
+    .story-box > p {
+        font-size: 13px;
+    }
+
+    .choices,
+    .left-path-choices {
+        gap: 10px;
+    }
+
+    .choices a,
+    .left-path-choices a {
+        min-width: 125px;
+        min-height: 44px;
+        padding: 8px 11px;
+        font-size: 13px;
+    }
+
+    #combat-buttons button {
+        padding: 7px 9px;
+        font-size: 11px;
+    }
+
+    .hp-section,
+    .enemy-hp-section {
+        width: 94%;
+    }
+
+    .hp-label {
+        font-size: 11px;
+    }
+
+    .dark-shop-page .merchant-image img {
+        width: min(270px, 62vw);
+        height: 105px;
+    }
+
+    .dragon-page .dragon-image img {
+        width: min(360px, 72vw);
+        height: 110px;
+    }
+
+    .peace-screen {
+        padding: 20px 18px;
+    }
+
+    .peace-content h1 {
+        font-size: 34px;
+    }
+
+    .epilogue {
+        font-size: 14px;
+        line-height: 1.45;
+    }
+
+    .final-line {
+        font-size: 14px;
+    }
+}
+/* =====================================================
+   FINAL DARK SHOP POLISH
+   ===================================================== */
+
+/* ----- USE POTION ----- */
+
+.dark-shop-page .use-potion-button {
+    width: auto !important;
+    min-width: 0 !important;
+
+    display: inline-block !important;
+
+    align-self: center !important;
+
+    margin: 4px auto 8px !important;
+
+    padding: 8px 18px !important;
+
+    background: rgba(5, 25, 15, 0.75) !important;
+
+    color: #d8ffe2 !important;
+
+    border: 1px solid #55cf7c !important;
+
+    border-radius: 9px !important;
+
+    font-family: "Lora", serif !important;
+
+    font-size: 14px !important;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 0 8px rgba(60, 210, 110, 0.12);
+
+    transition: 0.2s ease;
+}
+
+.dark-shop-page .use-potion-button:hover {
+    background: rgba(50, 150, 80, 0.18) !important;
+
+    color: #aaffbc !important;
+
+    border-color: #8cffaa !important;
+
+    box-shadow:
+        0 0 15px rgba(80, 230, 120, 0.35);
 
     transform: translateY(-2px);
 }
-./* =========================
-   DARK SHOP PAGE
-   ========================= */
 
-body.dark-shop-page {
 
-    background-image:
-        linear-gradient(
-            rgba(0, 0, 0, 0.45),
-            rgba(0, 0, 0, 0.45)
-        ),
-        url("images/darkshop-bg.png");
+/* ----- MERCHANT IMAGE ----- */
 
-    background-size: cover;
+.dark-shop-page .merchant-image {
+    width: 100% !important;
 
-    background-position: center;
+    display: flex !important;
 
-    background-repeat: no-repeat;
+    justify-content: center !important;
 
-    background-attachment: fixed;
+    align-items: center !important;
+
+    margin: 10px auto !important;
 }
 
+.dark-shop-page .merchant-image img {
+    display: block !important;
 
-/* =========================
-   DARK SHOP STORY BOX
-   ========================= */
+    width: min(340px, 65vw) !important;
 
-body.dark-shop-page {
-    background-image:
-        linear-gradient(
-            rgba(0, 0, 0, 0.45),
-            rgba(0, 0, 0, 0.45)
-        ),
-        url("images/darkshop-bg.png");
+    height: auto !important;
 
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-}
-
-
-/* =========================
-   DARK SHOP TITLE
-   ========================= */
-
-.dark-shop h1 {
-
-    color: #d94b4b;
-
-    text-shadow:
-        0 0 12px rgba(180, 0, 0, 0.6);
-}
-
-
-/* =========================
-   EVIL MERCHANT IMAGE
-   ========================= */
-
-.merchant-image {
-
-    display: flex;
-
-    justify-content: center;
-
-    margin: 20px 0;
-}
-
-.merchant-image img {
-
-    width: min(380px, 80vw);
-
-    max-height: 300px;
+    max-height: 230px !important;
 
     object-fit: cover;
 
     object-position: center;
+
+    margin: 0 auto !important;
 
     border-radius: 14px;
 
@@ -500,80 +1585,346 @@ body.dark-shop-page {
 }
 
 
-/* =========================
-   ENEMY BOX
-   ========================= */
+/* ----- DRAGON IMAGE ----- */
 
-#enemy-box {
+.dragon-page .dragon-image {
+    width: 100% !important;
 
-    margin-top: 20px;
+    display: flex !important;
 
-    padding: 20px;
+    justify-content: center !important;
 
-    background: rgba(0, 0, 0, 0.45);
+    align-items: center !important;
 
-    border-radius: 14px;
+    margin: 10px auto !important;
+}
 
-    border: 1px solid rgba(180, 40, 40, 0.5);
+.dragon-page .dragon-image img {
+    display: block !important;
+
+    width: min(460px, 70vw) !important;
+
+    height: auto !important;
+
+    max-height: 220px !important;
+
+    object-fit: cover;
+
+    object-position: center;
+
+    margin: 0 auto !important;
+}
+/* =====================================================
+   DARK SHOP - FINAL ONE SCREEN FIX
+   ===================================================== */
+
+body.dark-shop-page .story-box {
+    width: min(820px, 95vw);
+
+    height: auto !important;
+    min-height: 0 !important;
+
+    max-height: calc(100vh - 24px);
+
+    padding: 12px 26px !important;
+
+    overflow: hidden;
 }
 
 
-/* =========================
-   COMBAT BUTTONS
-   ========================= */
+/* Stats */
 
-#combat-buttons {
-
-    display: flex;
-
-    justify-content: center;
-
-    gap: 12px;
-
-    flex-wrap: wrap;
-
-    margin-top: 18px;
+body.dark-shop-page .stats {
+    margin-bottom: 4px !important;
+    gap: 18px !important;
 }
 
-#combat-buttons button {
-
-    padding: 10px 16px;
-
-    background: rgba(15, 10, 15, 0.9);
-
-    color: #eee;
-
-    border: 1px solid rgba(180, 40, 40, 0.65);
-
-    border-radius: 8px;
-
-    font-family: "Lora", serif;
-
-    font-size: 15px;
-
-    cursor: pointer;
-
-    transition: 0.2s;
+body.dark-shop-page .stats p {
+    font-size: 14px !important;
 }
 
-#combat-buttons button:hover {
 
-    background: rgba(180, 40, 40, 0.25);
+/* HP bar */
 
-    border-color: #d94b4b;
-
-    transform: translateY(-2px);
+body.dark-shop-page .hp-section {
+    margin: 5px auto !important;
 }
-.merchant-shop {
 
-    background-image:
-        linear-gradient(
-            rgba(0, 0, 0, 0.45),
-            rgba(0, 0, 0, 0.45)
-        ),
-        url("images/merchant-bg.png");
+body.dark-shop-page .hp-bar {
+    height: 15px !important;
+}
 
-    background-size: cover;
 
-    background-position: center;
+/* Potion button */
+
+body.dark-shop-page .use-potion-button {
+    width: auto !important;
+    display: inline-block !important;
+
+    margin: 3px auto 5px !important;
+
+    padding: 6px 16px !important;
+
+    font-size: 13px !important;
+}
+
+
+/* Title */
+
+body.dark-shop-page .story-box h1 {
+    margin: 4px 0 7px !important;
+
+    font-size: 34px !important;
+}
+
+
+/* Intro text */
+
+body.dark-shop-page #merchant-intro p,
+body.dark-shop-page .story-box > p {
+    margin: 4px auto !important;
+
+    font-size: 14px !important;
+
+    line-height: 1.3 !important;
+}
+
+
+/* Merchant image */
+
+body.dark-shop-page .merchant-image {
+    margin: 7px auto !important;
+
+    height: 150px !important;
+
+    flex-shrink: 0;
+}
+
+body.dark-shop-page .merchant-image img {
+    width: min(300px, 55vw) !important;
+
+    height: 150px !important;
+
+    max-height: 150px !important;
+
+    object-fit: cover;
+
+    object-position: center;
+
+    margin: auto !important;
+}
+
+
+/* Evil Merchant fight */
+
+body.dark-shop-page #enemy-box {
+    margin-top: 6px !important;
+
+    padding: 10px 14px !important;
+}
+
+body.dark-shop-page #enemy-box h2 {
+    margin: 3px 0 5px !important;
+
+    font-size: 20px !important;
+}
+
+body.dark-shop-page #enemy-box p {
+    margin: 4px 0 !important;
+
+    font-size: 13px !important;
+}
+
+
+/* Enemy HP */
+
+body.dark-shop-page .enemy-hp-section {
+    margin: 5px auto !important;
+}
+
+
+/* Combat buttons */
+
+body.dark-shop-page #combat-buttons {
+    margin-top: 6px !important;
+
+    gap: 7px !important;
+}
+
+body.dark-shop-page #combat-buttons button {
+    padding: 7px 12px !important;
+
+    font-size: 12px !important;
+}
+
+
+/* Back */
+
+body.dark-shop-page .back-button {
+    margin-top: 6px !important;
+}
+/* =====================================================
+   DRAGON DEN - FINAL ONE SCREEN FIX
+   ===================================================== */
+
+body.dragon-page {
+    padding: 8px;
+    height: 100vh;
+    min-height: 0;
+    overflow: hidden;
+    align-items: center;
+}
+
+
+/* Main Dragon window */
+
+body.dragon-page .story-box {
+    width: min(820px, 95vw);
+
+    height: auto !important;
+    min-height: 0 !important;
+
+    max-height: calc(100vh - 16px);
+
+    padding: 12px 26px !important;
+
+    overflow: hidden;
+}
+
+
+/* Stats */
+
+body.dragon-page .stats {
+    margin-bottom: 4px !important;
+    gap: 18px !important;
+}
+
+body.dragon-page .stats p {
+    font-size: 14px !important;
+}
+
+
+/* Player HP */
+
+body.dragon-page .hp-section {
+    margin: 5px auto !important;
+}
+
+body.dragon-page .hp-bar {
+    height: 15px !important;
+}
+
+
+/* Potion button */
+
+body.dragon-page .use-potion-button {
+    width: auto !important;
+
+    display: inline-block !important;
+
+    margin: 3px auto 5px !important;
+
+    padding: 6px 16px !important;
+
+    font-size: 13px !important;
+}
+
+
+/* Dragon title */
+
+body.dragon-page .story-box h1 {
+    margin: 4px 0 7px !important;
+
+    font-size: 34px !important;
+}
+
+
+/* Gate-opening text */
+
+body.dragon-page #dragon-fight > p {
+    margin: 5px auto !important;
+
+    font-size: 14px !important;
+
+    line-height: 1.3 !important;
+}
+
+
+/* Dragon image */
+
+body.dragon-page .dragon-image {
+    width: 100% !important;
+
+    margin: 7px auto !important;
+
+    height: 145px !important;
+
+    display: flex !important;
+
+    justify-content: center !important;
+
+    align-items: center !important;
+
+    overflow: hidden;
+}
+
+body.dragon-page .dragon-image img {
+    width: min(430px, 65vw) !important;
+
+    height: 145px !important;
+
+    max-height: 145px !important;
+
+    object-fit: cover;
+
+    object-position: center;
+
+    margin: auto !important;
+}
+
+
+/* Dragon fight box */
+
+body.dragon-page #enemy-box {
+    margin-top: 6px !important;
+
+    padding: 10px 14px !important;
+}
+
+
+/* Dragon heading */
+
+body.dragon-page #enemy-box h2 {
+    margin: 3px 0 5px !important;
+
+    font-size: 20px !important;
+}
+
+
+/* Dragon HP section */
+
+body.dragon-page .enemy-hp-section {
+    margin: 5px auto !important;
+}
+
+
+/* Combat buttons */
+
+body.dragon-page #combat-buttons {
+    margin-top: 6px !important;
+
+    gap: 7px !important;
+}
+
+body.dragon-page #combat-buttons button {
+    padding: 7px 12px !important;
+
+    font-size: 12px !important;
+}
+
+
+/* Back button */
+
+body.dragon-page .back-button {
+    margin-top: 6px !important;
 }

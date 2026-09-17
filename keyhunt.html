@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Key Hunt</title>
+
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Lora:wght@400;500&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body class="keyhunt-page">
+
+    <div class="story-box">
+
+        <div class="stats">
+
+            <p id="health">❤️ Health: 100</p>
+            <p id="gold">💰 Gold: 0</p>
+            <p id="keys">🗝️ Keys: 0</p>
+            <p id="potion-count">🧪 Potions: 0</p>
+
+        </div>
+
+        <button class="use-potion-button" onclick="Heal()">
+            🧪 Use Potion
+        </button>
+
+
+        <h1>🔑 Key Hunt</h1>
+
+        <p>
+            Strange keys are scattered throughout the forest.
+        </p>
+
+        <p>
+            Search carefully. Every
+            <strong>10 clicks</strong>
+            will uncover another key.
+        </p>
+
+
+        <div class="key-hunt">
+
+            <p id="key-click-progress">
+                Key Search: 0 / 10
+            </p>
+
+            <button
+                class="key-button"
+                onclick="SearchForKey()">
+
+                🔍 Search for a Key
+
+            </button>
+
+        </div>
+
+
+        <p>
+            🐉 The Dragon's Den requires
+            <strong>15 keys.</strong>
+        </p>
+
+
+        <div class="choices">
+
+            <a
+                id="dragon-button"
+                href="dragon.html"
+                class="locked">
+
+                🔒 Dragon's Den — 0 / 15 Keys
+
+            </a>
+
+        </div>
+
+
+        <div class="back-button">
+
+            <a href="right.html">
+                ← Back to Coniferous Path
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <div id="notification">
+
+        <div id="notifTitle"></div>
+        <div id="notifText"></div>
+
+    </div>
+
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>

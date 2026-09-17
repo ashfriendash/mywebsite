@@ -1,25 +1,113 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Right Path</title>
+
+    <title>The Coniferous Path</title>
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
+
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Lora:wght@400;500&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Lora:wght@400;500&display=swap"
+        rel="stylesheet">
+
     <link rel="stylesheet" href="style.css">
+
 </head>
+
+<body>
+
     <div class="story-box">
-        <body>
-            <h1>You chose Right!</h1>
-            <p>You walk down the right path and encounter a dark cave.</p>
-            <p>Inside the cave, you find a sleeping dragon.</p>
-            <div class="choices">
-                <a href="dragon.html">Wake up the dragon</a>
-                <a href="index.html">Go back</a>
-            </div>
-        </body>
-    </div>    
+
+        <!-- PLAYER STATS -->
+        <div class="stats">
+
+            <p id="health">❤️ Health: 100</p>
+
+            <p id="gold">💰 Gold: 0</p>
+
+            <p id="keys">🗝️ Keys: 0</p>
+
+            <p id="potion-count">🧪 Potions: 0</p>
+
+        </div>
+
+        <button class="use-potion-button" onclick="Heal()">
+            🧪 Use Potion
+        </button>
+
+
+        <!-- STORY -->
+        <h1>The Coniferous Path</h1>
+
+        <p>
+            You leave the forest entrance and enter a vast
+            coniferous woodland.
+        </p>
+
+        <p>
+            Towering evergreens surround you as the path
+            splits in two.
+        </p>
+
+        <p>
+            One route leads toward scattered objects hidden
+            among the trees. The other ends at an enormous
+            ancient gate.
+        </p>
+
+        <p>
+            <strong>
+                ⚠️ The Dragon's Den is locked.
+                You need 15 keys to open the gate.
+            </strong>
+        </p>
+
+
+        <!-- MAIN CHOICES -->
+        <div class="choices">
+
+            <a href="keyhunt.html">
+                🔑 Key Hunt
+            </a>
+
+            <a href="dragon.html">
+                🐉 Dragon's Den
+            </a>
+
+        </div>
+
+
+        <!-- BACK -->
+        <div class="back-button">
+
+            <a href="index.html">
+                ← Return to Forest Entrance
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <!-- STEAM-STYLE NOTIFICATION -->
+    <div id="notification">
+
+        <div id="notifTitle"></div>
+
+        <div id="notifText"></div>
+
+    </div>
+
+
+    <script src="script.js"></script>
+
+</body>
+
 </html>

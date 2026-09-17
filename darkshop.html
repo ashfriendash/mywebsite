@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<script>
-    enemyHealth = 80;
-</script>
+
 <head>
 
     <meta charset="UTF-8">
@@ -29,55 +27,94 @@
 
 <body class="dark-shop-page" data-enemy="merchant">
 
+    <!-- MAIN GAME -->
+
     <div class="story-box dark-shop">
 
-        <!-- PLAYER STATS -->
         <div class="stats">
 
             <p id="health">❤️ Health: 100</p>
+
             <p id="gold">💰 Gold: 0</p>
+
             <p id="keys">🗝️ Keys: 0</p>
+
             <p id="potion-count">🧪 Potions: 0</p>
 
         </div>
+        <div class="hp-section">
 
-        <!-- USE POTION -->
-        <button class="use-potion-button" onclick="Heal()">
+        <div class="hp-label">
+            ❤️ Your Health
+            <span id="player-health-text">100 / 100</span>
+        </div>
+
+        <div class="hp-bar">
+            <div id="player-health-bar" class="hp-fill"></div>
+        </div>
+
+    </div>
+
+
+        <button
+            class="use-potion-button"
+            onclick="Heal()">
+
             🧪 Use Potion
+
         </button>
 
-        <!-- TITLE -->
+
         <h1>🌑 The Dark Shop</h1>
 
-        <!-- STORY -->
+        <div id="merchant-intro">
         <p>
-            The warm lights disappear.
+            The moment you step inside,
+            the warm merchant shop disappears.
         </p>
 
         <p>
-            The merchant's friendly smile fades.
-            His true form is finally revealed.
+            The lights flicker.
+            The air becomes unnaturally cold.
         </p>
 
-        <!-- EVIL MERCHANT IMAGE -->
-        <div class="merchant-image">
+        <p>
+            The merchant slowly removes his hood.
+        </p>
+        </div>
+
+        <div id="merchant-intro-image" class="merchant-image">
 
             <img
                 src="images/evil-merchant.png"
-                alt="Evil Merchant"
-            >
+                alt="Evil Merchant">
 
         </div>
 
-        <!-- ENEMY -->
+
+        <!-- EVIL MERCHANT FIGHT -->
+
         <div id="enemy-box">
 
             <h2>👿 Evil Merchant</h2>
 
             <p>
-                Health:
-                <span id="enemy-health">80</span>
+                "You bought exactly what I needed..."
             </p>
+
+            <div class="enemy-hp-section">
+
+                <div class="hp-label">
+                    👿 Evil Merchant Health
+                    <span id="enemy-health-text">80 / 80</span>
+                </div>
+
+                <div class="hp-bar enemy-bar">
+                    <div id="enemy-health-bar" class="hp-fill"></div>
+                </div>
+
+            </div>
+
 
             <div id="combat-buttons">
 
@@ -97,11 +134,44 @@
 
         </div>
 
-        <!-- BACK -->
+
+        <!-- PEACE ENDING: HIDDEN AT START -->
+
+        <div
+            id="peace-ending"
+            class="peace-ending"
+            style="display: none;">
+
+            <h1>✨ Peace Restored ✨</h1>
+
+            <p>
+                The Evil Merchant has been defeated.
+            </p>
+
+            <p>
+                The curse that darkened the forest
+                is finally broken.
+            </p>
+
+            <p>
+                But the story is not quite over...
+            </p>
+
+            <a
+                href="peace.html"
+                class="restore-peace-button">
+
+                🌿 RESTORE PEACE
+
+            </a>
+
+        </div>
+
+
         <div class="back-button">
 
             <a href="merchant.html">
-                ← Back to Merchant
+                ← Back to Merchant Shop
             </a>
 
         </div>
@@ -109,7 +179,44 @@
     </div>
 
 
-    <!-- STEAM NOTIFICATION -->
+    <!-- GAME OVER: OUTSIDE STORY BOX -->
+
+    <div
+        id="game-over"
+        class="game-over"
+        style="display: none;">
+
+        <div class="game-over-card">
+
+            <h1>💀 You Have Fallen</h1>
+
+            <p>
+                Your health has reached zero.
+            </p>
+
+            <p>
+                Your gold, keys, potions and other
+                progress are safe.
+            </p>
+
+            <p id="revive-count">
+                Revive Progress: 0 / 10
+            </p>
+
+            <button
+                class="revive-button"
+                onclick="ReviveGame()">
+
+                ✨ Click to Revive
+
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- NOTIFICATION -->
 
     <div id="notification">
 

@@ -1,25 +1,252 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dragon</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Lora:wght@400;500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css"
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Dragon's Den</title>
+
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Lora:wght@400;500&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+
 </head>
+
+<body class="dragon-page" data-enemy="dragon">
+
+    <!-- MAIN GAME -->
+
     <div class="story-box">
-        <body>
-            <h1>Game Over🐉</h1>
-            <p>You woke up the dragon and it was not happy!</p>
-            <p>It eats you in one bite</p>
-            <div class="choices">
-                <a href="index.html">Try Again</a>
-            </div>
-            <img src="images/dragon.png" alt="Dragon Image" width="500">
-        </body>
+
+        <!-- PLAYER STATS -->
+
+        <div class="stats">
+
+            <p id="health">❤️ Health: 100</p>
+
+            <p id="gold">💰 Gold: 0</p>
+
+            <p id="keys">🗝️ Keys: 0</p>
+
+            <p id="potion-count">🧪 Potions: 0</p>
+
+        </div>
+        <div class="hp-section">
+
+    <div class="hp-label">
+        ❤️ Your Health
+        <span id="player-health-text">100 / 100</span>
     </div>
+
+        <div class="hp-bar">
+            <div id="player-health-bar" class="hp-fill"></div>
+        </div>
+
+    </div>
+
+
+        <!-- USE POTION -->
+
+        <button
+            class="use-potion-button"
+            onclick="Heal()">
+
+            🧪 Use Potion
+
+        </button>
+
+
+        <!-- TITLE -->
+
+        <h1>🐉 Dragon's Den</h1>
+
+
+        <!-- LOCKED GATE -->
+
+        <div id="dragon-lock">
+
+            <h2>🔒 The Dragon's Den Is Locked</h2>
+
+            <p>
+                An ancient gate blocks your path.
+            </p>
+
+            <p>
+                The lock is covered in countless keyholes.
+            </p>
+
+            <p>
+                <strong>
+                    ⚠️ You need 15 keys to open the gate.
+                </strong>
+            </p>
+
+            <p id="dragon-key-count">
+                Your keys: 0 / 15
+            </p>
+
+
+            <div class="choices">
+
+                <a href="keyhunt.html">
+                    🔑 Hunt for Keys
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <!-- DRAGON FIGHT -->
+
+        <div id="dragon-fight" style="display: none;">
+
+            <h2>🔥 The Gate Opens...</h2>
+
+            <p>
+                You have collected enough keys.
+                The ancient gate slowly opens.
+            </p>
+
+            <p>
+                Something enormous waits beyond it.
+            </p>
+
+
+            <!-- DRAGON IMAGE -->
+
+            <div class="dragon-image">
+
+                <img
+                    src="images/dragon.png"
+                    alt="Ancient Dragon">
+
+            </div>
+
+
+            <!-- ENEMY -->
+
+            <div id="enemy-box">
+
+                <h2>🐉 Ancient Dragon</h2>
+
+                <div class="enemy-hp-section">
+
+                    <div class="hp-label">
+                        🐉 Dragon Health
+                        <span id="enemy-health-text">100 / 100</span>
+                    </div>
+
+                    <div class="hp-bar enemy-bar">
+                        <div id="enemy-health-bar" class="hp-fill"></div>
+                    </div>
+
+                </div>
+
+
+                <div id="combat-buttons">
+
+                    <button onclick="SwordAttack()">
+
+                        🗡️ Sword Slash
+
+                    </button>
+
+
+                    <button onclick="HeavyAttack()">
+
+                        💥 Heavy Attack
+
+                    </button>
+
+
+                    <button onclick="RunAway()">
+
+                        🏃 Run Away
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- BACK -->
+
+        <div class="back-button">
+
+            <a href="right.html">
+                ← Back to Coniferous Path
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <!-- GAME OVER -->
+
+    <div id="game-over" class="game-over">
+
+        <div class="game-over-card">
+
+            <h1>💀 You Have Fallen</h1>
+
+            <p>
+                Your health has reached zero.
+            </p>
+
+            <p>
+                Your gold, keys, potions and other
+                progress are safe.
+            </p>
+
+            <p id="revive-count">
+                Revive Progress: 0 / 10
+            </p>
+
+
+            <button
+                class="revive-button"
+                onclick="ReviveGame()">
+
+                ✨ Click to Revive
+
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- STEAM-STYLE NOTIFICATION -->
+
+    <div id="notification">
+
+        <div id="notifTitle"></div>
+
+        <div id="notifText"></div>
+
+    </div>
+
+
+    <script src="script.js"></script>
+
+</body>
+
 </html>
