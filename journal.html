@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forest Journal| The Lost Forest
+    </title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        html {
+            min-height: 100%;
+            height: auto;
+
+        }
+        body.journal-page {
+            min-height: 100vh;
+            height:auto;
+            margin: 0;
+            padding: 24px 15px;
+            display:block;
+            overflow-x: hidden;
+            overflow-y: auto;
+            color: #f0eddd;
+            background:
+                linear gradient(
+                    rgba(5,18,12,.78),
+                    rgba(6,23,14,.88)
+                ),
+                url(images/forest.png) center / cover fixed no-repeat;
+                font-family: 'Lora', serif;
+            
+        }
+        .journal-shell {
+            width: min(850px, 100%);
+            margin: 0 auto;
+        }
+        .journal-topbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 25px;
+        }
+        .journal-back {
+            color: #d5dfcb;
+            font-size: 12px;
+            text-decoration: none;
+            opacity: 0.85;
+            transition: color .2s,opacity .2s;
+
+
+        }
+        .journal-back:hover {
+            color: #f0dfa0;
+            opacity: 1;
+        }
+        .journal-label {
+            color: #bdc8aa;
+            font-size: 9px;
+            letter-spacing: .18em;
+
+        }
+        .journal-heading {
+            margin-bottom: 25px;
+            text-align: center;
+        }
+        .journal-ornament {
+            margin-bottom: 10px;
+            color: #d9c88e;
+            font-size: 18px;
+            text-shadow: 0 0 16px rgba(231, 210, 139, 0.35);
+
+        }
+        .journal-eyebrow {
+            margin: 0 0 7px;
+            color: #bac9ac;
+            font-size: 10px;
+            letter-spacing: .25em;
+            text-transform: uppercase;
+        }
+        .journal-heading h1 {
+            margin: 0;
+            font-family: 'Cinzel', serif;
+            font-size: clamp(30px, 5vw, 45px);
+            line-height: 1.15;
+            color:#efdfac;
+            text-shadow: 0 0 22px rgba(229, 207, 126, 0.19);
+        }
+        .journal-subtitle {
+            max-width: 490px;
+            margin: 11px auto 0;
+            color:#d1dbc9;
+            font-size: 13px;
+            line-height: 1.7;
+
+        }
+        .journal-progress {
+            margin-bottom: 20px;
+            padding: 17px 19px;
+            border:1px solid rgba(207, 202, 150, 0.25);
+            border-radius: 14px;
+            background: rgba(11, 27, 18, 0.77);
+        }
+        .journal-progress-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            margin-bottom: 11px;
+        }
+        .journal-progress-top span {
+            color: #c7d0b9;
+            font-size: 11px;
+        }
+        #journal-count {
+            color:#f0dfa0;
+            font-family: 'Cinzel', serif;
+            font-size: 12px;
+            font-weight: 600;
+            text-align: right;
+        }
+        .journal-progress-track {
+            height: 5px;
+            overflow: hidden;
+            border-radius: 999px;
+            background: rgba(230, 232, 209, 0.12);
+        }
+        .journal-progress-fill {
+            height: 100%;
+            width: 0;
+            border-radius: inherit;
+            background: linear-gradient(90deg, #719976, #e1d092);
+            transition: width 0.5s ease;
+            box-shadow: 0 0 12px rgba(209, 213, 140, 0.2);
+        
+        }
+        .journal-grid{
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 16px;
+        }
+        .journal-entry{
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            min-width: 0;
+            padding: 21px;
+            overflow: hidden;
+            border: 1px solid rgba(191, 202, 163, 0.25);
+            border-radius: 16px;
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(20, 40, 27, 0.94),
+                    rgba(9,23,15,.96)
+        
+                );
+            box-shadow: 0 13px 32px rgba(0, 0, 0, 0.22);
+            transition: border-color 0.25s, transform 0.25s;  
+
+        }
+        .journal-entry:hover {
+            border-color: rgba(239, 221, 164, 0.45);
+            transform: translateY(-2px);
+        }
+        .journal-entry.is-unlocked {
+            border-color: rgba(220, 205, 144, .48);
+        }
+
+        .journal-entry.is-unlocked:hover {
+            transform: translateY(-2px);
+            border-color: rgba(235, 221, 163, .68);
+        }
+
+        .journal-entry::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 15%;
+            right: 15%;
+            height: 1px;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(231, 216, 155, .45),
+                transparent
+            );
+        }
+
+        .journal-entry-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            margin-bottom: 18px;
+        }
+
+        .journal-entry-icon {
+            display: grid;
+            place-items: center;
+            width: 42px;
+            height: 42px;
+            flex-shrink: 0;
+            border: 1px solid rgba(208, 205, 157, .28);
+            border-radius: 12px;
+            background: rgba(180, 193, 143, .07);
+            color: #e5d49a;
+            font-size: 22px;
+        }
+
+        .journal-entry.is-locked .journal-entry-icon {
+            color: #a3ae9a;
+            border-color: rgba(177, 185, 165, .17);
+            background: rgba(150, 164, 140, .035);
+        }
+
+        .journal-entry-state {
+            padding: 5px 8px;
+            border: 1px solid rgba(193, 203, 177, .2);
+            border-radius: 999px;
+            color: #b7c5ad;
+            font-size: 8px;
+            letter-spacing: .08em;
+            text-align: center;
+        }
+
+        .journal-entry.is-unlocked .journal-entry-state {
+            color: #eadca7;
+            border-color: rgba(222, 204, 139, .3);
+            background: rgba(194, 169, 93, .07);
+        }
+
+        .journal-entry h2 {
+            margin: 0 0 8px;
+            color: #e9dfbd;
+            font-family: "Cinzel", serif;
+            font-size: 17px;
+            line-height: 1.4;
+        }
+
+        .journal-entry-description {
+            margin: 0 0 15px;
+            color: #becbbb;
+            font-size: 12px;
+            line-height: 1.7;
+        }
+
+        .journal-locked-message {
+            margin-top: auto;
+            padding: 12px;
+            border: 1px dashed rgba(189, 198, 168, .22);
+            border-radius: 10px;
+            color: #aab8a2;
+            font-size: 11px;
+            line-height: 1.6;
+            text-align: center;
+        }
+
+        .journal-locked-message strong {
+            display: block;
+            margin-bottom: 3px;
+            color: #d3d7c2;
+            font-family: "Cinzel", serif;
+            font-size: 10px;
+            font-weight: 600;
+        }
+
+        .journal-unlocked-content {
+            display: flex;
+            flex: 1;
+            flex-direction: column;
+            margin-top: auto;
+        }
+
+        .journal-unlocked-content[hidden],
+        .journal-locked-message[hidden] {
+            display: none !important;
+        }
+
+        .journal-unlocked-content blockquote {
+            margin: 0;
+            padding: 13px 0 5px;
+            border-top: 1px solid rgba(219, 205, 145, .23);
+            color: #eddfb6;
+            font-size: 13px;
+            font-style: italic;
+            line-height: 1.8;
+        }
+
+        .journal-source {
+            margin: 4px 0 13px;
+            color: #aebda5;
+            font-size: 10px;
+            line-height: 1.5;
+        }
+
+        .journal-revisit {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            align-self: flex-start;
+            margin-top: auto;
+            padding: 8px 12px;
+            border: 1px solid rgba(218, 207, 159, .28);
+            border-radius: 999px;
+            color: #e7dfbf;
+            background: rgba(195, 179, 111, .055);
+            font-size: 10px;
+            text-decoration: none;
+            transition: background .2s, border-color .2s;
+        }
+
+        .journal-revisit:hover {
+            border-color: rgba(233, 220, 160, .6);
+            background: rgba(195, 179, 111, .12);
+        }
+
+        .journal-closing {
+            margin: 24px auto 0;
+            color: rgba(211, 221, 201, .68);
+            font-size: 11px;
+            line-height: 1.7;
+            text-align: center;
+        }
+
+        .journal-footer-link {
+            display: inline-block;
+            margin-top: 10px;
+            color: #e4d39c;
+            font-size: 11px;
+            text-decoration: none;
+        }
+
+        .journal-footer-link:hover {
+            color: #fff0b9;
+            text-decoration: underline;
+        }
+
+        @media (max-width: 600px) {
+            body.journal-page {
+                padding: 16px 10px 24px;
+            }
+
+            .journal-topbar {
+                margin-bottom: 20px;
+            }
+
+            .journal-heading {
+                margin-bottom: 19px;
+            }
+
+            .journal-subtitle {
+                font-size: 12px;
+            }
+
+            .journal-grid {
+                grid-template-columns: 1fr;
+                gap: 12px;
+            }
+
+            .journal-entry {
+                padding: 17px;
+            }
+
+            .journal-entry-top {
+                margin-bottom: 12px;
+            }
+
+            .journal-entry h2 {
+                font-size: 16px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .journal-progress-fill,
+            .journal-entry,
+            .journal-revisit {
+                transition: none;
+            }
+        }
+    </style>
+</head>
+
+<body class="journal-page">
+
+    <main class="journal-shell">
+
+        <nav class="journal-topbar" aria-label="Journal navigation">
+            <a class="journal-back" href="game.html">← Back to the forest</a>
+            <span class="journal-label">YOUR PERSONAL COLLECTION</span>
+        </nav>
+
+        <header class="journal-heading">
+            <div class="journal-ornament" aria-hidden="true">✧ ❦ ✧</div>
+            <p class="journal-eyebrow">A record of little discoveries</p>
+            <h1>The Forest Journal</h1>
+            <p class="journal-subtitle">
+                Not every treasure can be held. Some are moments,
+                memories, and quiet things the forest chooses to share.
+            </p>
+        </header>
+
+        <section class="journal-progress" aria-label="Collection progress">
+            <div class="journal-progress-top">
+                <span>Memories discovered</span>
+                <span id="journal-count" aria-live="polite">0 of 2 collected</span>
+            </div>
+
+            <div
+                class="journal-progress-track"
+                role="progressbar"
+                id="journal-progress-bar"
+                aria-label="Journal completion"
+                aria-valuemin="0"
+                aria-valuemax="2"
+                aria-valuenow="0">
+                <div class="journal-progress-fill" id="journal-progress-fill"></div>
+            </div>
+        </section>
+
+        <section class="journal-grid" aria-label="Forest memories">
+
+            <!-- FIREFLY MEMORY -->
+            <article
+                class="journal-entry is-locked"
+                id="entry-firefly"
+                data-memory-key="forestMemory_firefly">
+
+                <div class="journal-entry-top">
+                    <span class="journal-entry-icon" aria-hidden="true">✧</span>
+                    <span class="journal-entry-state">NOT YET FOUND</span>
+                </div>
+
+                <h2>The Golden Light</h2>
+
+                <p class="journal-entry-description">
+                    A little light wandered between the trees.
+                    You followed it, even when the forest grew quiet.
+                </p>
+
+                <div class="journal-locked-message">
+                    <strong>Memory sleeping</strong>
+                    Catch all ten golden fireflies to uncover this entry.
+                </div>
+
+                <div class="journal-unlocked-content" hidden>
+                    <blockquote>
+                        “Even the oldest trees remember those who were kind to them.”
+                    </blockquote>
+
+                    <p class="journal-source">
+                        Remembered in the Firefly Clearing.
+                    </p>
+
+                    <a class="journal-revisit" href="firefly.html">
+                        <span aria-hidden="true">✧</span>
+                        Visit the clearing
+                    </a>
+                </div>
+            </article>
+
+            <!-- MEMORY GROVE ENTRY -->
+            <article
+                class="journal-entry is-locked"
+                id="entry-grove"
+                data-memory-key="forestMemory_grove">
+
+                <div class="journal-entry-top">
+                    <span class="journal-entry-icon" aria-hidden="true">❖</span>
+                    <span class="journal-entry-state">NOT YET FOUND</span>
+                </div>
+
+                <h2>The Woodland Whisper</h2>
+
+                <p class="journal-entry-description">
+                    Six woodland symbols kept an old pattern.
+                    Patient eyes and a steady memory revealed their secret.
+                </p>
+
+                <div class="journal-locked-message">
+                    <strong>Memory sleeping</strong>
+                    Complete all five levels of the Memory Grove to uncover this entry.
+                </div>
+
+                <div class="journal-unlocked-content" hidden>
+                    <blockquote>
+                        “The forest remembers every kindness, even the ones no one else sees.”
+                    </blockquote>
+
+                    <p class="journal-source">
+                        Remembered in the Memory Grove.
+                    </p>
+
+                    <a class="journal-revisit" href="memory.html">
+                        <span aria-hidden="true">❖</span>
+                        Return to the grove
+                    </a>
+                </div>
+            </article>
+
+        </section>
+
+        <footer class="journal-closing">
+            There is no need to hurry. The forest keeps what you discover.
+
+            <br>
+
+            <a class="journal-footer-link" href="game.html">
+                Return to your adventure →
+            </a>
+        </footer>
+
+    </main>
+
+    <script>
+        (() => {
+            "use strict";
+
+            const entries = Array.from(
+                document.querySelectorAll(".journal-entry")
+            );
+
+            const count = document.getElementById("journal-count");
+            const progressBar = document.getElementById("journal-progress-bar");
+            const progressFill = document.getElementById("journal-progress-fill");
+
+            function updateJournal() {
+                let found = 0;
+
+                entries.forEach(entry => {
+                    let unlocked = false;
+
+                    try {
+                        unlocked =
+                            localStorage.getItem(entry.dataset.memoryKey) === "true";
+                    } catch (error) {
+                        // Keep the journal view usable if storage is unavailable.
+                    }
+
+                    if (unlocked) found++;
+
+                    entry.classList.toggle("is-unlocked", unlocked);
+                    entry.classList.toggle("is-locked", !unlocked);
+
+                    entry.querySelector(".journal-entry-state").textContent =
+                        unlocked ? "DISCOVERED" : "NOT YET FOUND";
+
+                    entry.querySelector(".journal-locked-message").hidden =
+                        unlocked;
+
+                    entry.querySelector(".journal-unlocked-content").hidden =
+                        !unlocked;
+                });
+
+                count.textContent = `${found} of ${entries.length} collected`;
+
+                progressBar.setAttribute("aria-valuenow", String(found));
+
+                progressFill.style.width =
+                    `${(found / entries.length) * 100}%`;
+
+                if (found === entries.length) {
+                    count.textContent = "Every memory discovered";
+                }
+            }
+
+            updateJournal();
+
+            // Update if a minigame unlocks a memory in another tab.
+            window.addEventListener("storage", updateJournal);
+        })();
+    </script>
+
+</body>
+</html>

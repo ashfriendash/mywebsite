@@ -1,0 +1,846 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#102219">
+
+    <title>Follow the Firefly | The Lost Forest</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Lora:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        /* ==========================================
+           FOLLOW THE FIREFLY
+           A little optional forest secret
+           ========================================== */
+
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+        }
+
+        body.firefly-page {
+            position: relative;
+            min-height: 100vh;
+            padding: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            color: #f6f2df;
+            background:
+                linear-gradient(
+                    180deg,
+                    rgba(5, 18, 12, .78),
+                    rgba(8, 27, 17, .76)
+                ),
+                url("images/forest.png") center / cover no-repeat;
+            font-family: "Lora", serif;
+        }
+
+        body.firefly-page::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            background:
+                radial-gradient(
+                    ellipse at 50% 55%,
+                    rgba(94, 151, 91, .15),
+                    transparent 65%
+                );
+        }
+
+        .firefly-shell {
+            position: relative;
+            z-index: 1;
+            width: min(710px, 100%);
+            max-height: calc(100vh - 28px);
+            display: flex;
+            flex-direction: column;
+            align-items: stretch;
+            gap: 12px;
+        }
+
+        .firefly-topbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+        }
+
+        .firefly-back {
+            color: #d5dfcb;
+            text-decoration: none;
+            font-size: 12px;
+            opacity: .82;
+            transition: color .2s, opacity .2s;
+        }
+
+        .firefly-back:hover {
+            color: #ffe6a0;
+            opacity: 1;
+        }
+
+        .firefly-label {
+            color: #c5d0b2;
+            font-size: 10px;
+            letter-spacing: .16em;
+            text-align: right;
+        }
+
+        .firefly-heading {
+            text-align: center;
+        }
+
+        .firefly-eyebrow {
+            margin: 0 0 5px;
+            color: #c3d0a9;
+            font-size: 10px;
+            letter-spacing: .24em;
+            text-transform: uppercase;
+        }
+
+        .firefly-heading h1 {
+            margin: 0;
+            color: #f4e5ad;
+            font-family: "Cinzel", serif;
+            font-size: clamp(26px, 4.5vh, 39px);
+            line-height: 1.15;
+            text-shadow: 0 0 22px rgba(227, 203, 122, .22);
+        }
+
+        .firefly-heading > p:last-child {
+            margin: 7px 0 0;
+            color: #d7dfd0;
+            font-size: 13px;
+            line-height: 1.45;
+        }
+
+        .firefly-panel {
+            padding: 14px;
+            border: 1px solid rgba(208, 199, 143, .27);
+            border-radius: 18px;
+            background: rgba(7, 20, 13, .72);
+            box-shadow:
+                0 16px 45px rgba(0, 0, 0, .30),
+                inset 0 0 28px rgba(180, 213, 151, .025);
+            backdrop-filter: blur(8px);
+        }
+
+        .firefly-stats {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            margin: 0 2px 11px;
+        }
+
+        .firefly-stat {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .firefly-stat:last-child {
+            text-align: right;
+        }
+
+        .firefly-stat span {
+            color: #bdcbb6;
+            font-size: 9px;
+            letter-spacing: .13em;
+        }
+
+        .firefly-stat strong {
+            color: #f0dfab;
+            font-family: "Cinzel", serif;
+            font-size: 16px;
+            font-variant-numeric: tabular-nums;
+        }
+
+        /* The little meadow */
+
+        .firefly-field {
+            position: relative;
+            isolation: isolate;
+            width: 100%;
+            height: clamp(190px, 31vh, 280px);
+            overflow: hidden;
+            border: 1px solid rgba(172, 202, 143, .26);
+            border-radius: 13px;
+            background:
+                radial-gradient(
+                    ellipse at 50% 110%,
+                    rgba(76, 121, 62, .42),
+                    transparent 65%
+                ),
+                radial-gradient(
+                    ellipse at 18% 14%,
+                    rgba(101, 139, 89, .13),
+                    transparent 45%
+                ),
+                linear-gradient(
+                    180deg,
+                    rgba(14, 35, 26, .93),
+                    rgba(13, 39, 25, .92) 70%,
+                    rgba(12, 31, 19, .98)
+                );
+        }
+
+        .firefly-field::before,
+        .firefly-field::after {
+            content: "";
+            position: absolute;
+            z-index: -1;
+            pointer-events: none;
+            border-radius: 50%;
+            filter: blur(1px);
+        }
+
+        .firefly-field::before {
+            width: 80%;
+            height: 40%;
+            bottom: -25%;
+            left: 10%;
+            background: rgba(76, 117, 65, .24);
+        }
+
+        .firefly-field::after {
+            width: 65%;
+            height: 28%;
+            bottom: -17%;
+            right: -8%;
+            background: rgba(135, 157, 89, .15);
+        }
+
+        .ambient-light {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            border-radius: 50%;
+            background: #d5e9b6;
+            box-shadow: 0 0 9px 2px rgba(206, 238, 160, .42);
+            opacity: .6;
+            pointer-events: none;
+            animation: ambientTwinkle 3s ease-in-out infinite;
+        }
+
+        .ambient-light:nth-child(1) {
+            left: 17%;
+            top: 25%;
+        }
+
+        .ambient-light:nth-child(2) {
+            left: 75%;
+            top: 19%;
+            animation-delay: 1s;
+        }
+
+        .ambient-light:nth-child(3) {
+            left: 84%;
+            top: 72%;
+            animation-delay: 1.7s;
+        }
+
+        .ambient-light:nth-child(4) {
+            left: 28%;
+            top: 76%;
+            animation-delay: .5s;
+        }
+
+        .ambient-light:nth-child(5) {
+            left: 57%;
+            top: 12%;
+            animation-delay: 2s;
+        }
+
+        .firefly-field-message {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            width: min(85%, 350px);
+            transform: translate(-50%, -50%);
+            margin: 0;
+            color: #d2ddc7;
+            font-size: 12px;
+            line-height: 1.7;
+            text-align: center;
+            transition: opacity .25s;
+            pointer-events: none;
+        }
+
+        .firefly-field-message strong {
+            display: block;
+            margin-bottom: 5px;
+            color: #f1e3b6;
+            font-family: "Cinzel", serif;
+            font-size: 15px;
+            font-weight: 600;
+        }
+
+        .firefly-field.is-playing .firefly-field-message {
+            opacity: 0;
+        }
+
+        /* Golden target */
+
+        .golden-firefly {
+            position: absolute;
+            z-index: 2;
+            left: 50%;
+            top: 50%;
+            width: 48px;
+            height: 48px;
+            padding: 0;
+            display: grid;
+            place-items: center;
+            border: 1px solid rgba(255, 238, 171, .68);
+            border-radius: 50%;
+            background:
+                radial-gradient(
+                    circle,
+                    rgba(255, 254, 212, .98) 0%,
+                    rgba(255, 222, 112, .88) 15%,
+                    rgba(226, 186, 78, .26) 39%,
+                    rgba(226, 186, 78, .04) 72%
+                );
+            box-shadow:
+                0 0 10px 3px rgba(255, 223, 119, .36),
+                0 0 28px 9px rgba(255, 207, 91, .16);
+            opacity: 0;
+            transform: translate(-50%, -50%) scale(.65);
+            cursor: pointer;
+            transition:
+                opacity .2s,
+                transform .25s;
+            animation: goldenDrift 1.9s ease-in-out infinite;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .golden-firefly[hidden] {
+            display: none;
+        }
+
+        .golden-firefly.is-visible {
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        .golden-firefly:hover {
+            box-shadow:
+                0 0 15px 5px rgba(255, 239, 157, .62),
+                0 0 36px 12px rgba(255, 211, 100, .25);
+        }
+
+        .golden-firefly:focus-visible {
+            outline: 2px solid #fff2b5;
+            outline-offset: 4px;
+        }
+
+        .golden-firefly span {
+            color: #fff9d6;
+            font-size: 19px;
+            line-height: 1;
+            text-shadow: 0 0 9px #fff3ae;
+            pointer-events: none;
+        }
+
+        .firefly-actions {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 13px;
+        }
+
+        .firefly-start {
+            padding: 10px 22px;
+            border: 1px solid rgba(237, 220, 156, .63);
+            border-radius: 999px;
+            color: #f5e9bf;
+            background: linear-gradient(
+                135deg,
+                rgba(56, 79, 48, .95),
+                rgba(34, 60, 40, .95)
+            );
+            font-family: "Cinzel", serif;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 0 15px rgba(197, 213, 131, .06);
+            transition:
+                transform .2s,
+                border-color .2s,
+                background .2s,
+                box-shadow .2s;
+        }
+
+        .firefly-start:hover {
+            transform: translateY(-2px);
+            border-color: #f0dda0;
+            background: linear-gradient(
+                135deg,
+                #4c6841,
+                #304e34
+            );
+            box-shadow: 0 0 18px rgba(204, 219, 145, .15);
+        }
+
+        .firefly-start:focus-visible,
+        .firefly-back:focus-visible {
+            outline: 2px solid #f0dda0;
+            outline-offset: 4px;
+        }
+
+        .firefly-status {
+            min-height: 18px;
+            margin: 11px 2px 0;
+            color: #c8d5c0;
+            font-size: 11px;
+            line-height: 1.5;
+            text-align: center;
+        }
+
+        /* The tiny story reward */
+
+        .firefly-memory {
+            margin-top: 10px;
+            padding: 12px 14px;
+            border-top: 1px solid rgba(224, 206, 138, .27);
+            text-align: center;
+            animation: memoryArrive .7s ease-out both;
+        }
+
+        .firefly-memory[hidden] {
+            display: none;
+        }
+
+        .firefly-memory-title {
+            margin: 0 0 5px;
+            color: #e4d29b;
+            font-family: "Cinzel", serif;
+            font-size: 11px;
+            letter-spacing: .12em;
+        }
+
+        .firefly-memory p {
+            max-width: 470px;
+            margin: 0 auto;
+            color: #e7e5d1;
+            font-size: 12px;
+            font-style: italic;
+            line-height: 1.65;
+        }
+
+        .firefly-footer {
+            margin: 0;
+            color: rgba(219, 226, 206, .66);
+            font-size: 10px;
+            line-height: 1.5;
+            text-align: center;
+        }
+
+        @keyframes goldenDrift {
+            0%, 100% {
+                margin-top: 0;
+            }
+            50% {
+                margin-top: -5px;
+            }
+        }
+
+        @keyframes ambientTwinkle {
+            0%, 100% {
+                opacity: .28;
+                transform: scale(.8);
+            }
+            50% {
+                opacity: .85;
+                transform: scale(1.35);
+            }
+        }
+
+        @keyframes memoryArrive {
+            from {
+                opacity: 0;
+                transform: translateY(5px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Compact layout for shorter displays */
+
+        @media (max-height: 680px) {
+            body.firefly-page {
+                padding: 7px;
+            }
+
+            .firefly-shell {
+                gap: 7px;
+                max-height: calc(100vh - 14px);
+            }
+
+            .firefly-heading h1 {
+                font-size: clamp(24px, 4vh, 30px);
+            }
+
+            .firefly-heading > p:last-child {
+                margin-top: 4px;
+                font-size: 11px;
+            }
+
+            .firefly-panel {
+                padding: 9px;
+            }
+
+            .firefly-field {
+                height: clamp(160px, 29vh, 205px);
+            }
+
+            .firefly-stat strong {
+                font-size: 14px;
+            }
+
+            .firefly-actions {
+                margin-top: 8px;
+            }
+
+            .firefly-status {
+                margin-top: 7px;
+            }
+
+            .firefly-memory {
+                margin-top: 6px;
+                padding: 7px;
+            }
+        }
+
+        @media (max-width: 420px) {
+            body.firefly-page {
+                padding: 8px;
+            }
+
+            .firefly-panel {
+                padding: 9px;
+            }
+
+            .firefly-field {
+                height: clamp(175px, 29vh, 240px);
+            }
+
+            .firefly-label {
+                font-size: 8px;
+            }
+
+            .firefly-heading h1 {
+                font-size: 27px;
+            }
+
+            .firefly-heading > p:last-child {
+                font-size: 12px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .ambient-light,
+            .golden-firefly {
+                animation: none;
+            }
+
+            *,
+            *::before,
+            *::after {
+                scroll-behavior: auto !important;
+            }
+        }
+    </style>
+</head>
+
+<body class="firefly-page">
+
+    <main class="firefly-shell">
+
+        <nav class="firefly-topbar" aria-label="Game navigation">
+            <a href="index.html" class="firefly-back">
+                ← Back to the forest
+            </a>
+            <span class="firefly-label">A QUIET LITTLE SECRET</span>
+        </nav>
+
+        <header class="firefly-heading">
+            <p class="firefly-eyebrow">Some magic is easy to miss</p>
+            <h1>Follow the Firefly</h1>
+            <p>Ten golden lights. One little memory.</p>
+        </header>
+
+        <section class="firefly-panel" aria-label="Firefly minigame">
+
+            <div class="firefly-stats">
+                <div class="firefly-stat">
+                    <span>GOLDEN FIREFLIES</span>
+                    <strong id="firefly-count">0 / 3</strong>
+                </div>
+
+                <div class="firefly-stat">
+                    <span>TIME REMAINING</span>
+                    <strong><span id="firefly-time">20</span>s</strong>
+                </div>
+            </div>
+
+            <div
+                class="firefly-field"
+                id="firefly-field"
+                aria-label="Find and click three golden fireflies">
+
+                <span class="ambient-light" aria-hidden="true"></span>
+                <span class="ambient-light" aria-hidden="true"></span>
+                <span class="ambient-light" aria-hidden="true"></span>
+                <span class="ambient-light" aria-hidden="true"></span>
+                <span class="ambient-light" aria-hidden="true"></span>
+
+                <p class="firefly-field-message" id="field-message">
+                    <strong>Listen to the quiet.</strong>
+                    When you're ready, follow the golden light.
+                </p>
+
+                <button
+                    type="button"
+                    class="golden-firefly"
+                    id="golden-firefly"
+                    aria-label="Catch the golden firefly"
+                    title="Catch the firefly"
+                    hidden>
+                    <span aria-hidden="true">✦</span>
+                </button>
+
+            </div>
+
+            <div class="firefly-actions">
+                <button class="firefly-start" id="start-fireflies" type="button">
+                    Begin quietly
+                </button>
+            </div>
+
+            <p
+                class="firefly-status"
+                id="firefly-status"
+                aria-live="polite">
+                Catch ten golden fireflies before the 25 seconds are up.
+            </p>
+
+            <div class="firefly-memory" id="firefly-memory" hidden>
+                <p class="firefly-memory-title">A MEMORY LEFT BY THE FOREST</p>
+                <p>
+                    “Even the oldest trees remember those who were kind to them.”
+                </p>
+            </div>
+
+        </section>
+
+        <p class="firefly-footer">
+            No quest to finish. No treasure to chase. Just a little moment of magic.
+        </p>
+
+    </main>
+
+    <script>
+        (() => {
+            const field = document.getElementById("firefly-field");
+            const target = document.getElementById("golden-firefly");
+            const countDisplay = document.getElementById("firefly-count");
+            const timeDisplay = document.getElementById("firefly-time");
+            const fieldMessage = document.getElementById("field-message");
+            const status = document.getElementById("firefly-status");
+            const startButton = document.getElementById("start-fireflies");
+            const memory = document.getElementById("firefly-memory");
+
+            const goal = 10;
+            const startingTime = 25;
+            const targetLifetime = 1350;
+
+            let caught = 0;
+            let seconds = startingTime;
+            let running = false;
+            let timerInterval = null;
+            let spawnTimeout = null;
+            let lifetimeTimeout = null;
+            let hideTimeout = null;
+
+            function clearTimers() {
+                clearInterval(timerInterval);
+                clearTimeout(spawnTimeout);
+                clearTimeout(lifetimeTimeout);
+                clearTimeout(hideTimeout);
+
+                timerInterval = null;
+                spawnTimeout = null;
+                lifetimeTimeout = null;
+                hideTimeout = null;
+            }
+
+            function hideTargetImmediately() {
+                target.classList.remove("is-visible");
+                target.hidden = true;
+            }
+
+            function updateStats() {
+                countDisplay.textContent = `${caught} / ${goal}`;
+                timeDisplay.textContent = seconds;
+            }
+
+            function finishGame(success) {
+                running = false;
+                clearTimers();
+                hideTargetImmediately();
+                field.classList.remove("is-playing");
+
+                if (success) {
+                    try{
+                        localStorage.setItem("forestMemory_firefly", "true");
+                    } catch(error){
+                        console.warn("Could not save firefly memory to localStorage:", error)
+                    }
+                    caught = goal;
+                    updateStats();
+
+                    fieldMessage.innerHTML =
+                        "<strong>A little forest secret.</strong>" +
+                        "You found something worth remembering.";
+
+                    status.textContent =
+                        "For a moment, the forest seems to breathe with you.";
+
+                    memory.hidden = false;
+                    startButton.textContent = "Visit again";
+                } else {
+                    fieldMessage.innerHTML =
+                        "<strong>The lights have drifted away.</strong>" +
+                        "The forest will be here if you wish to try again.";
+
+                    status.textContent =
+                        "No hurry. Some little things are worth a second look.";
+
+                    startButton.textContent = "Try again";
+                }
+            }
+
+            function placeTarget() {
+                if (!running) return;
+
+                // Keep the firefly safely inside the meadow.
+                const x = 15 + Math.random() * 70;
+                const y = 20 + Math.random() * 60;
+
+                target.style.left = `${x}%`;
+                target.style.top = `${y}%`;
+                target.hidden = false;
+
+                requestAnimationFrame(() => {
+                    if (running && !target.hidden) {
+                        target.classList.add("is-visible");
+                    }
+                });
+
+                lifetimeTimeout = setTimeout(() => {
+                    target.classList.remove("is-visible");
+
+                    status.textContent =
+                        "A little too quick! Watch for the next golden glow.";
+
+                    hideTimeout = setTimeout(() => {
+                        target.hidden = true;
+
+                        if (running) {
+                            spawnTimeout = setTimeout(placeTarget, 350);
+                        }
+                    }, 220);
+                }, targetLifetime);
+            }
+
+            function beginGame() {
+                clearTimers();
+
+                caught = 0;
+                seconds = startingTime;
+                running = true;
+
+                updateStats();
+
+                memory.hidden = true;
+                field.classList.add("is-playing");
+
+                fieldMessage.innerHTML =
+                    "<strong>Follow the golden light.</strong>" +
+                    "Catch ten before they drift away.";
+
+                status.textContent =
+                    "The fireflies are shy. Keep your eyes on the meadow.";
+
+                startButton.textContent = "Start over";
+
+                spawnTimeout = setTimeout(placeTarget, 500);
+
+                timerInterval = setInterval(() => {
+                    if (!running) return;
+
+                    seconds--;
+                    updateStats();
+
+                    if (seconds <= 0) {
+                        finishGame(false);
+                    }
+                }, 1000);
+            }
+
+            target.addEventListener("click", () => {
+                if (!running || target.hidden) return;
+
+                clearTimeout(lifetimeTimeout);
+                clearTimeout(hideTimeout);
+
+                hideTargetImmediately();
+
+                caught++;
+                updateStats();
+
+                if (caught >= goal) {
+                    finishGame(true);
+                    return;
+                }
+
+                if (caught === 1) {
+                    status.textContent =
+                        "One little light found its way to you. Nine more.";
+                } else if (caught === goal - 1) {
+                    status.textContent =
+                        "Nine lights gathered. Just one more.";
+                } else {
+                    status.textContent =
+                        `${caught} golden lights gathered. ` +
+                        `${goal - caught} more to find.`;
+                }
+
+                spawnTimeout = setTimeout(placeTarget, 380);
+            });
+
+            startButton.addEventListener("click", beginGame);
+
+            updateStats();
+        })();
+    </script>
+
+</body>
+</html>

@@ -1,100 +1,256 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Adventure</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <meta name="theme-color" content="#102219">
 
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Lora:wght@400;500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <title>The Lost Forest</title>
+
+    <link rel="stylesheet" href="title.css">
+
+    <style>
+        /* =========================================
+           OPTIONAL MINIGAMES — TITLE SCREEN
+           ========================================= */
+
+        .title-content .forest-minigames {
+            position: relative;
+            z-index: 5;
+            display: flex;
+            justify-content: center;
+            align-items: stretch;
+            flex-wrap: wrap;
+            gap: 9px;
+            width: 100%;
+            max-width: 440px;
+            margin: 17px auto 0;
+        }
+
+        .forest-minigame-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 9px;
+            flex: 1 1 175px;
+            min-width: 0;
+            max-width: 100%;
+            padding: 9px 12px;
+            border: 1px solid rgba(224, 211, 164, 0.24);
+            border-radius: 999px;
+            background: rgba(12, 29, 20, 0.48);
+            color: #e7e0c7;
+            text-decoration: none;
+            text-align: left;
+            box-shadow: 0 0 16px rgba(221, 201, 132, 0.025);
+            transition:
+                background 0.25s ease,
+                border-color 0.25s ease,
+                box-shadow 0.25s ease,
+                transform 0.25s ease;
+            animation: forestSecretGlow 4s ease-in-out infinite;
+        }
+
+        .forest-minigame-link:nth-child(2) {
+            animation-delay: 1.3s;
+        }
+
+        .forest-minigame-link:hover {
+            background: rgba(37, 61, 40, 0.78);
+            border-color: rgba(239, 221, 164, 0.62);
+            box-shadow: 0 0 20px rgba(221, 201, 132, 0.12);
+            transform: translateY(-2px);
+        }
+
+        .forest-minigame-link:focus-visible {
+            outline: 2px solid #eadba6;
+            outline-offset: 4px;
+        }
+
+        .forest-minigame-icon {
+            flex-shrink: 0;
+            color: #efdc9b;
+            font-size: 19px;
+            line-height: 1;
+            text-shadow: 0 0 10px rgba(247, 222, 142, 0.55);
+            animation: forestSecretFlicker 3s ease-in-out infinite;
+        }
+
+        .forest-minigame-copy {
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+            min-width: 0;
+        }
+
+        .forest-minigame-copy strong {
+            color: #f0e4bf;
+            font-family: "Cinzel", serif;
+            font-size: 10px;
+            font-weight: 600;
+            line-height: 1.35;
+            letter-spacing: 0.015em;
+        }
+
+        .forest-minigame-copy small {
+            color: #bfcbb7;
+            font-size: 9px;
+            line-height: 1.35;
+        }
+
+        .forest-minigame-arrow {
+            flex-shrink: 0;
+            margin-left: auto;
+            color: #d4c89c;
+            font-size: 12px;
+            opacity: 0.65;
+            transition: transform 0.25s ease, opacity 0.25s ease;
+        }
+
+        .forest-minigame-link:hover .forest-minigame-arrow {
+            transform: translate(2px, -2px);
+            opacity: 1;
+        }
+
+        @keyframes forestSecretGlow {
+            0%, 100% {
+                box-shadow: 0 0 8px rgba(221, 201, 132, 0.02);
+            }
+            50% {
+                box-shadow: 0 0 15px rgba(221, 201, 132, 0.075);
+            }
+        }
+
+        @keyframes forestSecretFlicker {
+            0%, 100% {
+                opacity: 0.72;
+            }
+            50% {
+                opacity: 1;
+                text-shadow: 0 0 13px rgba(247, 222, 142, 0.85);
+            }
+        }
+
+        @media (max-width: 420px) {
+            .title-content .forest-minigames {
+                gap: 7px;
+                margin-top: 13px;
+            }
+
+            .forest-minigame-link {
+                flex-basis: 160px;
+                padding: 8px 10px;
+                gap: 7px;
+            }
+
+            .forest-minigame-copy strong {
+                font-size: 9px;
+            }
+
+            .forest-minigame-copy small {
+                font-size: 8px;
+            }
+
+            .forest-minigame-icon {
+                font-size: 16px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .forest-minigame-link,
+            .forest-minigame-icon,
+            .forest-minigame-arrow {
+                animation: none;
+                transition: none;
+            }
+        }
+    </style>
 </head>
-<body>
-<body>
 
-    <div class="story-box">
+<body class="title-page">
 
-        <div class="stats">
+    <main class="title-screen">
 
-            <div class="stats">
+        <div class="atmosphere"></div>
 
-            <p id="health">❤️ Health: 100</p>
+        <section class="title-content">
 
-            <p id="gold">💰 Gold: 0</p>
+            <div class="title-ornament">
+                <span></span>
+                <i>✦</i>
+                <span></span>
+            </div>
 
-            <p id="keys">🗝️ Keys: 0</p>
+            <h1>
+                <span>THE</span>
+                LOST FOREST
+            </h1>
 
-            <p id="potion-count">🧪 Potions: 0</p>
+            <div class="title-divider">
+                <span></span>
+                <b>◆</b>
+                <span></span>
+            </div>
+
+            <!-- MAIN ADVENTURE -->
+            <a href="game.html" class="start-button">
+                <span class="start-icon">▶</span>
+                <span>START ADVENTURE</span>
+            </a>
+
+            <!-- OPTIONAL MINIGAMES -->
+            <div class="forest-minigames">
+
+                <a href="firefly.html" class="forest-minigame-link">
+                    <span class="forest-minigame-icon" aria-hidden="true">✧</span>
+
+                    <span class="forest-minigame-copy">
+                        <strong>Follow the Firefly</strong>
+                        <small>A little forest secret</small>
+                    </span>
+
+                    <span class="forest-minigame-arrow" aria-hidden="true">↗</span>
+                </a>
+
+                <a href="memory.html" class="forest-minigame-link">
+                    <span class="forest-minigame-icon" aria-hidden="true">❖</span>
+
+                    <span class="forest-minigame-copy">
+                        <strong>Remember the Forest</strong>
+                        <small>A five-level memory walk</small>
+                    </span>
+
+                    <span class="forest-minigame-arrow" aria-hidden="true">↗</span>
+                </a>
 
             </div>
 
-            <button class="use-potion-button" onclick="Heal()">
-                🧪 Use Potion
-            </button>
+        </section>
 
+        <!-- DECORATIVE CORNERS -->
+        <div class="corner corner-top-left"></div>
+        <div class="corner corner-top-right"></div>
+        <div class="corner corner-bottom-left"></div>
+        <div class="corner corner-bottom-right"></div>
+
+        <!-- AMBIENT PARTICLES -->
+        <div class="particles" aria-hidden="true">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
         </div>
 
-        <h1>The Lost Forest</h1>
-
-        <p>
-            You wake up in a mysterious forest.
-        </p>
-
-        <p>
-            Two paths stretch before you.
-            One disappears into darkness.
-            The other glows with warm sunlight.
-        </p>
-
-        <div class="choices">
-
-            <a href="left.html">Go Left</a>
-
-            <a href="right.html">Go Right</a>
-
-        </div>
-
-        <div class="action-panel">
-
-            <button onclick="LooseHealth(20)">
-                🪨 Cursed Stone
-            </button>
-
-            <button onclick="GainGold(25)">
-                💰 Pick Up Gold
-            </button>
-
-            <button onclick="FindKey()">
-                🗝️ Find Key
-            </button>
-
-            <button onclick="Heal()">
-                🧪 Drink Potion
-            </button>
-
-            <button onclick="OpenChest()">
-                📦 Open Chest
-            </button>
-
-        </div>
-
-    </div>
-
-
-    <div id="notification">
-
-        <div id="notifTitle"></div>
-        <div id="notifText"></div>
-
-    </div>
-    <button class="reset-button" onclick="ResetGame()">
-    🔄 Reset Game
-    </button>
-
-
-    <script src="script.js"></script>
+    </main>
 
 </body>
 </html>

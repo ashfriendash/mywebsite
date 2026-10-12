@@ -1,0 +1,928 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#102219">
+    <title>The Memory Grove | The Lost Forest</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Lora:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        /* ==========================================
+           THE MEMORY GROVE
+           A five-level forest memory challenge
+           ========================================== */
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body.memory-page {
+            width: 100%;
+            height: 100vh;
+            min-height: 0;
+            margin: 0;
+            padding: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            color: #f1f0df;
+            background:
+                linear-gradient(
+                    rgba(5, 17, 11, .78),
+                    rgba(7, 24, 15, .84)
+                ),
+                url("images/forest.png") center / cover no-repeat;
+            font-family: "Lora", serif;
+        }
+
+        .memory-shell {
+            width: min(720px, 100%);
+            max-height: calc(100vh - 24px);
+            display: flex;
+            flex-direction: column;
+            gap: 9px;
+        }
+
+        .memory-topbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            min-height: 20px;
+        }
+
+        .memory-back {
+            color: #d6dfcb;
+            font-size: 12px;
+            text-decoration: none;
+            opacity: .83;
+            transition: color .2s, opacity .2s;
+        }
+
+        .memory-back:hover {
+            color: #f2dfa0;
+            opacity: 1;
+        }
+
+        .memory-kicker {
+            color: #b8c6ab;
+            font-size: 9px;
+            letter-spacing: .15em;
+            text-align: right;
+        }
+
+        .memory-card {
+            position: relative;
+            padding: clamp(14px, 2.2vh, 22px);
+            overflow: hidden;
+            border: 1px solid rgba(207, 205, 151, .3);
+            border-radius: 19px;
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(17, 35, 24, .96),
+                    rgba(8, 22, 15, .97)
+                );
+            box-shadow:
+                0 18px 50px rgba(0, 0, 0, .42),
+                inset 0 0 35px rgba(194, 215, 153, .025);
+            text-align: center;
+        }
+
+        .memory-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 18%;
+            right: 18%;
+            height: 1px;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(236, 221, 163, .5),
+                transparent
+            );
+            pointer-events: none;
+        }
+
+        .memory-heading {
+            margin-bottom: 14px;
+        }
+
+        .memory-eyebrow {
+            margin: 0 0 5px;
+            color: #b8c8a7;
+            font-size: 9px;
+            letter-spacing: .24em;
+            text-transform: uppercase;
+        }
+
+        .memory-heading h1 {
+            margin: 0;
+            color: #f0dfaa;
+            font-family: "Cinzel", serif;
+            font-size: clamp(27px, 4.5vh, 38px);
+            line-height: 1.12;
+            text-shadow: 0 0 22px rgba(222, 199, 125, .2);
+        }
+
+        .memory-heading > p:last-child {
+            max-width: 440px;
+            margin: 7px auto 0;
+            color: #ccd7c7;
+            font-size: 12px;
+            line-height: 1.5;
+        }
+
+        /* Five-step level indicator */
+
+        .memory-level-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            margin-bottom: 10px;
+            text-align: left;
+        }
+
+        .memory-level-copy {
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+        }
+
+        .memory-level-copy span {
+            color: #aebea6;
+            font-size: 9px;
+            letter-spacing: .13em;
+        }
+
+        .memory-level-copy strong {
+            color: #f0e3bd;
+            font-family: "Cinzel", serif;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .memory-pips {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .memory-pip {
+            width: clamp(18px, 3.8vw, 34px);
+            height: 4px;
+            border-radius: 99px;
+            background: rgba(220, 227, 203, .16);
+            transition: background .3s, box-shadow .3s;
+        }
+
+        .memory-pip.is-current {
+            background: #d6c27f;
+            box-shadow: 0 0 9px rgba(230, 207, 123, .42);
+        }
+
+        .memory-pip.is-complete {
+            background: #8bc49a;
+            box-shadow: 0 0 7px rgba(120, 214, 148, .22);
+        }
+
+        .memory-meta {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            margin: 0 2px 10px;
+        }
+
+        .memory-meta span {
+            color: #c2cfb8;
+            font-size: 10px;
+        }
+
+        #memory-phase {
+            color: #e6d7a1;
+            font-size: 9px;
+            letter-spacing: .08em;
+            text-align: right;
+        }
+
+        /* Six woodland symbols */
+
+        .memory-board {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 9px;
+            width: min(490px, 100%);
+            margin: 0 auto;
+        }
+
+        .memory-tile {
+            position: relative;
+            min-width: 0;
+            height: clamp(58px, 9vh, 77px);
+            padding: 5px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 3px;
+            border: 1px solid rgba(177, 199, 158, .26);
+            border-radius: 12px;
+            background: linear-gradient(
+                145deg,
+                rgba(35, 61, 41, .85),
+                rgba(19, 39, 27, .95)
+            );
+            color: #eee8cc;
+            font-family: "Lora", serif;
+            cursor: pointer;
+            -webkit-tap-highlight-color: transparent;
+            transition:
+                background .2s,
+                border-color .2s,
+                box-shadow .2s,
+                transform .18s,
+                opacity .2s;
+        }
+
+        .memory-tile:disabled {
+            cursor: default;
+        }
+
+        .memory-tile:not(:disabled):hover {
+            border-color: rgba(223, 212, 160, .65);
+            background: rgba(65, 89, 53, .75);
+            transform: translateY(-1px);
+        }
+
+        .memory-tile:focus-visible {
+            outline: 2px solid #efdfa0;
+            outline-offset: 3px;
+        }
+
+        .memory-symbol {
+            font-size: clamp(22px, 3.7vh, 31px);
+            line-height: 1.05;
+            filter: saturate(.85);
+            pointer-events: none;
+        }
+
+        .memory-tile-name {
+            color: #c4d0bb;
+            font-size: 9px;
+            letter-spacing: .03em;
+            pointer-events: none;
+        }
+
+        .memory-tile.is-lit {
+            z-index: 1;
+            border-color: #f2dfa0;
+            background: linear-gradient(
+                145deg,
+                rgba(117, 111, 61, .98),
+                rgba(59, 78, 42, .98)
+            );
+            box-shadow:
+                0 0 12px rgba(243, 221, 138, .35),
+                0 0 29px rgba(241, 208, 105, .15),
+                inset 0 0 14px rgba(255, 239, 185, .12);
+            transform: scale(1.025);
+        }
+
+        .memory-tile.is-lit .memory-symbol {
+            filter: saturate(1.15) brightness(1.13);
+        }
+
+        .memory-tile.is-tapped {
+            border-color: #a8d7a4;
+            background: linear-gradient(
+                145deg,
+                rgba(62, 105, 67, .98),
+                rgba(33, 69, 43, .98)
+            );
+            box-shadow: 0 0 13px rgba(141, 224, 153, .22);
+        }
+
+        .memory-status {
+            min-height: 34px;
+            margin: 12px 4px 7px;
+            color: #d2dcc9;
+            font-size: 11px;
+            line-height: 1.55;
+        }
+
+        .memory-actions {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .memory-primary {
+            max-width: 100%;
+            min-height: 39px;
+            padding: 9px 22px;
+            border: 1px solid rgba(239, 221, 159, .68);
+            border-radius: 999px;
+            background: linear-gradient(
+                135deg,
+                #4a603b,
+                #293f2d
+            );
+            color: #f3e8c4;
+            font-family: "Cinzel", serif;
+            font-size: 11px;
+            font-weight: 600;
+            cursor: pointer;
+            transition:
+                background .2s,
+                border-color .2s,
+                box-shadow .2s,
+                transform .2s;
+        }
+
+        .memory-primary:hover:not(:disabled) {
+            border-color: #f3e5b1;
+            background: linear-gradient(
+                135deg,
+                #5d7748,
+                #35553a
+            );
+            box-shadow: 0 0 17px rgba(222, 211, 151, .12);
+            transform: translateY(-1px);
+        }
+
+        .memory-primary:focus-visible {
+            outline: 2px solid #f0dfa0;
+            outline-offset: 4px;
+        }
+
+        .memory-primary:disabled {
+            opacity: .65;
+            cursor: default;
+        }
+
+        /* Final, optional lore reward */
+
+        .memory-reward {
+            margin-top: 14px;
+            padding: 12px 10px 2px;
+            border-top: 1px solid rgba(221, 207, 147, .25);
+            animation: memoryRewardReveal .7s ease-out both;
+        }
+
+        .memory-reward[hidden] {
+            display: none !important;
+        }
+
+        .memory-reward-label {
+            margin: 0 0 7px;
+            color: #e0ce92;
+            font-family: "Cinzel", serif;
+            font-size: 10px;
+            letter-spacing: .14em;
+        }
+
+        .memory-reward blockquote {
+            max-width: 450px;
+            margin: 0 auto;
+            color: #f0e7ca;
+            font-size: 13px;
+            font-style: italic;
+            line-height: 1.65;
+        }
+
+        .memory-reward p:last-child {
+            margin: 7px 0 0;
+            color: #b8c9af;
+            font-size: 10px;
+        }
+
+        .memory-footer {
+            margin: 0;
+            color: rgba(218, 228, 207, .68);
+            font-size: 10px;
+            line-height: 1.4;
+            text-align: center;
+        }
+
+        @keyframes memoryRewardReveal {
+            from {
+                opacity: 0;
+                transform: translateY(5px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Short displays */
+
+        @media (max-height: 650px) {
+            body.memory-page {
+                padding: 6px;
+            }
+
+            .memory-shell {
+                max-height: calc(100vh - 12px);
+                gap: 5px;
+            }
+
+            .memory-card {
+                padding: 10px 12px;
+            }
+
+            .memory-heading {
+                margin-bottom: 8px;
+            }
+
+            .memory-heading h1 {
+                font-size: clamp(23px, 4vh, 29px);
+            }
+
+            .memory-heading > p:last-child {
+                margin-top: 4px;
+                font-size: 11px;
+            }
+
+            .memory-level-row {
+                margin-bottom: 6px;
+            }
+
+            .memory-meta {
+                margin-bottom: 6px;
+            }
+
+            .memory-board {
+                gap: 6px;
+            }
+
+            .memory-tile {
+                height: clamp(47px, 8vh, 59px);
+            }
+
+            .memory-symbol {
+                font-size: 22px;
+            }
+
+            .memory-tile-name {
+                font-size: 8px;
+            }
+
+            .memory-status {
+                min-height: 24px;
+                margin: 7px 2px 4px;
+                font-size: 10px;
+                line-height: 1.35;
+            }
+
+            .memory-primary {
+                min-height: 34px;
+                padding: 7px 16px;
+            }
+
+            .memory-reward {
+                margin-top: 8px;
+                padding-top: 8px;
+            }
+
+            .memory-reward blockquote {
+                font-size: 11px;
+            }
+        }
+
+        @media (max-width: 420px) {
+            body.memory-page {
+                padding: 7px;
+            }
+
+            .memory-card {
+                padding: 12px 10px;
+            }
+
+            .memory-kicker {
+                font-size: 8px;
+            }
+
+            .memory-heading h1 {
+                font-size: 27px;
+            }
+
+            .memory-heading > p:last-child {
+                font-size: 11px;
+            }
+
+            .memory-board {
+                gap: 6px;
+            }
+
+            .memory-tile {
+                border-radius: 10px;
+            }
+
+            .memory-status {
+                font-size: 10px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .memory-tile,
+            .memory-primary,
+            .memory-pip {
+                transition: none;
+            }
+
+            .memory-reward {
+                animation: none;
+            }
+        }
+    </style>
+</head>
+
+<body class="memory-page">
+
+    <main class="memory-shell">
+
+        <nav class="memory-topbar" aria-label="Game navigation">
+            <a class="memory-back" href="game.html">← Back to the forest</a>
+            <span class="memory-kicker">AN OPTIONAL FOREST SECRET</span>
+        </nav>
+
+        <section class="memory-card" aria-labelledby="memory-title">
+
+            <header class="memory-heading">
+                <p class="memory-eyebrow">Listen to the old woodland</p>
+                <h1 id="memory-title">The Memory Grove</h1>
+                <p>
+                    Watch the woodland symbols awaken, then repeat their
+                    pattern in the same order.
+                </p>
+            </header>
+
+            <div class="memory-level-row">
+                <div class="memory-level-copy">
+                    <span>YOUR JOURNEY</span>
+                    <strong id="memory-level">LEVEL 1 / 5</strong>
+                </div>
+
+                <div class="memory-pips" id="memory-pips" aria-label="Five levels">
+                    <span class="memory-pip is-current"></span>
+                    <span class="memory-pip"></span>
+                    <span class="memory-pip"></span>
+                    <span class="memory-pip"></span>
+                    <span class="memory-pip"></span>
+                </div>
+            </div>
+
+            <div class="memory-meta">
+                <span id="memory-pattern-size">Pattern length: 3 symbols</span>
+                <span id="memory-phase">A QUIET BEGINNING</span>
+            </div>
+
+            <div class="memory-board" id="memory-board"
+                 aria-label="Six woodland symbols">
+
+                <button class="memory-tile" type="button" data-index="0"
+                        aria-label="Leaf" disabled>
+                    <span class="memory-symbol" aria-hidden="true">🍃</span>
+                    <span class="memory-tile-name">Leaf</span>
+                </button>
+
+                <button class="memory-tile" type="button" data-index="1"
+                        aria-label="Moon" disabled>
+                    <span class="memory-symbol" aria-hidden="true">🌙</span>
+                    <span class="memory-tile-name">Moon</span>
+                </button>
+
+                <button class="memory-tile" type="button" data-index="2"
+                        aria-label="Mushroom" disabled>
+                    <span class="memory-symbol" aria-hidden="true">🍄</span>
+                    <span class="memory-tile-name">Mushroom</span>
+                </button>
+
+                <button class="memory-tile" type="button" data-index="3"
+                        aria-label="Butterfly" disabled>
+                    <span class="memory-symbol" aria-hidden="true">🦋</span>
+                    <span class="memory-tile-name">Butterfly</span>
+                </button>
+
+                <button class="memory-tile" type="button" data-index="4"
+                        aria-label="Blossom" disabled>
+                    <span class="memory-symbol" aria-hidden="true">🌼</span>
+                    <span class="memory-tile-name">Blossom</span>
+                </button>
+
+                <button class="memory-tile" type="button" data-index="5"
+                        aria-label="Star" disabled>
+                    <span class="memory-symbol" aria-hidden="true">✨</span>
+                    <span class="memory-tile-name">Star</span>
+                </button>
+
+            </div>
+
+            <p class="memory-status" id="memory-status" aria-live="polite">
+                When the symbols light up, remember their order.
+                Then repeat the pattern.
+            </p>
+
+            <div class="memory-actions">
+                <button class="memory-primary" id="memory-action" type="button">
+                    Begin the memory walk
+                </button>
+            </div>
+
+            <section class="memory-reward" id="memory-reward" hidden>
+                <p class="memory-reward-label">A MEMORY KEPT SAFE</p>
+                <blockquote>
+                    “The forest remembers every kindness, even the ones
+                    no one else sees.”
+                </blockquote>
+                <p>Five patterns remembered. A little magic to carry with you.</p>
+            </section>
+
+        </section>
+
+        <p class="memory-footer">
+            Five levels · Six woodland symbols · One quiet little secret
+        </p>
+
+    </main>
+
+    <script>
+        (() => {
+            "use strict";
+
+            const levels = [
+                { length: 3, flash: 850, gap: 290 },
+                { length: 4, flash: 760, gap: 250 },
+                { length: 5, flash: 680, gap: 220 },
+                { length: 6, flash: 600, gap: 190 },
+                { length: 7, flash: 520, gap: 165 }
+            ];
+
+            const tiles = Array.from(
+                document.querySelectorAll(".memory-tile")
+            );
+
+            const levelDisplay = document.getElementById("memory-level");
+            const pips = Array.from(
+                document.querySelectorAll(".memory-pip")
+            );
+            const patternDisplay = document.getElementById("memory-pattern-size");
+            const phaseDisplay = document.getElementById("memory-phase");
+            const status = document.getElementById("memory-status");
+            const action = document.getElementById("memory-action");
+            const reward = document.getElementById("memory-reward");
+
+            let levelIndex = 0;
+            let sequence = [];
+            let answers = [];
+            let phase = "idle";
+            let roundToken = 0;
+            let tapTimer = null;
+
+            const wait = ms =>
+                new Promise(resolve => window.setTimeout(resolve, ms));
+
+            function clearLights() {
+                window.clearTimeout(tapTimer);
+                tapTimer = null;
+
+                tiles.forEach(tile => {
+                    tile.classList.remove("is-lit", "is-tapped");
+                });
+            }
+
+            function createSequence(length) {
+                const result = [];
+
+                while (result.length < length) {
+                    const next = Math.floor(Math.random() * tiles.length);
+
+                    // Avoid identical symbols back-to-back so the
+                    // sequence stays clear and fair.
+                    if (
+                        result.length === 0 ||
+                        result[result.length - 1] !== next
+                    ) {
+                        result.push(next);
+                    }
+                }
+
+                return result;
+            }
+
+            function render() {
+                const current = levels[levelIndex];
+
+                levelDisplay.textContent =
+                    phase === "complete"
+                        ? "ALL FIVE REMEMBERED"
+                        : `LEVEL ${levelIndex + 1} / ${levels.length}`;
+
+                patternDisplay.textContent =
+                    phase === "input"
+                        ? `${answers.length} / ${sequence.length} remembered`
+                        : `Pattern length: ${current.length} symbols`;
+
+                const phaseLabels = {
+                    idle: "A QUIET BEGINNING",
+                    watching: "WATCH CAREFULLY",
+                    input: "YOUR TURN",
+                    checking: "MEMORY TAKING SHAPE",
+                    failed: "THE PATTERN SLIPPED",
+                    between: "LEVEL REMEMBERED",
+                    complete: "MEMORY KEEPER"
+                };
+
+                phaseDisplay.textContent = phaseLabels[phase];
+
+                pips.forEach((pip, index) => {
+                    pip.classList.toggle(
+                        "is-complete",
+                        index < levelIndex || phase === "complete"
+                    );
+
+                    pip.classList.toggle(
+                        "is-current",
+                        index === levelIndex && phase !== "complete"
+                    );
+                });
+
+                tiles.forEach(tile => {
+                    tile.disabled = phase !== "input";
+                });
+
+                const actionLabels = {
+                    idle: "Begin the memory walk",
+                    watching: "Watch the pattern…",
+                    input: "Repeat the pattern",
+                    checking: "Remembering…",
+                    failed: "Try this level again",
+                    between: `Continue to level ${levelIndex + 2} →`,
+                    complete: "Play the memory walk again"
+                };
+
+                action.textContent = actionLabels[phase];
+                action.disabled = [
+                    "watching",
+                    "input",
+                    "checking"
+                ].includes(phase);
+            }
+
+            async function playSequence(token) {
+                const settings = levels[levelIndex];
+
+                for (const tileIndex of sequence) {
+                    if (token !== roundToken) return;
+
+                    clearLights();
+                    tiles[tileIndex].classList.add("is-lit");
+
+                    await wait(settings.flash);
+
+                    if (token !== roundToken) return;
+
+                    clearLights();
+                    await wait(settings.gap);
+                }
+
+                if (token !== roundToken) return;
+
+                phase = "input";
+                status.textContent =
+                    `Your turn. Repeat all ${sequence.length} symbols in exactly the same order.`;
+
+                render();
+            }
+
+            function startLevel(index, reuseSequence = false) {
+                roundToken++;
+                clearLights();
+
+                levelIndex = index;
+
+                if (!reuseSequence) {
+                    sequence = createSequence(levels[levelIndex].length);
+                }
+
+                answers = [];
+                phase = "watching";
+                reward.hidden = true;
+
+                status.textContent =
+                    `Level ${levelIndex + 1}: watch all ${sequence.length} symbols carefully.`;
+
+                render();
+
+                void playSequence(roundToken);
+            }
+
+            function flashPlayerTile(index) {
+                clearLights();
+
+                tiles[index].classList.add("is-tapped");
+
+                tapTimer = window.setTimeout(() => {
+                    tiles[index].classList.remove("is-tapped");
+                    tapTimer = null;
+                }, 170);
+            }
+
+            function handleTilePress(index) {
+                if (phase !== "input") return;
+
+                const expected = sequence[answers.length];
+
+                if (index !== expected) {
+                    phase = "failed";
+                    clearLights();
+
+                    status.textContent =
+                        "The pattern slipped away. Take a breath and try this level again.";
+
+                    render();
+                    return;
+                }
+
+                answers.push(index);
+                flashPlayerTile(index);
+
+                if (answers.length < sequence.length) {
+                    status.textContent =
+                        `Well remembered. ${answers.length} of ${sequence.length} symbols correct.`;
+
+                    render();
+                    return;
+                }
+
+                phase = "checking";
+                status.textContent = "The last symbol settles into place…";
+                render();
+
+                const token = roundToken;
+
+                window.setTimeout(() => {
+                    if (token !== roundToken || phase !== "checking") return;
+
+                    clearLights();
+
+                    if (levelIndex === levels.length - 1) {
+                        phase = "complete";
+                        reward.hidden = false;
+                        try{
+                            localStorage.setItem("forestMemory_grove", "true");
+                        } catch(error){
+                            console.warn("Could not save grove memory", error)
+                        }
+
+                        status.textContent =
+                            "All five levels complete. The forest has shared its little secret with you.";
+                    } else {
+                        phase = "between";
+
+                        status.textContent =
+                            `Beautifully remembered. Level ${levelIndex + 1} is complete. The next pattern will be longer and quicker.`;
+                    }
+
+                    render();
+                }, 280);
+            }
+
+            tiles.forEach(tile => {
+                tile.addEventListener("click", () => {
+                    handleTilePress(Number(tile.dataset.index));
+                });
+            });
+
+            action.addEventListener("click", () => {
+                if (phase === "idle") {
+                    startLevel(0);
+                } else if (phase === "failed") {
+                    // Retry the same pattern, so the player can
+                    // learn it rather than losing all progress.
+                    startLevel(levelIndex, true);
+                } else if (phase === "between") {
+                    startLevel(levelIndex + 1);
+                } else if (phase === "complete") {
+                    startLevel(0);
+                }
+            });
+
+            render();
+        })();
+    </script>
+
+</body>
+</html>

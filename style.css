@@ -2,527 +2,211 @@
    THE LOST FOREST — CLEAN MASTER STYLESHEET
    ========================================================= */
 
-/* -------------------------
-   GLOBAL RESET / VIEWPORT
-   ------------------------- */
-
-html,
-body {
+/* ------------------------- GLOBAL ------------------------ */
+html, body {
+    margin: 0;
     width: 100%;
     height: 100%;
-    margin: 0;
-    padding: 0;
 }
 
-*,
-*::before,
-*::after {
+*, *::before, *::after {
     box-sizing: border-box;
-}
-
-html {
-    overflow: hidden;
 }
 
 body {
     min-height: 100vh;
-    height: 100vh;
-    overflow: hidden;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
     padding: 18px;
-
-    color: #f5f2e9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    color: #fff;
+    background:
+        linear-gradient(rgba(0,0,0,.18), rgba(0,0,0,.28)),
+        url("images/forest.png") center / cover no-repeat fixed;
     font-family: "Lora", serif;
-
-    background-image:
-        linear-gradient(
-            rgba(7, 18, 12, 0.18),
-            rgba(7, 18, 12, 0.28)
-        ),
-        url("images/forest.png");
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
 }
 
-button,
-a {
-    -webkit-tap-highlight-color: transparent;
-}
-
-button {
-    font: inherit;
-}
-
-/* -------------------------
-   MAIN GAME WINDOW
-   ------------------------- */
-
+/* ---------------------- MAIN WINDOW ---------------------- */
 .story-box {
     position: relative;
-    isolation: isolate;
-
-    width: min(820px, 94vw);
-    max-height: calc(100vh - 36px);
-
-    padding: 24px 30px;
-
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-    justify-content: flex-start;
-
-    overflow: hidden;
-
+    width: min(760px, 94vw);
+    padding: 22px 30px;
+    background: rgba(0,0,0,.60);
+    border: 2px solid rgba(255,215,0,.75);
+    border-radius: 20px;
+    box-shadow: 0 12px 35px rgba(0,0,0,.55), inset 0 0 24px rgba(255,215,0,.03);
+    backdrop-filter: blur(4px);
     text-align: center;
-
-    background:
-        linear-gradient(
-            180deg,
-            rgba(4, 10, 8, 0.78),
-            rgba(3, 8, 6, 0.86)
-        );
-
-    border: 2px solid rgba(255, 215, 0, 0.78);
-    border-radius: 22px;
-
-    box-shadow:
-        0 18px 50px rgba(0, 0, 0, 0.52),
-        inset 0 0 0 1px rgba(255, 255, 255, 0.03);
-
-    backdrop-filter: blur(7px);
-}
-
-/* Keep everything above merchant-shop's decorative layer. */
-.story-box > * {
-    position: relative;
-    z-index: 2;
-}
-
-/* -------------------------
-   TYPOGRAPHY
-   ------------------------- */
-
-.story-box h1,
-.story-box h2,
-.story-box h3 {
-    font-family: "Cinzel", serif;
 }
 
 .story-box h1 {
-    margin: 8px 0 12px;
-
-    color: #ffd51a;
-
-    font-size: clamp(34px, 4.5vw, 50px);
-    line-height: 1.08;
+    margin: 8px 0 14px;
+    color: #ffd84d;
+    font-family: "Cinzel", serif;
+    font-size: clamp(34px, 5vw, 46px);
+    line-height: 1.1;
     letter-spacing: 1.5px;
+    text-shadow: 0 0 10px rgba(255,215,70,.45);
+}
 
-    text-shadow:
-        0 0 12px rgba(255, 215, 0, 0.20);
+.story-box h2 {
+    font-family: "Cinzel", serif;
 }
 
 .story-box > p {
-    max-width: 680px;
-
+    max-width: 620px;
     margin: 8px auto;
-
-    font-size: 17px;
+    font-size: 16px;
     line-height: 1.5;
 }
 
-/* -------------------------
-   PLAYER STATS
-   ------------------------- */
-
+/* ------------------------- STATS ------------------------- */
 .stats {
     display: flex;
-    align-items: center;
     justify-content: center;
+    align-items: center;
     flex-wrap: wrap;
-    gap: 16px 26px;
-
-    margin: 0 0 6px;
+    gap: 18px;
+    margin-bottom: 8px;
 }
 
 .stats p {
     margin: 0;
+    font-size: 14px;
     white-space: nowrap;
-
-    font-size: 15px;
-    line-height: 1.25;
 }
 
-/* -------------------------
-   UTILITY / POTION BUTTONS
-   ------------------------- */
-
-.utility-row {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    margin: 2px 0 7px;
-}
-
-.use-potion-button,
-.buy-potion-button {
-    border: 1px solid rgba(109, 224, 146, 0.68);
-    border-radius: 10px;
-
-    color: #e4ffeb;
-
-    cursor: pointer;
-
-    transition:
-        transform 0.18s ease,
-        background 0.18s ease,
-        box-shadow 0.18s ease,
-        border-color 0.18s ease;
-}
-
-.use-potion-button {
-    padding: 7px 14px;
-    margin: 0;
-
-    background: rgba(8, 42, 25, 0.72);
-    font-size: 13px;
-}
-
-.use-potion-button:hover {
-    transform: translateY(-2px);
-    border-color: #a0ffc0;
-    background: rgba(30, 105, 60, 0.58);
-    box-shadow: 0 0 16px rgba(80, 230, 135, 0.28);
-}
-
-.buy-potion-button {
-    display: block;
-    width: 250px;
-
-    margin: 15px auto;
-    padding: 12px 18px;
-
-    background:
-        linear-gradient(
-            135deg,
-            #153b27,
-            #286c46,
-            #153b27
-        );
-
-    font-family: "Cinzel", serif;
-    font-size: 15px;
-    font-weight: 700;
-    letter-spacing: 0.3px;
-
-    box-shadow:
-        0 0 12px rgba(80, 215, 130, 0.16),
-        inset 0 0 10px rgba(0, 0, 0, 0.28);
-}
-
-.buy-potion-button:hover {
-    transform: translateY(-2px) scale(1.025);
-    border-color: #a0ffbd;
-    background:
-        linear-gradient(
-            135deg,
-            #1e5935,
-            #32865a,
-            #1e5935
-        );
-    box-shadow: 0 0 20px rgba(90, 235, 145, 0.42);
-}
-
-/* -------------------------
-   MAIN CHOICES
-   ------------------------- */
-
-.choices,
-.left-path-choices {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 24px;
-
-    margin-top: 18px;
-}
-
-.choices a,
-.left-path-choices a {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-
-    min-width: 155px;
-    min-height: 54px;
-    padding: 10px 17px;
-
-    border-radius: 12px;
-
-    background:
-        linear-gradient(
-            135deg,
-            #ffd000,
-            #ffda28,
-            #ffd000
-        );
-
-    color: #111;
-
-    text-decoration: none;
-    text-align: center;
-
-    font-family: "Cinzel", serif;
-    font-size: 17px;
-    font-weight: 700;
-
-    box-shadow:
-        0 7px 16px rgba(0, 0, 0, 0.32),
-        inset 0 0 0 1px rgba(255, 255, 255, 0.12);
-
-    transition:
-        transform 0.18s ease,
-        box-shadow 0.18s ease,
-        filter 0.18s ease;
-}
-
-.choices a:hover,
-.left-path-choices a:hover {
-    transform: translateY(-3px) scale(1.035);
-    filter: brightness(1.05);
-
-    box-shadow:
-        0 0 20px rgba(255, 215, 0, 0.38),
-        0 8px 18px rgba(0, 0, 0, 0.34);
-}
-
-.choices a:active,
-.left-path-choices a:active {
-    transform: translateY(1px) scale(0.99);
-}
-
-/* -------------------------
-   SMALL ACTION PANEL (INDEX)
-   ------------------------- */
-
-.action-panel {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 8px;
-
-    margin-top: 18px;
-    padding-top: 14px;
-
-    border-top: 1px solid rgba(255, 215, 0, 0.28);
-}
-
-.action-panel h2 {
-    width: 100%;
-    margin: 0 0 2px;
-
-    color: rgba(255, 220, 80, 0.88);
-
-    font-size: 13px;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-}
-
-.action-panel button {
-    padding: 8px 12px;
-
-    background: rgba(8, 10, 10, 0.70);
-    color: #e5e0d8;
-
-    border: 1px solid rgba(255, 215, 0, 0.42);
-    border-radius: 9px;
-
-    font-size: 12px;
-    cursor: pointer;
-
-    transition:
-        transform 0.18s ease,
-        background 0.18s ease,
-        color 0.18s ease,
-        border-color 0.18s ease;
-}
-
-.action-panel button:hover {
-    transform: translateY(-2px);
-    color: #ffe56b;
-    border-color: rgba(255, 215, 0, 0.86);
-    background: rgba(255, 215, 0, 0.10);
-}
-
-.reset-area {
-    display: flex;
-    justify-content: center;
-
-    margin-top: 10px;
-}
-
-.reset-area button {
-    padding: 6px 11px;
-
-    background: rgba(4, 7, 7, 0.58);
-    color: #aaa;
-
-    border: 1px solid rgba(255, 215, 0, 0.24);
-    border-radius: 8px;
-
-    font-size: 11px;
-    cursor: pointer;
-
-    transition: 0.18s ease;
-}
-
-.reset-area button:hover {
-    color: #ffe56b;
-    border-color: rgba(255, 215, 0, 0.68);
-    background: rgba(255, 215, 0, 0.07);
-}
-
-/* -------------------------
-   BACK LINKS / NAVIGATION
-   ------------------------- */
-
+/* ------------------------- LINKS ------------------------- */
 .back-button {
     margin-top: 14px;
-    flex-shrink: 0;
 }
 
 .back-button a,
 .back-link {
-    color: #ddd7cd;
+    color: #d8d8d8;
     text-decoration: none;
-
     font-family: "Lora", serif;
-    font-size: 14px;
-
-    transition: color 0.18s ease;
+    font-size: 13px;
+    transition: .2s ease;
 }
 
 .back-button a:hover,
 .back-link:hover {
-    color: #ffe16a;
+    color: #ffd84d;
 }
 
-.fight-again,
-.back-link {
-    display: block;
-    width: fit-content;
+/* ---------------------- MAIN CHOICES --------------------- */
+.choices,
+.left-path-choices {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 24px;
+    margin-top: 20px;
+}
 
-    margin: 10px auto;
-    padding: 9px 18px;
-
-    border-radius: 9px;
-
+.choices a,
+.left-path-choices a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 155px;
+    min-height: 52px;
+    padding: 10px 14px;
+    background: linear-gradient(135deg,#e8b900,#ffd83d,#e8b900);
+    color: #151000;
+    border: 1px solid #fff0a0;
+    border-radius: 11px;
     text-decoration: none;
-    font-family: "Cinzel", serif;
-    font-size: 14px;
-    font-weight: 700;
-
-    transition:
-        transform 0.18s ease,
-        box-shadow 0.18s ease,
-        background 0.18s ease,
-        border-color 0.18s ease;
-}
-
-.fight-again {
-    background: #ffd000;
-    color: #111;
-}
-
-.fight-again:hover {
-    transform: translateY(-2px);
-    background: #ffe45c;
-    box-shadow: 0 0 16px rgba(255, 215, 0, 0.35);
-}
-
-.back-link {
-    color: #ddd;
-    border: 1px solid rgba(255, 215, 0, 0.32);
-    background: rgba(0, 0, 0, 0.18);
-}
-
-.back-link:hover {
-    transform: translateY(-2px);
-    color: #ffe16a;
-    border-color: rgba(255, 215, 0, 0.7);
-}
-
-/* -------------------------
-   STEAM-STYLE NOTIFICATION
-   ------------------------- */
-
-#notification {
-    position: fixed;
-    right: -390px;
-    bottom: 20px;
-    z-index: 5000;
-
-    width: min(320px, calc(100vw - 30px));
-    min-height: 72px;
-    padding: 14px 18px;
-
-    background: rgba(18, 19, 23, 0.96);
-
-    border-left: 4px solid #ffd43b;
-    border-radius: 8px;
-
-    box-shadow:
-        0 8px 30px rgba(0, 0, 0, 0.6),
-        0 0 16px rgba(255, 212, 59, 0.10);
-
-    transition: right 0.38s ease;
-}
-
-#notifTitle {
-    color: #ffd43b;
-
     font-family: "Cinzel", serif;
     font-size: 16px;
     font-weight: 700;
+    box-shadow: 0 5px 12px rgba(0,0,0,.35), inset 0 0 8px rgba(255,255,255,.18);
+    transition: .2s ease;
 }
 
-#notifText {
-    margin-top: 4px;
-
-    color: #ddd;
-    font-size: 14px;
-    line-height: 1.4;
+.left-path-choices a {
+    width: 175px;
 }
 
-/* -------------------------
-   HP BARS
-   ------------------------- */
+.choices a:hover,
+.left-path-choices a:hover {
+    transform: translateY(-3px) scale(1.03);
+    background: linear-gradient(135deg,#f2c527,#ffe771,#f2c527);
+    box-shadow: 0 0 18px rgba(255,215,80,.45);
+}
 
+/* ------------------------ POTION ------------------------- */
+.utility-row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 4px 0 8px;
+}
+
+.use-potion-button,
+.buy-potion-button {
+    display: inline-block;
+    width: auto !important;
+    min-width: 0 !important;
+    padding: 7px 16px;
+    margin: 4px auto 7px;
+    border-radius: 9px;
+    font-family: "Lora", serif;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: .2s ease;
+}
+
+.use-potion-button {
+    background: rgba(8,32,18,.78);
+    color: #dffff0;
+    border: 1px solid rgba(100,220,145,.75);
+    box-shadow: 0 0 9px rgba(70,220,120,.12);
+}
+
+.use-potion-button:hover {
+    color: #fff;
+    border-color: #9cffb5;
+    background: rgba(60,150,85,.18);
+    box-shadow: 0 0 16px rgba(80,235,125,.32);
+    transform: translateY(-2px);
+}
+
+.buy-potion-button {
+    width: 250px !important;
+    padding: 12px 18px;
+    background: linear-gradient(135deg,#173b28,#287249,#173b28);
+    color: #ddffe7;
+    border: 1px solid #65d692;
+    font-family: "Cinzel", serif;
+}
+
+.buy-potion-button:hover {
+    background: linear-gradient(135deg,#215a38,#35945b,#215a38);
+    color: #fff;
+    border-color: #94ffb5;
+    box-shadow: 0 0 20px rgba(80,235,130,.5);
+    transform: translateY(-2px) scale(1.025);
+}
+
+/* -------------------------- HP --------------------------- */
 .hp-section,
 .enemy-hp-section {
-    width: min(520px, 90%);
+    width: min(520px,92%);
     margin: 8px auto;
-    flex-shrink: 0;
 }
 
 .hp-label {
     display: flex;
-    align-items: center;
     justify-content: space-between;
+    align-items: center;
     gap: 12px;
-
     margin-bottom: 6px;
-
-    color: #ece8df;
-
+    color: #eee;
     font-family: "Cinzel", serif;
     font-size: 13px;
     font-weight: 700;
@@ -530,57 +214,40 @@ button {
 
 .hp-bar {
     width: 100%;
-    height: 15px;
-
+    height: 16px;
     overflow: hidden;
-
-    background: rgba(0, 0, 0, 0.72);
-
-    border: 1px solid rgba(255, 255, 255, 0.22);
+    background: rgba(0,0,0,.72);
+    border: 1px solid rgba(255,255,255,.2);
     border-radius: 999px;
-
-    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.72);
+    box-shadow: inset 0 2px 5px rgba(0,0,0,.65);
 }
 
 .hp-fill {
     width: 100%;
     height: 100%;
-
-    background: linear-gradient(90deg, #3acb65, #8cff9e);
-
-    border-radius: inherit;
-
-    transition:
-        width 0.30s ease,
-        background 0.30s ease;
-
-    box-shadow: 0 0 8px rgba(80, 255, 120, 0.30);
+    background: linear-gradient(90deg,#32bd5d,#8cff9e);
+    border-radius: 999px;
+    transition: width .35s ease, background .35s ease;
+    box-shadow: 0 0 8px rgba(80,255,120,.3);
 }
 
 .enemy-bar .hp-fill {
-    background: linear-gradient(90deg, #c52d2d, #ff7777);
-    box-shadow: 0 0 8px rgba(255, 60, 60, 0.30);
+    background: linear-gradient(90deg,#bd2525,#ff7474);
+    box-shadow: 0 0 8px rgba(255,55,55,.3);
 }
 
-/* -------------------------
-   ENEMY / COMBAT
-   ------------------------- */
-
+/* ------------------------ COMBAT ------------------------- */
 #enemy-box {
-    margin: 10px auto 0;
-    padding: 14px 16px;
-
-    width: min(650px, 100%);
-
-    background: rgba(0, 0, 0, 0.38);
-
-    border: 1px solid rgba(210, 60, 60, 0.48);
+    margin-top: 12px;
+    padding: 14px;
+    background: rgba(0,0,0,.43);
+    border: 1px solid rgba(180,40,40,.48);
     border-radius: 14px;
 }
 
 #enemy-box h2 {
     margin: 3px 0 7px;
-    font-size: 22px;
+    font-size: 20px;
 }
 
 #enemy-box p {
@@ -590,1341 +257,2390 @@ button {
 
 #combat-buttons {
     display: flex;
-    align-items: center;
     justify-content: center;
+    align-items: center;
     flex-wrap: wrap;
     gap: 8px;
-
     margin-top: 9px;
 }
 
 #combat-buttons button {
     padding: 8px 13px;
-
-    background: rgba(13, 10, 14, 0.90);
-    color: #eee;
-
-    border: 1px solid rgba(190, 55, 55, 0.66);
-    border-radius: 9px;
-
+    background: rgba(17,10,14,.92);
+    color: #f0f0f0;
+    border: 1px solid rgba(190,55,55,.70);
+    border-radius: 8px;
+    font-family: "Lora", serif;
     font-size: 13px;
+    font-weight: 600;
     cursor: pointer;
-
-    transition:
-        transform 0.18s ease,
-        background 0.18s ease,
-        box-shadow 0.18s ease,
-        border-color 0.18s ease;
+    transition: .2s ease;
 }
 
 #combat-buttons button:hover {
+    background: rgba(190,55,55,.2);
+    border-color: #e45b5b;
     transform: translateY(-2px);
-
-    background: rgba(180, 40, 40, 0.23);
-    border-color: #e05a5a;
-
-    box-shadow: 0 0 14px rgba(220, 60, 60, 0.18);
 }
 
-#combat-buttons button:active {
-    transform: translateY(1px);
+.fight-again,
+.back-link {
+    display: block;
+    width: fit-content;
+    margin: 12px auto;
+    padding: 9px 18px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-family: "Cinzel", serif;
+    transition: .2s ease;
 }
 
-/* -------------------------
-   MERCHANT SHOP
-   ------------------------- */
+.fight-again {
+    background: linear-gradient(135deg,#e8b900,#ffd83d,#e8b900);
+    color: #171200;
+    border: 1px solid #fff0a0;
+}
 
+.fight-again:hover {
+    transform: scale(1.04);
+    box-shadow: 0 0 16px rgba(255,215,80,.45);
+}
+
+/* ---------------------- NOTIFICATIONS -------------------- */
+#notification {
+    position: fixed;
+    right: -380px;
+    bottom: 22px;
+    width: min(320px,88vw);
+    min-height: 72px;
+    padding: 14px 18px;
+    background: rgba(18,18,23,.96);
+    border-left: 4px solid #ffd84d;
+    border-radius: 7px;
+    box-shadow: 0 7px 24px rgba(0,0,0,.6);
+    z-index: 10000;
+    transition: right .4s ease;
+}
+
+#notifTitle {
+    color: #ffd84d;
+    font-family: "Cinzel", serif;
+    font-size: 17px;
+    font-weight: 700;
+}
+
+#notifText {
+    margin-top: 5px;
+    color: #ddd;
+    font-size: 14px;
+}
+
+/* ---------------------- MERCHANT PAGE -------------------- */
 .merchant-shop {
     position: relative;
-    isolation: isolate;
-
+    overflow: hidden;
     background-image:
-        linear-gradient(
-            rgba(0, 0, 0, 0.42),
-            rgba(0, 0, 0, 0.48)
-        ),
+        linear-gradient(rgba(0,0,0,.54),rgba(0,0,0,.54)),
         url("images/merchant-bg.png");
     background-size: cover;
     background-position: center;
-    background-repeat: no-repeat;
-
-    overflow: hidden;
 }
 
 .merchant-shop::before {
     content: "";
-
     position: absolute;
-    inset: -10px;
-    z-index: 0;
-
+    inset: -8px;
     background: inherit;
     filter: blur(5px);
     transform: scale(1.04);
-    opacity: 0.72;
+    z-index: 0;
+    pointer-events: none;
 }
 
 .merchant-shop > * {
     position: relative;
-    z-index: 2;
+    z-index: 1;
 }
 
-.shop {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+#potion-purchases {
+    color: #ffe58c;
+    font-family: "Cinzel", serif;
+    font-size: 14px;
+    font-weight: 700;
 }
 
+/* Dark-shop entrance */
 #dark-shop-button {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+    display: block;
     width: fit-content;
-    margin: 10px auto;
-    padding: 12px 22px;
-
-    background:
-        linear-gradient(
-            135deg,
-            #241034,
-            #4a176d,
-            #241034
-        );
-
-    color: #e1b7ff;
-
-    border: 1px solid #a364d6;
+    margin: 14px auto;
+    padding: 12px 23px;
+    background: linear-gradient(135deg,#241034,#4c1b70,#241034);
+    color: #debaff;
+    border: 1px solid #a762d5;
     border-radius: 10px;
-
     text-decoration: none;
-
     font-family: "Cinzel", serif;
     font-size: 15px;
     font-weight: 700;
+    box-shadow: 0 0 10px rgba(145,65,220,.3);
+    animation: dark-shop-pulse 2.6s ease-in-out infinite;
+    transition: .25s ease;
+}
 
-    box-shadow:
-        0 0 12px rgba(150, 75, 220, 0.34),
-        inset 0 0 10px rgba(0, 0, 0, 0.42);
-
-    transition:
-        transform 0.20s ease,
-        background 0.20s ease,
-        box-shadow 0.20s ease,
-        border-color 0.20s ease;
+#dark-shop-button::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 52%;
+    height: 100%;
+    background: linear-gradient(90deg,transparent,rgba(255,255,255,.35),transparent);
+    transform: skewX(-20deg);
+    animation: dark-shop-sweep 2.9s ease-in-out infinite;
+    pointer-events: none;
 }
 
 #dark-shop-button:hover {
-    transform: translateY(-2px) scale(1.025);
-    color: #f1d8ff;
-    border-color: #d09aff;
-
-    background:
-        linear-gradient(
-            135deg,
-            #35134c,
-            #68289b,
-            #35134c
-        );
-
-    box-shadow: 0 0 22px rgba(180, 85, 255, 0.60);
+    color: #fff;
+    border-color: #d29aff;
+    background: linear-gradient(135deg,#35134e,#6c249a,#35134e);
+    box-shadow: 0 0 18px rgba(175,90,255,.75),0 0 35px rgba(145,55,235,.32);
+    transform: translateY(-3px) scale(1.04);
+    animation: none;
 }
 
-/* -------------------------
-   DARK SHOP PAGE
-   ------------------------- */
+@keyframes dark-shop-pulse {
+    0%,100% { box-shadow: 0 0 8px rgba(145,65,220,.22),0 0 18px rgba(120,45,210,.08); }
+    50% { box-shadow: 0 0 16px rgba(175,80,250,.56),0 0 32px rgba(135,45,220,.18); }
+}
 
-body.dark-shop-page {
+@keyframes dark-shop-sweep {
+    0% { left: -100%; opacity: 0; }
+    18% { opacity: 1; }
+    52% { left: 140%; opacity: 0; }
+    100% { left: 140%; opacity: 0; }
+}
+
+/* ----------------------- DARK SHOP ----------------------- */
+.dark-shop-page {
     background-image:
-        linear-gradient(
-            rgba(0, 0, 0, 0.46),
-            rgba(0, 0, 0, 0.50)
-        ),
+        linear-gradient(rgba(0,0,0,.46),rgba(0,0,0,.54)),
         url("images/darkshop-bg.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
-.dark-shop-page .story-box {
-    width: min(800px, 94vw);
-    padding: 16px 28px;
+.dark-shop {
+    width: min(820px,95vw);
 }
 
-.dark-shop-page .stats {
-    gap: 10px 20px;
-}
-
-.dark-shop-page .stats p {
-    font-size: 14px;
-}
-
-.dark-shop-page .use-potion-button {
-    padding: 6px 12px;
-    font-size: 12px;
-}
-
-.dark-shop-page .story-box h1,
 .dark-shop h1 {
-    margin: 4px 0 8px;
-
-    color: #e45a5a;
-
-    font-size: clamp(30px, 4vw, 42px);
-    text-shadow: 0 0 14px rgba(190, 0, 0, 0.46);
+    color: #d94b4b;
+    text-shadow: 0 0 13px rgba(190,20,20,.55);
 }
 
-.dark-shop-page .story-box > p {
-    margin: 5px auto;
-    font-size: 14px;
-    line-height: 1.32;
+.merchant-image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin: 9px auto;
 }
 
-.dark-shop-page .merchant-image {
-    margin: 7px 0;
-    flex-shrink: 0;
-}
-
-.dark-shop-page .merchant-image img {
+.merchant-image img {
     display: block;
-
-    width: min(300px, 58vw);
-    height: 145px;
-
+    width: min(330px,62vw);
+    max-height: 200px;
+    height: auto;
     object-fit: cover;
     object-position: center;
-
-    border-radius: 13px;
-    border: 2px solid rgba(180, 40, 40, 0.70);
-
-    box-shadow:
-        0 8px 24px rgba(0, 0, 0, 0.75),
-        0 0 18px rgba(130, 0, 0, 0.28);
+    border-radius: 14px;
+    border: 2px solid rgba(180,40,40,.7);
+    box-shadow: 0 8px 26px rgba(0,0,0,.78),0 0 22px rgba(130,0,0,.3);
 }
 
-.dark-shop-page #enemy-box {
-    margin-top: 6px;
-    padding: 10px 12px;
-}
-
-.dark-shop-page #enemy-box h2 {
-    margin: 2px 0 5px;
-    font-size: 20px;
-}
-
-.dark-shop-page #enemy-box p {
-    margin: 4px 0;
-    font-size: 13px;
-}
-
-.dark-shop-page #combat-buttons {
-    margin-top: 7px;
-}
-
-.dark-shop-page #combat-buttons button {
-    padding: 7px 11px;
-    font-size: 12px;
-}
-
-/* Ending state */
-
-.peace-ending {
-    display: none;
-
-    width: 100%;
-    margin-top: 8px;
-    padding: 20px;
-
-    background:
-        linear-gradient(
-            rgba(4, 35, 17, 0.90),
-            rgba(3, 19, 10, 0.94)
-        );
-
-    border: 2px solid #6fd28a;
-    border-radius: 15px;
-
-    box-shadow:
-        0 0 28px rgba(80, 220, 120, 0.22);
-
-    text-align: center;
-}
-
-.peace-ending h1 {
-    margin: 0 0 10px;
-
-    color: #9dffb3;
-
-    font-family: "Cinzel", serif;
-    font-size: 28px;
-
-    text-shadow: 0 0 14px rgba(100, 255, 140, 0.42);
-}
-
-.peace-ending p {
-    margin: 6px auto;
-
-    font-size: 15px;
-    line-height: 1.4;
-}
-
-.dark-shop.story-ending {
-    width: min(760px, 92vw);
-    max-height: calc(100vh - 36px);
-    padding: 24px 30px;
-    justify-content: center;
-}
-
-.dark-shop.story-ending .peace-ending {
-    margin-top: 0;
-    padding: 24px;
-}
-
-.restore-peace-button {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-
-    margin-top: 12px;
-    padding: 12px 24px;
-
-    background:
-        linear-gradient(
-            135deg,
-            #164d29,
-            #2f9a50,
-            #164d29
-        );
-
-    color: #eaffef;
-
-    border: 2px solid #79ff9b;
-    border-radius: 12px;
-
-    text-decoration: none;
-
-    font-family: "Cinzel", serif;
-    font-size: 16px;
-    font-weight: 700;
-    letter-spacing: 0.8px;
-
-    box-shadow:
-        0 0 12px rgba(80, 255, 120, 0.45),
-        inset 0 0 10px rgba(0, 0, 0, 0.32);
-
-    transition:
-        transform 0.20s ease,
-        box-shadow 0.20s ease,
-        background 0.20s ease,
-        border-color 0.20s ease;
-}
-
-.restore-peace-button:hover {
-    transform: translateY(-2px) scale(1.035);
-    border-color: #b4ffc7;
-
-    background:
-        linear-gradient(
-            135deg,
-            #216c39,
-            #45c76b,
-            #216c39
-        );
-
-    box-shadow: 0 0 24px rgba(90, 255, 130, 0.75);
-}
-
-/* -------------------------
-   DRAGON PAGE
-   ------------------------- */
-
-body.dragon-page {
+/* ------------------------- DRAGON ------------------------ */
+.dragon-page {
     background-image:
-        linear-gradient(
-            rgba(0, 0, 0, 0.54),
-            rgba(0, 0, 0, 0.58)
-        ),
+        linear-gradient(rgba(0,0,0,.54),rgba(0,0,0,.60)),
         url("images/dragon-cave-bg.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
 .dragon-page .story-box {
-    width: min(820px, 94vw);
-    padding: 18px 28px;
+    width: min(820px,95vw);
 }
 
-.dragon-page .dragon-image {
+.dragon-image {
     display: flex;
-    align-items: center;
     justify-content: center;
-
-    margin: 8px 0;
-    flex-shrink: 0;
+    align-items: center;
+    width: 100%;
+    margin: 9px auto;
+    overflow: hidden;
 }
 
-.dragon-page .dragon-image img {
+.dragon-image img {
     display: block;
-
-    width: min(430px, 68vw);
-    height: 165px;
-
+    width: min(460px,68vw);
+    max-height: 190px;
+    height: auto;
     object-fit: cover;
     object-position: center;
-
     border-radius: 14px;
-    border: 2px solid rgba(255, 80, 30, 0.70);
-
-    box-shadow:
-        0 8px 28px rgba(0, 0, 0, 0.78),
-        0 0 24px rgba(180, 40, 20, 0.30);
+    border: 2px solid rgba(255,90,40,.72);
+    box-shadow: 0 8px 28px rgba(0,0,0,.78),0 0 25px rgba(200,50,20,.3);
 }
 
-/* -------------------------
-   DRAGON GATE BUTTON
-   ------------------------- */
-
-#dragon-button {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-
-    width: fit-content;
-    margin: 12px auto 0;
-    padding: 12px 20px;
-
-    border-radius: 11px;
-
-    text-decoration: none;
-
-    font-family: "Cinzel", serif;
-    font-size: 15px;
-    font-weight: 700;
-
-    transition:
-        transform 0.20s ease,
-        background 0.20s ease,
-        box-shadow 0.20s ease,
-        border-color 0.20s ease;
-}
-
-#dragon-button.locked {
-    background: rgba(80, 20, 20, 0.84);
-    color: #ddd;
-    border: 2px solid #8b3a3a;
-    cursor: not-allowed;
-}
-
-#dragon-button.unlocked {
-    background: rgba(20, 100, 50, 0.88);
-    color: white;
-    border: 2px solid #5cff8a;
-
-    box-shadow: 0 0 16px rgba(92, 255, 138, 0.48);
-}
-
-#dragon-button.unlocked:hover {
-    transform: translateY(-2px) scale(1.035);
-    background: rgba(30, 140, 70, 0.92);
-    box-shadow: 0 0 25px rgba(92, 255, 138, 0.74);
-}
-
-/* -------------------------
-   KEY HUNT
-   ------------------------- */
-
-body.keyhunt-page {
+/* ----------------------- KEY HUNT ------------------------ */
+.keyhunt-page {
     background-image:
-        linear-gradient(
-            rgba(0, 0, 0, 0.34),
-            rgba(0, 0, 0, 0.40)
-        ),
+        linear-gradient(rgba(0,0,0,.36),rgba(0,0,0,.44)),
         url("images/keyhunt-bg.png");
-}
-
-.keyhunt-page .story-box {
-    width: min(760px, 94vw);
-    padding: 20px 28px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
 .key-hunt {
-    width: min(520px, 100%);
-    margin: 14px auto;
+    max-width: 500px;
+    margin: 16px auto;
     padding: 18px;
-
-    background: rgba(0, 0, 0, 0.34);
-
-    border: 1px solid rgba(255, 215, 0, 0.34);
+    background: rgba(0,0,0,.44);
+    border: 1px solid rgba(255,215,0,.4);
     border-radius: 15px;
 }
 
 #key-click-progress {
-    margin: 4px 0 10px;
-
-    color: #f5d76e;
-
-    font-size: 18px;
+    margin: 4px 0 12px;
+    color: #f6dc78;
+    font-family: "Cinzel", serif;
+    font-size: 19px;
     font-weight: 700;
 }
 
 .key-button {
     padding: 13px 25px;
-
-    background: rgba(10, 15, 15, 0.88);
-    color: white;
-
+    background: linear-gradient(135deg,#17201d,#26332e,#17201d);
+    color: #fff;
     border: 2px solid #d4af37;
     border-radius: 11px;
-
     font-family: "Cinzel", serif;
     font-size: 16px;
     font-weight: 700;
-
     cursor: pointer;
-
-    transition:
-        transform 0.18s ease,
-        background 0.18s ease,
-        color 0.18s ease,
-        box-shadow 0.18s ease;
+    box-shadow: 0 0 9px rgba(255,215,80,.16);
+    transition: .2s ease;
 }
 
 .key-button:hover {
-    transform: translateY(-2px);
-    background: rgba(212, 175, 55, 0.17);
-    color: #ffe66d;
-    box-shadow: 0 0 19px rgba(255, 215, 0, 0.34);
+    background: linear-gradient(135deg,#263c31,#385547,#263c31);
+    color: #ffe979;
+    box-shadow: 0 0 20px rgba(255,215,80,.45);
+    transform: translateY(-3px);
 }
 
-.keyhunt-page .story-box strong {
-    color: #f5d76e;
+/* Dragon lock button */
+#dragon-button {
+    display: inline-block;
+    margin-top: 16px;
+    padding: 12px 20px;
+    border-radius: 11px;
+    text-decoration: none;
+    font-family: "Cinzel", serif;
+    font-size: 15px;
+    font-weight: 700;
+    transition: .25s ease;
 }
 
-/* -------------------------
-   GAME OVER
-   ------------------------- */
+#dragon-button.locked {
+    background: rgba(75,20,20,.84);
+    color: #d8d8d8;
+    border: 2px solid #8b3a3a;
+    cursor: not-allowed;
+}
 
+#dragon-button.unlocked {
+    background: linear-gradient(135deg,#16532e,#2f9951,#16532e);
+    color: #fff;
+    border: 2px solid #76ff9b;
+    box-shadow: 0 0 14px rgba(80,255,130,.48);
+    transform: scale(1.02);
+}
+
+#dragon-button.unlocked:hover {
+    background: linear-gradient(135deg,#216c3a,#43c76b,#216c3a);
+    box-shadow: 0 0 24px rgba(95,255,140,.76);
+    transform: translateY(-2px) scale(1.05);
+}
+
+/* --------------------- GAME OVER ------------------------- */
 .game-over {
     display: none;
-
     position: fixed;
     inset: 0;
-    z-index: 9000;
-
     width: 100vw;
     height: 100vh;
-
+    padding: 20px;
+    z-index: 9999;
     align-items: center;
     justify-content: center;
-
-    padding: 20px;
-
-    background: rgba(0, 0, 0, 0.78);
+    background: rgba(0,0,0,.80);
 }
 
 .game-over-card {
-    width: min(440px, 90vw);
+    width: min(430px,90vw);
     padding: 28px 26px;
-
-    text-align: center;
-
-    background:
-        linear-gradient(
-            180deg,
-            rgba(38, 7, 12, 0.98),
-            rgba(10, 5, 8, 0.98)
-        );
-
+    background: linear-gradient(rgba(35,5,10,.98),rgba(10,5,10,.98));
     border: 2px solid #a33b3b;
     border-radius: 16px;
-
-    box-shadow:
-        0 15px 42px rgba(0, 0, 0, 0.55),
-        0 0 35px rgba(120, 0, 0, 0.42);
+    box-shadow: 0 0 35px rgba(120,0,0,.52);
+    text-align: center;
 }
 
 .game-over-card h1 {
-    margin: 0 0 16px;
-
+    margin: 0 0 13px;
     color: #e05a5a;
-
     font-family: "Cinzel", serif;
-    font-size: 31px;
-
-    text-shadow: 0 0 12px rgba(220, 50, 50, 0.48);
+    font-size: 30px;
+    text-shadow: 0 0 12px rgba(220,50,50,.5);
 }
 
 .game-over-card p {
-    margin: 9px 0;
+    margin: 9px auto;
     font-size: 15px;
     line-height: 1.55;
 }
 
 #revive-count {
-    margin-top: 18px;
-
+    margin-top: 20px;
     color: #f5d76e;
-
     font-family: "Cinzel", serif;
+    font-size: 15px;
     font-weight: 700;
 }
 
 .revive-button {
+    padding: 13px 24px;
     margin-top: 8px;
-    padding: 12px 24px;
+    background: linear-gradient(135deg,#24133f,#4a2380,#24133f);
+    color: #e7dcff;
+    border: 2px solid #8d6aff;
+    border-radius: 10px;
+    font-family: "Cinzel", serif;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 0 13px rgba(130,80,255,.35);
+    transition: .2s ease;
+}
+
+.revive-button:hover {
+    border-color: #b8a2ff;
+    box-shadow: 0 0 24px rgba(150,100,255,.68);
+    transform: scale(1.04);
+}
+
+/* ---------------------- ENDINGS -------------------------- */
+.story-box.story-ending {
+    height: auto !important;
+    min-height: 0 !important;
+    padding: 22px 30px;
+    justify-content: center;
+}
+
+.peace-ending,
+.treasure-ending {
+    display: none;
+    width: 100%;
+    margin-top: 5px;
+    padding: 24px;
+    text-align: center;
+    border-radius: 16px;
+}
+
+.peace-ending {
+    background: linear-gradient(rgba(5,30,15,.9),rgba(5,15,10,.96));
+    border: 2px solid #6fd28a;
+    box-shadow: 0 0 27px rgba(80,220,120,.28);
+}
+
+.treasure-ending {
+    background: linear-gradient(rgba(45,28,5,.92),rgba(20,12,2,.97));
+    border: 2px solid #f1c84b;
+    box-shadow: 0 0 25px rgba(255,200,60,.25);
+}
+
+.peace-ending h1,
+.treasure-ending h1 {
+    margin: 0 0 12px;
+    font-family: "Cinzel", serif;
+    font-size: 30px;
+}
+
+.peace-ending h1 {
+    color: #9dffb3;
+    text-shadow: 0 0 12px rgba(100,255,140,.45);
+}
+
+.treasure-ending h1 {
+    color: #ffe27a;
+    text-shadow: 0 0 12px rgba(255,210,70,.55);
+}
+
+.peace-ending p,
+.treasure-ending p {
+    margin: 8px auto;
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+/* Restore Peace */
+.restore-peace-button {
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+    display: inline-block;
+    margin-top: 16px;
+    padding: 13px 28px;
+    background: linear-gradient(135deg,#18552d,#3ca963,#18552d);
+    color: #ebfff0;
+    border: 2px solid #83ffa2;
+    border-radius: 11px;
+    text-decoration: none;
+    font-family: "Cinzel", serif;
+    font-size: 17px;
+    font-weight: 700;
+    letter-spacing: .7px;
+    box-shadow: 0 0 10px rgba(80,255,120,.35);
+    animation: peace-pulse 2.6s ease-in-out infinite;
+    transition: .25s ease;
+}
+
+.restore-peace-button::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 52%;
+    height: 100%;
+    background: linear-gradient(90deg,transparent,rgba(255,255,255,.46),transparent);
+    transform: skewX(-20deg);
+    animation: peace-sweep 3.1s ease-in-out infinite;
+    pointer-events: none;
+}
+
+.restore-peace-button:hover {
+    color: #fff;
+    border-color: #b8ffca;
+    box-shadow: 0 0 20px rgba(100,255,140,.82),0 0 38px rgba(70,230,110,.34);
+    transform: translateY(-3px) scale(1.05);
+    animation: none;
+}
+
+@keyframes peace-pulse {
+    0%,100% { box-shadow: 0 0 8px rgba(80,240,120,.28),0 0 18px rgba(70,220,100,.09); }
+    50% { box-shadow: 0 0 18px rgba(100,255,140,.68),0 0 32px rgba(70,230,110,.2); }
+}
+
+@keyframes peace-sweep {
+    0% { left: -100%; opacity: 0; }
+    18% { opacity: 1; }
+    52% { left: 140%; opacity: 0; }
+    100% { left: 140%; opacity: 0; }
+}
+
+/* Treasure button */
+.treasure-button {
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+    margin-top: 15px;
+    padding: 13px 30px;
+    background: linear-gradient(135deg,#a66d08,#ffd84d,#fff0a0,#ffd84d,#a66d08);
+    background-size: 250% 100%;
+    color: #392400;
+    border: 2px solid #fff1a2;
+    border-radius: 12px;
+    text-decoration: none;
+    font-family: "Cinzel", serif;
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: .8px;
+    box-shadow: 0 0 12px rgba(255,215,60,.52),0 0 25px rgba(255,190,25,.22);
+    animation: treasure-shine 2.3s ease-in-out infinite;
+    transition: .25s ease;
+}
+
+.treasure-button:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 0 20px rgba(255,230,100,.9),0 0 40px rgba(255,190,30,.45);
+}
+
+@keyframes treasure-shine {
+    0% { background-position: 100% 0; }
+    50% { background-position: 0% 0; }
+    100% { background-position: 100% 0; }
+}
+
+/* ---------------------- PEACE PAGE ----------------------- */
+.peace-page {
+    min-height: 100vh;
+    padding: 18px;
+    background:
+        linear-gradient(rgba(20,55,30,.16),rgba(5,30,15,.28)),
+        url("images/peace-bg.png") center / cover no-repeat fixed;
+}
+
+.peace-screen {
+    width: min(760px,92vw);
+    padding: 32px 42px;
+    background: rgba(5,25,12,.74);
+    border: 2px solid rgba(150,230,165,.75);
+    border-radius: 22px;
+    box-shadow: 0 15px 45px rgba(0,0,0,.48),0 0 30px rgba(100,220,120,.16);
+    backdrop-filter: blur(5px);
+    text-align: center;
+}
+
+.peace-icon { font-size: 42px; margin-bottom: 3px; }
+
+.peace-content h1 {
+    margin: 0 0 18px;
+    color: #d0ffd8;
+    font-family: "Cinzel", serif;
+    font-size: clamp(38px,5vw,52px);
+    letter-spacing: 2px;
+    text-shadow: 0 0 15px rgba(120,255,150,.43);
+}
+
+.epilogue {
+    max-width: 620px;
+    margin: 11px auto;
+    color: #f3fff5;
+    font-size: 17px;
+    line-height: 1.6;
+}
+
+.epilogue-divider { margin: 18px 0; color: #a7efb2; font-size: 22px; }
+.final-line { color: #d5ffdc; font-family: "Cinzel",serif; font-size: 17px; line-height: 1.65; }
+
+.return-button {
+    display: inline-block;
+    margin-top: 18px;
+    padding: 11px 22px;
+    background: linear-gradient(135deg,#1d6032,#369b52,#1d6032);
+    color: #fff;
+    border: 1px solid #8bf0a0;
+    border-radius: 10px;
+    text-decoration: none;
+    font-family: "Cinzel", serif;
+    font-size: 14px;
+    font-weight: 700;
+    transition: .25s ease;
+}
+
+.return-button:hover {
+    background: linear-gradient(135deg,#287b40,#4bc56b,#287b40);
+    border-color: #b0ffc0;
+    box-shadow: 0 0 22px rgba(100,255,140,.58);
+    transform: translateY(-2px) scale(1.03);
+}
+
+/* --------------------- RESET BUTTON ---------------------- */
+
+/* =====================================================
+   CURSED WAND BUTTON
+   ===================================================== */
+
+.merchant-ending-choices {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 18px;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+
+
+/* -------------------------
+   CURSED WAND
+   ------------------------- */
+
+.cursed-wand-button {
+    position: relative;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    min-width: 230px;
+    min-height: 54px;
+
+    padding: 13px 22px;
+
+    border: 2px solid #c45cff;
+    border-radius: 12px;
 
     background:
         linear-gradient(
             135deg,
-            #24133f,
-            #4a2380,
-            #24133f
+            #1a0829,
+            #4b125f,
+            #1a0829
         );
 
-    color: #e5d7ff;
+    color: #f3d9ff;
 
-    border: 2px solid #8d6aff;
-    border-radius: 10px;
+    text-decoration: none;
 
     font-family: "Cinzel", serif;
     font-size: 16px;
-    font-weight: 700;
+    font-weight: bold;
 
-    cursor: pointer;
+    letter-spacing: 0.8px;
 
-    box-shadow: 0 0 14px rgba(130, 80, 255, 0.40);
+    overflow: hidden;
+
+    box-shadow:
+        0 0 10px rgba(179, 65, 255, 0.35),
+        0 0 25px rgba(137, 38, 190, 0.22);
 
     transition:
-        transform 0.18s ease,
-        box-shadow 0.18s ease,
-        border-color 0.18s ease;
+        transform 0.25s ease,
+        border-color 0.25s ease,
+        box-shadow 0.25s ease;
+
+    animation: cursedWandPulse 2.5s ease-in-out infinite;
 }
 
-.revive-button:hover {
-    transform: translateY(-2px) scale(1.035);
-    border-color: #b59aff;
-    box-shadow: 0 0 24px rgba(150, 100, 255, 0.70);
-}
 
-.revive-button:active {
-    transform: scale(0.98);
-}
+/* Dark magical shimmer */
 
-/* -------------------------
-   PEACE ENDING PAGE
-   ------------------------- */
+.cursed-wand-button::after {
+    content: "";
 
-body.peace-page {
-    background-image:
+    position: absolute;
+
+    top: -40%;
+    bottom: -40%;
+
+    left: -45%;
+
+    width: 24%;
+
+    transform: skewX(-22deg);
+
+    background:
         linear-gradient(
-            rgba(19, 55, 28, 0.18),
-            rgba(7, 31, 16, 0.28)
-        ),
-        url("images/peace-bg.png");
+            90deg,
+            transparent,
+            rgba(255, 220, 255, 0.60),
+            transparent
+        );
+
+    animation: cursedWandSweep 3.2s ease-in-out infinite;
+
+    pointer-events: none;
 }
 
-.peace-screen {
-    width: min(790px, 92vw);
-    max-height: calc(100vh - 40px);
 
-    padding: 34px 44px;
+/* Hover */
+
+.cursed-wand-button:hover {
+    transform: translateY(-4px) scale(1.04);
+
+    border-color: #edb4ff;
+
+    color: white;
+
+    box-shadow:
+        0 0 15px rgba(202, 95, 255, 0.65),
+        0 0 38px rgba(167, 53, 220, 0.55),
+        0 8px 25px rgba(0, 0, 0, 0.45);
+}
+
+
+/* Click */
+
+.cursed-wand-button:active {
+    transform: translateY(0) scale(0.98);
+}
+
+
+/* =====================================================
+   CURSED WAND ANIMATIONS
+   ===================================================== */
+
+@keyframes cursedWandPulse {
+
+    0%,
+    100% {
+        box-shadow:
+            0 0 10px rgba(179, 65, 255, 0.30),
+            0 0 25px rgba(137, 38, 190, 0.18);
+    }
+
+    50% {
+        box-shadow:
+            0 0 18px rgba(207, 91, 255, 0.65),
+            0 0 38px rgba(157, 44, 212, 0.45);
+    }
+
+}
+
+
+@keyframes cursedWandSweep {
+
+    0% {
+        left: -45%;
+    }
+
+    55%,
+    100% {
+        left: 130%;
+    }
+
+}
+
+
+/* =====================================================
+   MOBILE
+   ===================================================== */
+
+@media (max-width: 600px) {
+
+    .merchant-ending-choices {
+        flex-direction: column;
+    }
+
+    .cursed-wand-button,
+    .restore-peace-button {
+        width: min(300px, 85vw);
+    }
+
+}
+/* =====================================================
+   BAD ENDING
+   ===================================================== */
+
+.bad-ending-page {
+    margin: 0;
+    width: 100%;
+    height: 100vh;
+
+    overflow: hidden;
+
+    font-family: "Lora", serif;
+
+    background:
+        linear-gradient(
+            rgba(12, 0, 18, 0.72),
+            rgba(4, 0, 8, 0.90)
+        ),
+        url("images/darkshop-bg.png");
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    color: #f1dfff;
+}
+
+
+.bad-ending-screen {
+    position: relative;
+
+    width: 100%;
+    height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    overflow: hidden;
+}
+
+
+.bad-ending-overlay {
+    position: absolute;
+    inset: 0;
+
+    background:
+        radial-gradient(
+            circle at center,
+            transparent 15%,
+            rgba(45, 0, 65, 0.35) 50%,
+            rgba(0, 0, 0, 0.82) 100%
+        );
+
+    pointer-events: none;
+}
+
+
+.bad-ending-content {
+    position: relative;
+    z-index: 2;
+
+    width: min(720px, 90vw);
+
+    padding: 36px 40px;
+
+    text-align: center;
+
+    background:
+        linear-gradient(
+            rgba(15, 4, 22, 0.88),
+            rgba(7, 1, 12, 0.94)
+        );
+
+    border: 2px solid rgba(197, 91, 255, 0.75);
+
+    border-radius: 18px;
+
+    box-shadow:
+        0 0 25px rgba(145, 40, 190, 0.30),
+        0 0 70px rgba(80, 0, 110, 0.30),
+        0 20px 50px rgba(0, 0, 0, 0.60);
+
+    animation: badEndingAppear 1.2s ease-out both;
+}
+
+
+/* Symbol */
+
+.bad-ending-symbol {
+    font-size: 42px;
+
+    color: #d888ff;
+
+    text-shadow:
+        0 0 12px rgba(216, 136, 255, 0.7),
+        0 0 30px rgba(157, 50, 220, 0.45);
+
+    animation: curseGlow 2s ease-in-out infinite;
+}
+
+
+/* Label */
+
+.bad-ending-label {
+    margin: 8px 0 4px;
+
+    font-family: "Cinzel", serif;
+
+    font-size: 14px;
+
+    font-weight: bold;
+
+    letter-spacing: 0.28em;
+
+    color: #c883ef;
+}
+
+
+/* Main title */
+
+.bad-ending-content h1 {
+    margin: 5px 0 15px;
+
+    font-family: "Cinzel", serif;
+
+    font-size: clamp(35px, 6vw, 58px);
+
+    letter-spacing: 0.05em;
+
+    color: #eed4ff;
+
+    text-shadow:
+        0 2px 0 #2d0d3a,
+        0 0 20px rgba(205, 101, 255, 0.50);
+}
+
+
+/* Divider */
+
+.bad-ending-divider {
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    width: min(500px, 80%);
+
+    margin: 0 auto 22px;
+}
+
+
+.bad-ending-divider span {
+    flex: 1;
+
+    height: 1px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(204, 120, 255, 0.75)
+        );
+}
+
+
+.bad-ending-divider span:last-child {
+    background:
+        linear-gradient(
+            90deg,
+            rgba(204, 120, 255, 0.75),
+            transparent
+        );
+}
+
+
+.bad-ending-divider b {
+    color: #dda0ff;
+
+    font-size: 10px;
+}
+
+
+/* Story */
+
+.bad-ending-story {
+    max-width: 600px;
+
+    margin: 10px auto;
+
+    font-size: 16px;
+
+    line-height: 1.6;
+
+    color: #e5d1eb;
+}
+
+
+.final-line {
+    margin-top: 22px;
+
+    color: #f0d5ff;
+
+    font-weight: 500;
+
+    text-shadow:
+        0 0 9px rgba(193, 91, 238, 0.28);
+}
+
+
+/* Final message */
+
+.bad-ending-title {
+    margin-top: 25px;
+
+    padding: 14px;
+
+    font-family: "Cinzel", serif;
+
+    font-size: clamp(14px, 2vw, 18px);
+
+    font-weight: bold;
+
+    letter-spacing: 0.08em;
+
+    color: #d994ff;
+
+    border-top: 1px solid rgba(200, 119, 255, 0.3);
+    border-bottom: 1px solid rgba(200, 119, 255, 0.3);
+
+    text-shadow:
+        0 0 12px rgba(205, 102, 255, 0.45);
+}
+
+
+/* Return button */
+
+.bad-ending-button {
+    position: relative;
+
+    display: inline-flex;
+
+    justify-content: center;
+    align-items: center;
+
+    margin-top: 27px;
+
+    min-width: 230px;
+
+    padding: 13px 24px;
+
+    border: 2px solid #ad58d4;
+
+    border-radius: 11px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #260d34,
+            #57216d,
+            #260d34
+        );
+
+    color: #f1dcff;
+
+    text-decoration: none;
+
+    font-family: "Cinzel", serif;
+
+    font-size: 15px;
+
+    font-weight: bold;
+
+    letter-spacing: 0.05em;
+
+    box-shadow:
+        0 0 15px rgba(170, 73, 217, 0.35);
+
+    transition: 0.25s ease;
+}
+
+
+.bad-ending-button:hover {
+    transform: translateY(-3px);
+
+    border-color: #e1a6ff;
+
+    box-shadow:
+        0 0 25px rgba(194, 94, 247, 0.65);
+}
+
+
+/* =====================================================
+   BAD ENDING ANIMATIONS
+   ===================================================== */
+
+@keyframes badEndingAppear {
+
+    from {
+        opacity: 0;
+        transform: translateY(25px) scale(0.97);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+
+}
+
+
+@keyframes curseGlow {
+
+    0%,
+    100% {
+        transform: scale(1);
+
+        text-shadow:
+            0 0 12px rgba(216, 136, 255, 0.55),
+            0 0 25px rgba(157, 50, 220, 0.35);
+    }
+
+    50% {
+        transform: scale(1.08);
+
+        text-shadow:
+            0 0 18px rgba(232, 171, 255, 0.85),
+            0 0 38px rgba(171, 61, 232, 0.65);
+    }
+
+}
+
+
+/* Mobile */
+
+@media (max-width: 600px) {
+
+    .bad-ending-content {
+        padding: 28px 22px;
+    }
+
+    .bad-ending-story {
+        font-size: 15px;
+    }
+
+    .bad-ending-title {
+        font-size: 13px;
+    }
+
+}
+/* =====================================================
+   DRAGON FINAL CHOICE
+   ===================================================== */
+
+.dragon-ending-choices {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-top: 24px;
+}
+
+
+/* =========================
+   TREASURE CHOICE
+   ========================= */
+
+.treasure-choice-button {
+    position: relative;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    min-width: 240px;
+    min-height: 60px;
+
+    padding: 14px 24px;
+
+    border-radius: 13px;
+    border: 2px solid #ffe18a;
+
+    background:
+        linear-gradient(
+            135deg,
+            #7d5100,
+            #e1a817,
+            #7d5100
+        );
+
+    color: #fff8d9;
+
+    text-decoration: none;
+
+    font-family: "Cinzel", serif;
+    font-size: 16px;
+    font-weight: bold;
+
+    letter-spacing: 0.06em;
+
+    box-shadow:
+        0 0 12px rgba(255, 206, 76, 0.45),
+        0 0 30px rgba(255, 191, 42, 0.25);
+
+    overflow: hidden;
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+
+.treasure-choice-button::after {
+    content: "";
+
+    position: absolute;
+
+    top: -50%;
+    bottom: -50%;
+
+    left: -45%;
+
+    width: 22%;
+
+    transform: skewX(-22deg);
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(255,255,255,0.7),
+            transparent
+        );
+
+    animation: treasureChoiceShine 3.2s ease-in-out infinite;
+}
+
+
+.treasure-choice-button:hover {
+    transform: translateY(-4px) scale(1.04);
+
+    box-shadow:
+        0 0 18px rgba(255, 220, 100, 0.75),
+        0 0 42px rgba(255, 190, 45, 0.5);
+}
+
+
+/* =========================
+   NO EVIL / GUARDIAN
+   ========================= */
+
+.guardian-choice-button {
+    position: relative;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    min-width: 240px;
+    min-height: 60px;
+
+    padding: 14px 24px;
+
+    border-radius: 13px;
+    border: 2px solid #7dff9c;
+
+    background:
+        linear-gradient(
+            135deg,
+            #123d22,
+            #267847,
+            #123d22
+        );
+
+    color: #eaffef;
+
+    text-decoration: none;
+
+    font-family: "Cinzel", serif;
+    font-size: 16px;
+    font-weight: bold;
+
+    letter-spacing: 0.1em;
+
+    box-shadow:
+        0 0 12px rgba(86, 235, 123, 0.38),
+        0 0 30px rgba(43, 177, 83, 0.22);
+
+    overflow: hidden;
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+
+.guardian-choice-button::after {
+    content: "";
+
+    position: absolute;
+
+    top: -50%;
+    bottom: -50%;
+
+    left: -45%;
+
+    width: 22%;
+
+    transform: skewX(-22deg);
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(220,255,228,0.6),
+            transparent
+        );
+
+    animation: guardianChoiceShine 3.7s ease-in-out infinite;
+}
+
+
+.guardian-choice-button:hover {
+    transform: translateY(-4px) scale(1.04);
+
+    box-shadow:
+        0 0 18px rgba(104, 255, 142, 0.72),
+        0 0 42px rgba(55, 201, 94, 0.45);
+}
+
+
+/* =========================
+   FINAL CHOICE TEXT
+   ========================= */
+
+.final-choice-text {
+    color: #a6ffb8;
+
+    font-family: "Cinzel", serif;
+
+    font-weight: bold;
+
+    text-shadow:
+        0 0 12px rgba(104, 255, 139, 0.3);
+}
+
+
+/* =========================
+   ANIMATIONS
+   ========================= */
+
+@keyframes treasureChoiceShine {
+
+    0% {
+        left: -45%;
+    }
+
+    55%,
+    100% {
+        left: 130%;
+    }
+
+}
+
+
+@keyframes guardianChoiceShine {
+
+    0% {
+        left: -45%;
+    }
+
+    55%,
+    100% {
+        left: 130%;
+    }
+
+}
+
+
+/* Mobile */
+
+@media (max-width: 600px) {
+
+    .dragon-ending-choices {
+        flex-direction: column;
+    }
+
+    .treasure-choice-button,
+    .guardian-choice-button {
+        width: min(310px, 85vw);
+    }
+
+}
+/* =====================================================
+   GUARDIAN TRUE ENDING
+   ===================================================== */
+
+.guardian-ending-page {
+    margin: 0;
+
+    width: 100%;
+    height: 100vh;
+
+    overflow: hidden;
+
+    font-family: "Lora", serif;
+
+    color: #eaffef;
+
+    background:
+        linear-gradient(
+            rgba(5, 25, 13, 0.45),
+            rgba(3, 14, 8, 0.75)
+        ),
+        url("images/forest.png");
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+
+.guardian-ending-screen {
+    position: relative;
+
+    width: 100%;
+    height: 100vh;
 
     display: flex;
     align-items: center;
     justify-content: center;
 
     overflow: hidden;
+}
 
-    background: rgba(5, 25, 12, 0.70);
 
-    border: 2px solid rgba(150, 230, 165, 0.72);
-    border-radius: 22px;
+.guardian-overlay {
+    position: absolute;
+    inset: 0;
 
-    box-shadow:
-        0 15px 45px rgba(0, 0, 0, 0.48),
-        0 0 30px rgba(100, 220, 120, 0.16);
+    background:
+        radial-gradient(
+            circle at center,
+            transparent 15%,
+            rgba(0, 45, 18, 0.22) 55%,
+            rgba(0, 0, 0, 0.62) 100%
+        );
+}
 
-    backdrop-filter: blur(6px);
+
+.guardian-content {
+    position: relative;
+    z-index: 2;
+
+    width: min(720px, 90vw);
+
+    padding: 34px 40px;
 
     text-align: center;
+
+    background:
+        linear-gradient(
+            rgba(6, 31, 17, 0.84),
+            rgba(3, 18, 10, 0.94)
+        );
+
+    border: 2px solid rgba(112, 231, 139, 0.72);
+
+    border-radius: 18px;
+
+    box-shadow:
+        0 0 30px rgba(62, 201, 102, 0.25),
+        0 0 70px rgba(25, 110, 53, 0.2),
+        0 20px 50px rgba(0, 0, 0, 0.55);
+
+    animation: guardianAppear 1.2s ease-out both;
 }
 
-.peace-content {
-    width: 100%;
+
+.guardian-symbol {
+    font-size: 45px;
+
+    text-shadow:
+        0 0 18px rgba(113, 255, 145, 0.7);
+
+    animation: guardianGlow 2.5s ease-in-out infinite;
 }
 
-.peace-icon {
-    margin-bottom: 2px;
-    font-size: 43px;
-}
 
-.peace-content h1 {
-    margin: 0 0 18px;
-
-    color: #d0ffd8;
+.guardian-label {
+    margin: 8px 0 4px;
 
     font-family: "Cinzel", serif;
-    font-size: clamp(36px, 5vw, 52px);
-    letter-spacing: 2px;
 
-    text-shadow: 0 0 15px rgba(120, 255, 150, 0.44);
+    font-size: 14px;
+
+    letter-spacing: 0.25em;
+
+    color: #8fffab;
 }
 
-.epilogue {
-    max-width: 640px;
 
-    margin: 11px auto;
-
-    color: #f3fff5;
-
-    font-family: "Lora", serif;
-    font-size: 17px;
-    line-height: 1.58;
-}
-
-.epilogue-divider {
-    margin: 18px 0;
-    color: #a7efb2;
-    font-size: 22px;
-}
-
-.final-line {
-    color: #d5ffdc;
+.guardian-content h1 {
+    margin: 5px 0 15px;
 
     font-family: "Cinzel", serif;
-    font-size: 17px;
-    line-height: 1.65;
+
+    font-size: clamp(35px, 6vw, 58px);
+
+    letter-spacing: 0.04em;
+
+    color: #d8ffe1;
+
+    text-shadow:
+        0 2px 0 #123d20,
+        0 0 20px rgba(107, 255, 142, 0.35);
 }
 
-.return-button {
+
+.guardian-divider {
+    width: min(500px, 80%);
+
+    margin: 0 auto 22px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 12px;
+}
+
+
+.guardian-divider span {
+    flex: 1;
+
+    height: 1px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(121, 255, 157, 0.7)
+        );
+}
+
+
+.guardian-divider span:last-child {
+    background:
+        linear-gradient(
+            90deg,
+            rgba(121, 255, 157, 0.7),
+            transparent
+        );
+}
+
+
+.guardian-divider b {
+    color: #adffc0;
+}
+
+
+.guardian-content > p {
+    max-width: 590px;
+
+    margin: 10px auto;
+
+    font-size: 16px;
+
+    line-height: 1.6;
+
+    color: #d6ebdb;
+}
+
+
+.guardian-final-text {
+    margin-top: 22px !important;
+
+    color: #b5ffc6 !important;
+
+    font-weight: bold;
+
+    text-shadow:
+        0 0 10px rgba(101, 255, 139, 0.35);
+}
+
+
+.guardian-title {
+    margin: 24px auto 10px;
+
+    padding: 13px;
+
+    border-top: 1px solid rgba(119, 255, 152, 0.3);
+    border-bottom: 1px solid rgba(119, 255, 152, 0.3);
+
+    font-family: "Cinzel", serif;
+
+    font-size: clamp(15px, 2vw, 20px);
+
+    font-weight: bold;
+
+    letter-spacing: 0.14em;
+
+    color: #a6ffb9;
+
+    text-shadow:
+        0 0 14px rgba(100, 255, 137, 0.4);
+}
+
+
+.guardian-return-button {
     display: inline-flex;
+
     align-items: center;
     justify-content: center;
 
-    margin-top: 18px;
-    padding: 11px 23px;
+    min-width: 230px;
+
+    margin-top: 25px;
+
+    padding: 13px 24px;
+
+    border: 2px solid #77e895;
+
+    border-radius: 11px;
 
     background:
         linear-gradient(
             135deg,
-            #1d6032,
-            #369b52,
-            #1d6032
+            #123d22,
+            #287746,
+            #123d22
         );
 
-    color: white;
-
-    border: 1px solid #8bf0a0;
-    border-radius: 10px;
+    color: #edfff2;
 
     text-decoration: none;
 
     font-family: "Cinzel", serif;
+
     font-size: 15px;
-    font-weight: 700;
 
-    box-shadow: 0 0 14px rgba(90, 240, 120, 0.28);
+    font-weight: bold;
 
-    transition:
-        transform 0.20s ease,
-        box-shadow 0.20s ease,
-        background 0.20s ease;
+    box-shadow:
+        0 0 16px rgba(91, 231, 122, 0.35);
+
+    transition: 0.25s ease;
 }
 
-.return-button:hover {
-    transform: translateY(-2px) scale(1.03);
 
-    background:
-        linear-gradient(
-            135deg,
-            #287b40,
-            #4bc56b,
-            #287b40
-        );
+.guardian-return-button:hover {
+    transform: translateY(-3px);
 
-    box-shadow: 0 0 23px rgba(100, 255, 140, 0.60);
+    box-shadow:
+        0 0 28px rgba(97, 255, 133, 0.65);
 }
 
-/* -------------------------
-   SCREEN-FIT TUNING
-   ------------------------- */
 
-@media (max-height: 820px) {
+@keyframes guardianAppear {
 
+    from {
+        opacity: 0;
+        transform: translateY(25px) scale(0.97);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+
+}
+
+
+@keyframes guardianGlow {
+
+    0%,
+    100% {
+        transform: scale(1);
+
+        text-shadow:
+            0 0 12px rgba(113, 255, 145, 0.45);
+    }
+
+    50% {
+        transform: scale(1.08);
+
+        text-shadow:
+            0 0 25px rgba(113, 255, 145, 0.85);
+    }
+
+}
+#enemy-box {
+    position: relative;
+}
+#enemy-box.sword-hit {
+    animation: swordHit 0.42s ease-out;
+}
+#enemy-box.sword-hit::after {
+    content: "⚔️";
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    font-size: 46px;
+    transform: translate(-50%,-50%) rotate(-25deg);
+    color: white;
+    text-shadow: 0 0 8px white, 0 0 20px #bfe8ff;
+    pointer-events: none;
+    animation:swordSlash 0.42s ease-out;
+}
+#enemy-box.heavy-hit {
+    animation: heavyHit 0.55s ease-out;
+}
+#enemy-box.heavy-hit::after {
+    content: "💥";
+    position: absolute;
+    left: 50%;
+    top: 48%;
+    font-size: 58px;
+    transform: translate(-50%,-50%);
+    pointer-events: none;
+    animation:heavyHitEffect 0.55s ease-out;
+}
+.story-box.player-hit {
+    animation: playerHit 0.42s ease-out;
+}
+.story-box.player-hit::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(255,40,40,.18);
+    box-shadow: inset 0 0 35px rgba(255,30,30,.18);
+    pointer-events: none;
+    animation:damageFlash 0.42s ease-out;
+}
+.damage-number{
+    position: absolute;
+    left: 50%;
+    top: 35%;
+    z-index: 20;
+    transform: translate(-50%,0);
+    font-family: "Cinzel", serif;
+    font-size: 27px;
+    font-weight: bold;
+    color: #ffdfdf;
+    text-shadow: 0 0 8px #ff1f1f,0 0 18px rgba(255,50,50,.8);
+    pointer-events: none;
+    animation:damageFloat 0.8s ease-out forwards;
+}
+.damage-number.heavy-damage {
+    font-size: 34px;
+    color: #fff2cf;
+    text-shadow:
+    0 0 10px #ff7b00,
+    0 0 25px rgba(255,80,0,0.8);
+}
+.story-box.low-health {
+    animation: lowHealthPulse 1.1s ease-out infinite;
+}
+@keyframes swordHit {
+    0% { transform: translateX(0) rotate(0);}
+    18% { transform: translateX(13px) rotate(1deg);}
+    45% { transform: translateX(-9px) rotate(-1deg);}
+    70% { transform: translateX(5px);}
+    100% { transform: translateX(0);  }  
+}
+
+/* =====================================================
+   THE LOST FOREST — FIT EVERYTHING ON SCREEN
+   Keeps scrolling disabled and preserves the design.
+   ===================================================== */
+
+/* Long button labels must stay inside the screen */
+.choices a,
+.left-path-choices a,
+#dark-shop-button,
+#dragon-button,
+.fight-again,
+.back-link,
+.cursed-wand-button,
+.restore-peace-button,
+.treasure-button,
+.treasure-choice-button,
+.guardian-choice-button,
+.bad-ending-button,
+.guardian-return-button,
+.buy-potion-button,
+.use-potion-button,
+.key-button,
+.revive-button,
+#combat-buttons button {
+    box-sizing: border-box;
+    min-width: 0;
+    max-width: 100%;
+    white-space: normal;
+    overflow-wrap: anywhere;
+    text-align: center;
+}
+
+/* Make the layout more compact on typical laptop screens */
+@media (max-height: 900px) {
     body {
         padding: 10px;
+        overflow: hidden;
+        align-items: center;
     }
 
     .story-box {
-        max-height: calc(100vh - 20px);
-        padding: 18px 24px;
+        padding: 13px 20px;
     }
 
     .story-box h1 {
-        margin: 5px 0 9px;
-        font-size: clamp(30px, 4vw, 42px);
+        font-size: clamp(27px, 4.4vh, 38px);
+        line-height: 1.05;
+        margin: 4px 0 8px;
+        letter-spacing: 0.7px;
+    }
+
+    .story-box h2 {
+        margin: 5px 0;
     }
 
     .story-box > p {
-        margin: 5px auto;
-        font-size: 15px;
-        line-height: 1.38;
-    }
-
-    .choices,
-    .left-path-choices {
-        margin-top: 13px;
-        gap: 16px;
-    }
-
-    .choices a,
-    .left-path-choices a {
-        min-height: 48px;
-        min-width: 145px;
-        font-size: 15px;
-    }
-
-    .action-panel {
-        margin-top: 12px;
-        padding-top: 10px;
-    }
-
-    .dark-shop-page .story-box {
-        padding: 12px 22px;
-    }
-
-    .dark-shop-page .merchant-image img {
-        height: 118px;
-    }
-
-    .dragon-page .story-box {
-        padding: 13px 24px;
-    }
-
-    .dragon-page .dragon-image img {
-        height: 125px;
-    }
-
-    .keyhunt-page .story-box {
-        padding: 15px 24px;
-    }
-
-    .peace-screen {
-        max-height: calc(100vh - 20px);
-        padding: 25px 32px;
-    }
-}
-
-@media (max-width: 700px) {
-
-    body {
-        padding: 8px;
-    }
-
-    .story-box {
-        width: 96vw;
-        max-height: calc(100vh - 16px);
-        padding: 15px 18px;
-        border-radius: 17px;
+        font-size: clamp(12px, 1.7vh, 14px);
+        line-height: 1.3;
+        margin: 4px auto;
     }
 
     .stats {
-        gap: 8px 13px;
+        gap: 6px 12px;
+        margin-bottom: 4px;
     }
 
     .stats p {
         font-size: 12px;
     }
 
-    .story-box h1 {
-        font-size: 29px;
+    .merchant-image,
+    .dragon-image {
+        margin: 4px auto;
     }
 
-    .story-box > p {
-        font-size: 13px;
+    .merchant-image img {
+        width: min(280px, 45vw);
+        max-height: 15vh;
+        object-fit: contain;
     }
 
-    .choices,
-    .left-path-choices {
-        gap: 10px;
+    .dragon-image img {
+        width: min(360px, 50vw);
+        max-height: 15vh;
+        object-fit: contain;
     }
 
-    .choices a,
-    .left-path-choices a {
-        min-width: 125px;
-        min-height: 44px;
-        padding: 8px 11px;
-        font-size: 13px;
+    .utility-row {
+        margin: 0 0 3px;
     }
 
-    #combat-buttons button {
-        padding: 7px 9px;
-        font-size: 11px;
+    .use-potion-button,
+    .buy-potion-button {
+        padding: 5px 10px;
+        margin: 2px auto 4px;
+        font-size: 12px;
     }
 
     .hp-section,
     .enemy-hp-section {
-        width: 94%;
+        margin: 4px auto;
     }
 
     .hp-label {
         font-size: 11px;
+        margin-bottom: 3px;
+    }
+
+    .hp-bar {
+        height: 12px;
+    }
+
+    #enemy-box {
+        margin-top: 6px;
+        padding: 8px;
+    }
+
+    #enemy-box h2 {
+        font-size: 16px;
+        margin: 2px 0 4px;
+    }
+
+    #enemy-box p {
+        font-size: 12px;
+        margin: 3px 0;
+    }
+
+    #combat-buttons {
+        gap: 6px;
+        margin-top: 5px;
+    }
+
+    #combat-buttons button {
+        padding: 6px 9px;
+        font-size: 12px;
+    }
+
+    /* Merchant and treasure endings */
+    .story-box.story-ending {
+        padding: 11px 16px;
+    }
+
+    .peace-ending,
+    .treasure-ending {
+        padding: 11px;
+        margin-top: 3px;
+    }
+
+    .peace-ending h1,
+    .treasure-ending h1 {
+        font-size: clamp(22px, 3.6vh, 28px);
+        margin: 0 0 6px;
+    }
+
+    .peace-ending p,
+    .treasure-ending p {
+        font-size: clamp(12px, 1.6vh, 14px);
+        line-height: 1.3;
+        margin: 4px auto;
+    }
+
+    .merchant-ending-choices,
+    .dragon-ending-choices {
+        gap: 8px;
+        margin-top: 10px;
+    }
+
+    .cursed-wand-button,
+    .restore-peace-button,
+    .treasure-choice-button,
+    .guardian-choice-button {
+        min-width: 0;
+        min-height: 42px;
+        padding: 8px 12px;
+        font-size: clamp(12px, 1.65vh, 14px);
+        letter-spacing: 0;
+    }
+
+    .treasure-button,
+    .fight-again,
+    .back-link,
+    .bad-ending-button,
+    .guardian-return-button {
+        padding: 8px 12px;
+        font-size: clamp(12px, 1.7vh, 15px);
+        margin-top: 7px;
+    }
+}
+
+/* Very short screens: compact the content further */
+@media (max-height: 680px) {
+    body {
+        padding: 5px;
+    }
+
+    .story-box {
+        padding: 8px 13px;
+    }
+
+    .story-box h1 {
+        font-size: clamp(22px, 4vh, 30px);
+        line-height: 1;
+        margin: 2px 0 5px;
+    }
+
+    .story-box > p {
+        font-size: 11px;
+        line-height: 1.18;
+        margin: 2px auto;
+    }
+
+    .stats {
+        gap: 4px 9px;
+        margin-bottom: 2px;
+    }
+
+    .stats p {
+        font-size: 11px;
+    }
+
+    .merchant-image img,
+    .dragon-image img {
+        max-height: 11vh;
+    }
+
+    .story-box.story-ending {
+        padding: 7px 10px;
+    }
+
+    .peace-ending,
+    .treasure-ending {
+        padding: 7px;
+        margin-top: 2px;
+    }
+
+    .peace-ending h1,
+    .treasure-ending h1 {
+        font-size: 22px;
+        margin-bottom: 4px;
+    }
+
+    .peace-ending p,
+    .treasure-ending p {
+        font-size: 11px;
+        line-height: 1.2;
+        margin: 2px auto;
+    }
+
+    #enemy-box {
+        padding: 5px;
+        margin-top: 4px;
+    }
+
+    #combat-buttons {
+        gap: 4px;
+        margin-top: 4px;
+    }
+
+    #combat-buttons button {
+        padding: 5px 7px;
+        font-size: 11px;
+    }
+
+    .cursed-wand-button,
+    .restore-peace-button,
+    .treasure-choice-button,
+    .guardian-choice-button {
+        min-height: 36px;
+        padding: 6px 8px;
+        font-size: 11px;
+        margin-top: 5px;
+    }
+}
+
+/* Narrow screens: fit buttons inside the game window */
+@media (max-width: 600px) {
+    body {
+        padding: 6px;
+    }
+
+    .story-box {
+        width: 100%;
+        padding: 12px 10px;
+    }
+
+    .choices,
+    .left-path-choices {
+        gap: 8px;
+        margin-top: 10px;
+    }
+
+    .choices a,
+    .left-path-choices a {
+        width: auto;
+        flex: 1 1 125px;
+        padding: 8px;
+        font-size: 13px;
+    }
+
+    /* Let ending buttons share the available width */
+    .merchant-ending-choices,
+    .dragon-ending-choices {
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 7px;
+    }
+
+    .cursed-wand-button,
+    .restore-peace-button,
+    .treasure-choice-button,
+    .guardian-choice-button {
+        width: auto;
+        flex: 1 1 42%;
+        min-width: 0;
+        padding: 8px;
+        font-size: 12px;
+        letter-spacing: 0;
+    }
+
+    #dark-shop-button,
+    #dragon-button,
+    .treasure-button,
+    .bad-ending-button,
+    .guardian-return-button {
+        max-width: 100%;
+        padding: 8px 10px;
+        font-size: 12px;
+        letter-spacing: 0;
+    }
+}
+
+/* =====================================================
+   DARK SHOP — LARGER MERCHANT, SAME NO-SCROLL LAYOUT
+   ===================================================== */
+
+@media (max-height: 900px) {
+
+    /* Give the merchant image more room */
+    .dark-shop-page .merchant-image {
+        margin: 5px auto;
     }
 
     .dark-shop-page .merchant-image img {
-        width: min(270px, 62vw);
-        height: 105px;
+        width: min(330px, 55vw);
+        max-height: min(180px, 22vh);
+        height: auto;
+        object-fit: contain;
+    }
+
+    /* Recover vertical space from introductory text */
+    .dark-shop-page #merchant-intro p {
+        margin: 3px auto;
+        line-height: 1.22;
+    }
+}
+
+/* Short screens: keep the image visible without
+   letting it consume the space needed by the fight */
+@media (max-height: 680px) {
+
+    .dark-shop-page .merchant-image img {
+        width: min(310px, 50vw);
+        max-height: min(135px, 22vh);
+        object-fit: contain;
+    }
+
+    .dark-shop-page #merchant-intro p {
+        margin: 2px auto;
+        font-size: 11px;
+        line-height: 1.15;
+    }
+}
+
+/* =====================================================
+   DRAGON PAGE — RESTORE IMAGE SIZE
+   ===================================================== */
+
+@media (max-height: 900px) {
+    .dragon-page .dragon-image {
+        margin: 6px auto;
     }
 
     .dragon-page .dragon-image img {
-        width: min(360px, 72vw);
-        height: 110px;
-    }
-
-    .peace-screen {
-        padding: 20px 18px;
-    }
-
-    .peace-content h1 {
-        font-size: 34px;
-    }
-
-    .epilogue {
-        font-size: 14px;
-        line-height: 1.45;
-    }
-
-    .final-line {
-        font-size: 14px;
+        width: min(460px, 65vw);
+        max-height: min(190px, 24vh);
+        height: auto;
+        object-fit: contain;
     }
 }
+
+@media (max-height: 680px) {
+    .dragon-page .dragon-image img {
+        width: min(420px, 60vw);
+        max-height: min(150px, 22vh);
+        height: auto;
+        object-fit: contain;
+    }
+}
+
 /* =====================================================
-   FINAL DARK SHOP POLISH
+   GUARDIAN TRUE ENDING — EPIC, COMPACT, NO SCROLL
    ===================================================== */
 
-/* ----- USE POTION ----- */
-
-.dark-shop-page .use-potion-button {
-    width: auto !important;
-    min-width: 0 !important;
-
-    display: inline-block !important;
-
-    align-self: center !important;
-
-    margin: 4px auto 8px !important;
-
-    padding: 8px 18px !important;
-
-    background: rgba(5, 25, 15, 0.75) !important;
-
-    color: #d8ffe2 !important;
-
-    border: 1px solid #55cf7c !important;
-
-    border-radius: 9px !important;
-
-    font-family: "Lora", serif !important;
-
-    font-size: 14px !important;
-
-    cursor: pointer;
-
-    box-shadow:
-        0 0 8px rgba(60, 210, 110, 0.12);
-
-    transition: 0.2s ease;
-}
-
-.dark-shop-page .use-potion-button:hover {
-    background: rgba(50, 150, 80, 0.18) !important;
-
-    color: #aaffbc !important;
-
-    border-color: #8cffaa !important;
-
-    box-shadow:
-        0 0 15px rgba(80, 230, 120, 0.35);
-
-    transform: translateY(-2px);
-}
-
-
-/* ----- MERCHANT IMAGE ----- */
-
-.dark-shop-page .merchant-image {
-    width: 100% !important;
-
-    display: flex !important;
-
-    justify-content: center !important;
-
-    align-items: center !important;
-
-    margin: 10px auto !important;
-}
-
-.dark-shop-page .merchant-image img {
-    display: block !important;
-
-    width: min(340px, 65vw) !important;
-
-    height: auto !important;
-
-    max-height: 230px !important;
-
-    object-fit: cover;
-
-    object-position: center;
-
-    margin: 0 auto !important;
-
-    border-radius: 14px;
-
-    border: 2px solid rgba(180, 40, 40, 0.7);
-
-    box-shadow:
-        0 8px 25px rgba(0, 0, 0, 0.8),
-        0 0 20px rgba(130, 0, 0, 0.35);
-}
-
-
-/* ----- DRAGON IMAGE ----- */
-
-.dragon-page .dragon-image {
-    width: 100% !important;
-
-    display: flex !important;
-
-    justify-content: center !important;
-
-    align-items: center !important;
-
-    margin: 10px auto !important;
-}
-
-.dragon-page .dragon-image img {
-    display: block !important;
-
-    width: min(460px, 70vw) !important;
-
-    height: auto !important;
-
-    max-height: 220px !important;
-
-    object-fit: cover;
-
-    object-position: center;
-
-    margin: 0 auto !important;
-}
-/* =====================================================
-   DARK SHOP - FINAL ONE SCREEN FIX
-   ===================================================== */
-
-body.dark-shop-page .story-box {
-    width: min(820px, 95vw);
-
-    height: auto !important;
-    min-height: 0 !important;
-
-    max-height: calc(100vh - 24px);
-
-    padding: 12px 26px !important;
-
-    overflow: hidden;
-}
-
-
-/* Stats */
-
-body.dark-shop-page .stats {
-    margin-bottom: 4px !important;
-    gap: 18px !important;
-}
-
-body.dark-shop-page .stats p {
-    font-size: 14px !important;
-}
-
-
-/* HP bar */
-
-body.dark-shop-page .hp-section {
-    margin: 5px auto !important;
-}
-
-body.dark-shop-page .hp-bar {
-    height: 15px !important;
-}
-
-
-/* Potion button */
-
-body.dark-shop-page .use-potion-button {
-    width: auto !important;
-    display: inline-block !important;
-
-    margin: 3px auto 5px !important;
-
-    padding: 6px 16px !important;
-
-    font-size: 13px !important;
-}
-
-
-/* Title */
-
-body.dark-shop-page .story-box h1 {
-    margin: 4px 0 7px !important;
-
-    font-size: 34px !important;
-}
-
-
-/* Intro text */
-
-body.dark-shop-page #merchant-intro p,
-body.dark-shop-page .story-box > p {
-    margin: 4px auto !important;
-
-    font-size: 14px !important;
-
-    line-height: 1.3 !important;
-}
-
-
-/* Merchant image */
-
-body.dark-shop-page .merchant-image {
-    margin: 7px auto !important;
-
-    height: 150px !important;
-
-    flex-shrink: 0;
-}
-
-body.dark-shop-page .merchant-image img {
-    width: min(300px, 55vw) !important;
-
-    height: 150px !important;
-
-    max-height: 150px !important;
-
-    object-fit: cover;
-
-    object-position: center;
-
-    margin: auto !important;
-}
-
-
-/* Evil Merchant fight */
-
-body.dark-shop-page #enemy-box {
-    margin-top: 6px !important;
-
-    padding: 10px 14px !important;
-}
-
-body.dark-shop-page #enemy-box h2 {
-    margin: 3px 0 5px !important;
-
-    font-size: 20px !important;
-}
-
-body.dark-shop-page #enemy-box p {
-    margin: 4px 0 !important;
-
-    font-size: 13px !important;
-}
-
-
-/* Enemy HP */
-
-body.dark-shop-page .enemy-hp-section {
-    margin: 5px auto !important;
-}
-
-
-/* Combat buttons */
-
-body.dark-shop-page #combat-buttons {
-    margin-top: 6px !important;
-
-    gap: 7px !important;
-}
-
-body.dark-shop-page #combat-buttons button {
-    padding: 7px 12px !important;
-
-    font-size: 12px !important;
-}
-
-
-/* Back */
-
-body.dark-shop-page .back-button {
-    margin-top: 6px !important;
-}
-/* =====================================================
-   DRAGON DEN - FINAL ONE SCREEN FIX
-   ===================================================== */
-
-body.dragon-page {
-    padding: 8px;
+.guardian-ending-page {
     height: 100vh;
     min-height: 0;
     overflow: hidden;
+}
+
+.guardian-ending-screen {
+    width: 100%;
+    height: 100vh;
+    min-height: 0;
+    padding: 8px;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+.guardian-content {
+    box-sizing: border-box;
+    width: min(720px, 92vw);
+    padding: clamp(14px, 2.5vh, 26px)
+             clamp(18px, 3.5vw, 34px);
+}
+
+/* Glowing guardian symbol */
+.guardian-symbol {
+    font-size: clamp(30px, 4.5vh, 40px);
+}
+
+.guardian-label {
+    margin: 5px 0 3px;
+    font-size: clamp(10px, 1.6vh, 13px);
+    letter-spacing: 0.2em;
+}
+
+/* Dramatic heading, scaled for screen height */
+.guardian-content h1 {
+    font-size: clamp(26px, 5.5vh, 48px);
+    line-height: 1.05;
+    margin: 4px 0 10px;
+    letter-spacing: 0.03em;
+}
+
+.guardian-divider {
+    margin: 0 auto 12px;
+    gap: 9px;
+}
+
+/* Tighter story spacing preserves the atmosphere */
+.guardian-content > p {
+    font-size: clamp(12px, 1.8vh, 15px);
+    line-height: 1.4;
+    margin: 6px auto;
+}
+
+.guardian-final-text {
+    margin-top: 13px !important;
+}
+
+.guardian-title {
+    margin: 15px auto 7px;
+    padding: 9px;
+    font-size: clamp(12px, 1.9vh, 18px);
+    letter-spacing: 0.08em;
+    line-height: 1.25;
+}
+
+/* Final return button */
+.guardian-return-button {
+    box-sizing: border-box;
+    width: min(260px, 100%);
+    min-width: 0;
+    margin-top: 12px;
+    padding: 10px 16px;
+    font-size: clamp(12px, 1.8vh, 14px);
+    white-space: normal;
+    line-height: 1.25;
+}
+
+/* Extra compact layout for short laptop screens */
+@media (max-height: 680px) {
+    .guardian-content {
+        padding: 10px 14px;
+    }
+
+    .guardian-symbol {
+        font-size: 27px;
+    }
+
+    .guardian-label {
+        margin: 2px 0;
+        font-size: 10px;
+    }
+
+    .guardian-content h1 {
+        font-size: clamp(22px, 4.2vh, 29px);
+        margin: 3px 0 6px;
+    }
+
+    .guardian-divider {
+        margin-bottom: 7px;
+    }
+
+    .guardian-content > p {
+        font-size: 11px;
+        line-height: 1.22;
+        margin: 3px auto;
+    }
+
+    .guardian-final-text {
+        margin-top: 7px !important;
+    }
+
+    .guardian-title {
+        margin: 7px auto 4px;
+        padding: 6px;
+        font-size: 11px;
+        line-height: 1.2;
+    }
+
+    .guardian-return-button {
+        margin-top: 7px;
+        padding: 7px 10px;
+        font-size: 11px;
+    }
+}
+
+/* =====================================================
+   PEACE RESTORED — GUARDIAN-STYLE ANIMATION
+   ===================================================== */
+
+/* Cinematic entrance for the entire Peace ending */
+.peace-screen {
+    animation: guardianAppear 1.2s ease-out both;
+}
+
+/* Give the peace symbol the Guardian's magical glow */
+.peace-icon {
+    animation: guardianGlow 2.5s ease-in-out infinite;
+}
+
+/* =====================================================
+   FOLLOW THE FIREFLY — SUBTLE MAIN-CHOICE LINK
+   ===================================================== */
+
+.firefly-invitation {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin: 13px auto 0;
+}
+
+.firefly-link {
+    display: inline-flex;
     align-items: center;
+    justify-content: center;
+    gap: 10px;
+    max-width: 100%;
+    padding: 8px 15px;
+    border: 1px solid rgba(222, 207, 151, .25);
+    border-radius: 999px;
+    background: rgba(11, 28, 19, .40);
+    color: #e8e1c7;
+    text-decoration: none;
+    text-align: left;
+    transition:
+        background .25s ease,
+        border-color .25s ease,
+        box-shadow .25s ease,
+        transform .25s ease;
+    animation: fireflyInvitationGlow 4s ease-in-out infinite;
 }
 
-
-/* Main Dragon window */
-
-body.dragon-page .story-box {
-    width: min(820px, 95vw);
-
-    height: auto !important;
-    min-height: 0 !important;
-
-    max-height: calc(100vh - 16px);
-
-    padding: 12px 26px !important;
-
-    overflow: hidden;
+.firefly-link:hover {
+    background: rgba(34, 58, 36, .72);
+    border-color: rgba(237, 217, 155, .58);
+    box-shadow: 0 0 18px rgba(226, 207, 133, .12);
+    transform: translateY(-1px);
 }
 
-
-/* Stats */
-
-body.dragon-page .stats {
-    margin-bottom: 4px !important;
-    gap: 18px !important;
+.firefly-link:focus-visible {
+    outline: 2px solid #e8dba5;
+    outline-offset: 4px;
 }
 
-body.dragon-page .stats p {
-    font-size: 14px !important;
+.firefly-link-icon {
+    color: #f0d991;
+    font-size: 17px;
+    line-height: 1;
+    text-shadow: 0 0 9px rgba(241, 214, 128, .42);
 }
 
-
-/* Player HP */
-
-body.dragon-page .hp-section {
-    margin: 5px auto !important;
+.firefly-link-copy {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
 }
 
-body.dragon-page .hp-bar {
-    height: 15px !important;
+.firefly-link-copy strong {
+    color: #f0e5c4;
+    font-family: "Cinzel", serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: .025em;
 }
 
-
-/* Potion button */
-
-body.dragon-page .use-potion-button {
-    width: auto !important;
-
-    display: inline-block !important;
-
-    margin: 3px auto 5px !important;
-
-    padding: 6px 16px !important;
-
-    font-size: 13px !important;
+.firefly-link-copy small {
+    color: #bfcbb5;
+    font-family: "Lora", serif;
+    font-size: 10px;
 }
 
-
-/* Dragon title */
-
-body.dragon-page .story-box h1 {
-    margin: 4px 0 7px !important;
-
-    font-size: 34px !important;
+.firefly-link-arrow {
+    margin-left: 3px;
+    color: #c7cda8;
+    font-size: 12px;
+    opacity: .7;
+    transition: transform .2s ease, opacity .2s ease;
 }
 
-
-/* Gate-opening text */
-
-body.dragon-page #dragon-fight > p {
-    margin: 5px auto !important;
-
-    font-size: 14px !important;
-
-    line-height: 1.3 !important;
+.firefly-link:hover .firefly-link-arrow {
+    transform: translate(2px, -2px);
+    opacity: 1;
 }
 
-
-/* Dragon image */
-
-body.dragon-page .dragon-image {
-    width: 100% !important;
-
-    margin: 7px auto !important;
-
-    height: 145px !important;
-
-    display: flex !important;
-
-    justify-content: center !important;
-
-    align-items: center !important;
-
-    overflow: hidden;
+@keyframes fireflyInvitationGlow {
+    0%, 100% {
+        box-shadow: 0 0 0 rgba(226, 207, 133, 0);
+    }
+    50% {
+        box-shadow: 0 0 12px rgba(226, 207, 133, .055);
+    }
 }
 
-body.dragon-page .dragon-image img {
-    width: min(430px, 65vw) !important;
+@media (max-width: 600px) {
+    .firefly-invitation {
+        margin-top: 10px;
+    }
 
-    height: 145px !important;
-
-    max-height: 145px !important;
-
-    object-fit: cover;
-
-    object-position: center;
-
-    margin: auto !important;
+    .firefly-link {
+        padding: 7px 12px;
+    }
 }
 
-
-/* Dragon fight box */
-
-body.dragon-page #enemy-box {
-    margin-top: 6px !important;
-
-    padding: 10px 14px !important;
-}
-
-
-/* Dragon heading */
-
-body.dragon-page #enemy-box h2 {
-    margin: 3px 0 5px !important;
-
-    font-size: 20px !important;
-}
-
-
-/* Dragon HP section */
-
-body.dragon-page .enemy-hp-section {
-    margin: 5px auto !important;
-}
-
-
-/* Combat buttons */
-
-body.dragon-page #combat-buttons {
-    margin-top: 6px !important;
-
-    gap: 7px !important;
-}
-
-body.dragon-page #combat-buttons button {
-    padding: 7px 12px !important;
-
-    font-size: 12px !important;
-}
-
-
-/* Back button */
-
-body.dragon-page .back-button {
-    margin-top: 6px !important;
+@media (prefers-reduced-motion: reduce) {
+    .firefly-link {
+        animation: none;
+    }
 }
