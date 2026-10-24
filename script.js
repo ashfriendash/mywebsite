@@ -1,6 +1,4 @@
-// =========================
-// PLAYER DATA
-// =========================
+
 
 let health =
     Number(localStorage.getItem("health")) || 100;
@@ -27,18 +25,11 @@ let merchantDefeated =
     localStorage.getItem("merchantDefeated") === "true";
 
 
-// =========================
-// GAME OVER / REVIVE
-// =========================
-
 let gameOver = false;
 
 let reviveClicks = 0;
 
 
-// =========================
-// ENEMY DATA
-// =========================
 
 let enemyType =
     document.body.dataset.enemy || "wolf";
@@ -66,10 +57,6 @@ let enemyHealth =
     GetEnemyMaxHealth();
 
 
-// =========================
-// COMBAT PAGE CHECK
-// =========================
-
 function IsCombatPage() {
 
     return (
@@ -80,13 +67,9 @@ function IsCombatPage() {
 }
 
 
-// =========================
-// HP BARS
-// =========================
 
 function UpdateHealthBars() {
 
-    // PLAYER HP
 
     let playerBar =
         document.getElementById("player-health-bar");
@@ -129,7 +112,7 @@ function UpdateHealthBars() {
     }
 
 
-    // ENEMY HP
+   
 
     let enemyBar =
         document.getElementById("enemy-health-bar");
@@ -161,9 +144,7 @@ function UpdateHealthBars() {
 }
 
 
-// =========================
-// SAVE GAME
-// =========================
+
 
 function SaveGame() {
 
@@ -209,10 +190,6 @@ function SaveGame() {
 }
 
 
-// =========================
-// UPDATE PLAYER STATS
-// =========================
-
 function UpdateStats() {
 
     let healthDisplay =
@@ -240,7 +217,7 @@ function UpdateStats() {
         document.getElementById("dragon-button");
 
 
-    // HEALTH
+
 
     if (healthDisplay) {
 
@@ -249,7 +226,6 @@ function UpdateStats() {
     }
 
 
-    // GOLD
 
     if (goldDisplay) {
 
@@ -258,7 +234,6 @@ function UpdateStats() {
     }
 
 
-    // KEYS
 
     if (keysDisplay) {
 
@@ -267,7 +242,6 @@ function UpdateStats() {
     }
 
 
-    // POTIONS
 
     if (potionDisplay) {
 
@@ -276,7 +250,6 @@ function UpdateStats() {
     }
 
 
-    // MERCHANT PURCHASE PROGRESS
 
     if (purchaseDisplay) {
 
@@ -287,7 +260,6 @@ function UpdateStats() {
     }
 
 
-    // KEY HUNT PROGRESS
 
     if (progress) {
 
@@ -298,7 +270,6 @@ function UpdateStats() {
     }
 
 
-    // DARK SHOP UNLOCK
 
     if (darkButton) {
 
@@ -315,7 +286,6 @@ function UpdateStats() {
     }
 
 
-    // DRAGON DEN
 
     if (dragonButton) {
 
@@ -368,9 +338,6 @@ function UpdateStats() {
 }
 
 
-// =========================
-// RESET GAME
-// =========================
 
 function ResetGame() {
 
@@ -386,10 +353,6 @@ function ResetGame() {
     location.reload();
 }
 
-
-// =========================
-// NOTIFICATIONS
-// =========================
 
 function ShowNotification(title, text) {
 
@@ -435,9 +398,6 @@ function ShowNotification(title, text) {
 }
 
 
-// =========================
-// DAMAGE PLAYER
-// =========================
 
 function LooseHealth(amount) {
 
@@ -484,9 +444,6 @@ function LooseHealth(amount) {
 }
 
 
-// =========================
-// SHOW GAME OVER
-// =========================
 
 function ShowGameOver() {
 
@@ -533,9 +490,6 @@ function ShowGameOver() {
 }
 
 
-// =========================
-// REVIVE GAME
-// =========================
 
 function ReviveGame() {
 
@@ -618,10 +572,6 @@ function ReviveGame() {
 }
 
 
-// =========================
-// GOLD
-// =========================
-
 function GainGold(amount) {
 
     gold += amount;
@@ -640,9 +590,6 @@ function GainGold(amount) {
 }
 
 
-// =========================
-// FIND KEY
-// =========================
 
 function FindKey() {
 
@@ -660,9 +607,6 @@ function FindKey() {
 }
 
 
-// =========================
-// USE POTION
-// =========================
 
 function Heal() {
 
@@ -703,9 +647,6 @@ function Heal() {
 }
 
 
-// =========================
-// BUY POTION
-// =========================
 
 function BuyPotion() {
 
@@ -761,10 +702,6 @@ function BuyPotion() {
 }
 
 
-// =========================
-// TREASURE CHEST
-// =========================
-
 function OpenChest() {
 
     if (ChestOpened === false) {
@@ -793,9 +730,6 @@ function OpenChest() {
 }
 
 
-// =========================
-// ENEMY ATTACK
-// =========================
 
 function EnemyAttack() {
 
@@ -839,9 +773,6 @@ function EnemyAttack() {
 }
 
 
-// =========================
-// SWORD ATTACK
-// =========================
 
 function SwordAttack() {
 
@@ -888,9 +819,6 @@ function SwordAttack() {
 }
 
 
-// =========================
-// HEAVY ATTACK
-// =========================
 
 function HeavyAttack() {
 
@@ -937,9 +865,6 @@ function HeavyAttack() {
 }
 
 
-// =========================
-// WIN BATTLE
-// =========================
 
 function WinBattle() {
 
@@ -947,14 +872,10 @@ function WinBattle() {
         document.getElementById("enemy-box");
 
 
-    // =====================
-    // WOLF
-    // =====================
 
     if (enemyType === "wolf") {
 
         gold += 20;
-
 
         SaveGame();
         UpdateStats();
@@ -983,14 +904,10 @@ function WinBattle() {
             "+20 Gold"
         );
 
-
         return;
     }
 
 
-    // =====================
-    // EVIL MERCHANT
-    // =====================
 
     if (enemyType === "merchant") {
 
@@ -1028,67 +945,49 @@ function WinBattle() {
             );
 
 
-        // Hide the fight
 
         if (enemyBox) {
-
-            enemyBox.style.display =
-                "none";
+            enemyBox.style.display = "none";
         }
 
 
-        // Hide introduction
+
 
         if (intro) {
-
-            intro.style.display =
-                "none";
+            intro.style.display = "none";
         }
 
 
-        // Hide merchant image
+    
 
         if (introImage) {
-
-            introImage.style.display =
-                "none";
+            introImage.style.display = "none";
         }
 
 
-        // Hide title
 
         if (title) {
-
-            title.style.display =
-                "none";
+            title.style.display = "none";
         }
 
 
-        // Hide potion button
 
         if (potionButton) {
-
-            potionButton.style.display =
-                "none";
+            potionButton.style.display = "none";
         }
 
 
-        // Show ending
+     
 
         if (peaceEnding) {
-
-            peaceEnding.style.display =
-                "block";
+            peaceEnding.style.display = "block";
         }
 
 
-        // Shrink ending layout
+    
 
         if (storyBox) {
-
-            storyBox.classList.add(
-                "story-ending"
-            );
+            storyBox.classList.add("story-ending");
         }
 
 
@@ -1097,46 +996,63 @@ function WinBattle() {
             "The curse has been broken."
         );
 
-
         return;
     }
 
 
-    // =====================
-    // DRAGON
-    // =====================
+  
 
     if (enemyType === "dragon") {
 
-        if (enemyBox) {
+    let dragonFight =
+        document.getElementById("dragon-fight");
 
-            enemyBox.innerHTML =
+    let treasureEnding =
+        document.getElementById("treasure-ending");
 
-                "<h2>🏆 Dragon Defeated!</h2>" +
+    let title =
+        document.querySelector(".dragon-page .story-box h1");
 
-                "<p>" +
-                "The Ancient Dragon falls " +
-                "and the path to the treasure " +
-                "is revealed." +
-                "</p>" +
-
-                '<a href="treasure.html" class="back-link">' +
-                "💎 Enter the Treasure Room" +
-                "</a>";
-        }
+    let potionButton =
+        document.querySelector(".dragon-page .use-potion-button");
 
 
-        ShowNotification(
-            "🐉 Dragon Defeated!",
-            "The path to the treasure is open!"
-        );
+    if (dragonFight) {
+        dragonFight.style.display = "none";
     }
+
+
+    if (title) {
+        title.style.display = "none";
+    }
+
+
+    if (potionButton) {
+        potionButton.style.display = "none";
+    }
+
+
+    if (treasureEnding) {
+        treasureEnding.style.display = "block";
+    }
+
+
+    let storyBox =
+        document.querySelector(".story-box");
+
+    if (storyBox) {
+        storyBox.classList.add("story-ending");
+    }
+
+
+    ShowNotification(
+        "🏆 Dragon is Slain!",
+        "You feel accomplished yet incomplete"
+    );
+
+    return;
 }
-
-
-// =========================
-// RUN AWAY
-// =========================
+}
 
 function RunAway() {
 
@@ -1224,9 +1140,7 @@ function RunAway() {
 }
 
 
-// =========================
-// KEY HUNT
-// =========================
+
 
 function SearchForKey() {
 
@@ -1261,9 +1175,7 @@ function SearchForKey() {
 }
 
 
-// =========================
-// DRAGON GATE
-// =========================
+
 
 function UpdateDragonGate() {
 
@@ -1316,9 +1228,7 @@ function UpdateDragonGate() {
 }
 
 
-// =========================
-// MERCHANT ENDING STATE
-// =========================
+
 
 function UpdateMerchantEnding() {
 
@@ -1464,9 +1374,7 @@ function UpdateMerchantEnding() {
 }
 
 
-// =========================
-// PAGE START
-// =========================
+
 
 UpdateStats();
 
@@ -1475,9 +1383,6 @@ UpdateDragonGate();
 UpdateMerchantEnding();
 
 
-// =========================
-// GAME OVER INITIALIZATION
-// =========================
 
 let gameOverScreen =
     document.getElementById("game-over");
@@ -1502,8 +1407,6 @@ if (gameOverScreen) {
 }
 
 
-// =========================
-// FINAL HP BAR UPDATE
-// =========================
 
 UpdateHealthBars();
+

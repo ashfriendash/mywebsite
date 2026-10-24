@@ -1,0 +1,111 @@
+<!-- LOCAL SAD / BAD END THEME: self-contained Web Audio; does not use audio.js -->
+<script>
+(() => {
+    "use strict";
+
+    // This snippet listens only for clicks on controls whose visible text matches
+    // this ending choice. Keep it in the HTML file containing that choice.
+    const endingChoicePattern = /turn\s+evil|become\s+evil|evil\s+ending|bad\s+ending|embrace\s+darkness|choose\s+darkness|become\s+the\s+villain/i;
+    const navigationDelayMs = 5200;
+    let isPlaying = false;
+    let lockedUntil = 0;
+
+    function playEndingTheme() {
+        if (isPlaying || Date.now() < lockedUntil) return false;
+        const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+        if (!AudioContextClass) return;
+
+        let context;
+        try { context = new AudioContextClass(); }
+        catch (_) { return; }
+
+        isPlaying = true;
+        lockedUntil = Date.now() + navigationDelayMs;
+        if (context.state === "suspended") context.resume().catch(() => {});
+
+        const master = context.createGain();
+        master.gain.setValueAtTime(0.72, context.currentTime);
+        master.connect(context.destination);
+        const start = context.currentTime + 0.035;
+
+        function note(freq, offset, length, volume = 0.12, wave = "sine", detune = 0) {
+            const oscillator = context.createOscillator();
+            const envelope = context.createGain();
+            const when = start + offset;
+            const attack = Math.min(0.12, Math.max(0.015, length * 0.16));
+            oscillator.type = wave;
+            oscillator.frequency.setValueAtTime(freq, when);
+            if (detune) oscillator.detune.setValueAtTime(detune, when);
+            envelope.gain.setValueAtTime(0.0001, when);
+            envelope.gain.exponentialRampToValueAtTime(Math.max(0.0002, volume), when + attack);
+            envelope.gain.setTargetAtTime(0.0001, when + Math.max(attack + 0.03, length * 0.68), Math.max(0.06, length * 0.16));
+            oscillator.connect(envelope);
+            envelope.connect(master);
+            oscillator.start(when);
+            oscillator.stop(when + length + 0.18);
+        }
+
+        try {
+            // A low, descending minor phrase with a muted, melancholy undertone.
+            note(110.00, 0.00, 4.15, 0.070, "triangle");
+            note(164.81, 0.00, 3.90, 0.035, "sine");
+            note(220.00, 0.02, 3.60, 0.025, "sine", -4);
+            const melody = [
+                [440.00, 0.12, 0.60, 0.105], [392.00, 0.72, 0.63, 0.095],
+                [349.23, 1.36, 0.68, 0.090], [293.66, 2.05, 0.84, 0.085],
+                [261.63, 2.90, 1.08, 0.075]
+            ];
+            melody.forEach(([freq, at, len, vol]) => note(freq, at, len, vol, "triangle"));
+            note(207.65, 1.38, 1.10, 0.030, "sine");
+            note(146.83, 2.60, 1.35, 0.035, "sine");
+        } catch (error) {
+            console.warn("Local ending theme could not be played.", error);
+            isPlaying = false;
+        }
+
+        window.setTimeout(() => {
+            context.close().catch(() => {});
+            isPlaying = false;
+        }, 4900);
+
+        return true;
+    }
+
+    document.addEventListener("click", (event) => {
+        const origin = event.target instanceof Element ? event.target : event.target?.parentElement;
+        const control = origin?.closest("a[href], button, [role='button'], input[type='button'], input[type='submit']");
+        if (!control || control.disabled) return;
+
+        const label = [
+            control.innerText,
+            control.textContent,
+            control.value,
+            control.getAttribute("aria-label"),
+            control.getAttribute("title")
+        ].filter(Boolean).join(" ").replace(/\s+/g, " ").trim();
+        if (!endingChoicePattern.test(label)) return;
+
+        const rawHref = control.matches("a[href]") ? control.getAttribute("href") : "";
+        const shouldDelayNavigation = Boolean(
+            rawHref &&
+            !rawHref.startsWith("#") &&
+            !rawHref.toLowerCase().startsWith("javascript:") &&
+            !control.hasAttribute("download") &&
+            control.target !== "_blank"
+        );
+
+        if (shouldDelayNavigation) {
+            // Start within the trusted click, then delay a normal link navigation
+            // only if Web Audio actually initialized.
+            const destination = control.href;
+            const didStart = playEndingTheme();
+            if (didStart) {
+                event.preventDefault();
+                window.setTimeout(() => window.location.assign(destination), navigationDelayMs);
+            }
+        } else {
+            playEndingTheme();
+        }
+    }, true);
+})();
+</script>

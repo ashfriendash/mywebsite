@@ -1,8 +1,4 @@
-/* =========================================================
-   THE LOST FOREST — CLEAN MASTER STYLESHEET
-   ========================================================= */
 
-/* ------------------------- GLOBAL ------------------------ */
 html, body {
     margin: 0;
     width: 100%;
@@ -27,7 +23,6 @@ body {
     font-family: "Lora", serif;
 }
 
-/* ---------------------- MAIN WINDOW ---------------------- */
 .story-box {
     position: relative;
     width: min(760px, 94vw);
@@ -61,7 +56,7 @@ body {
     line-height: 1.5;
 }
 
-/* ------------------------- STATS ------------------------- */
+
 .stats {
     display: flex;
     justify-content: center;
@@ -77,7 +72,7 @@ body {
     white-space: nowrap;
 }
 
-/* ------------------------- LINKS ------------------------- */
+
 .back-button {
     margin-top: 14px;
 }
@@ -96,7 +91,6 @@ body {
     color: #ffd84d;
 }
 
-/* ---------------------- MAIN CHOICES --------------------- */
 .choices,
 .left-path-choices {
     display: flex;
@@ -138,7 +132,6 @@ body {
     box-shadow: 0 0 18px rgba(255,215,80,.45);
 }
 
-/* ------------------------ POTION ------------------------- */
 .utility-row {
     display: flex;
     justify-content: center;
@@ -193,7 +186,6 @@ body {
     transform: translateY(-2px) scale(1.025);
 }
 
-/* -------------------------- HP --------------------------- */
 .hp-section,
 .enemy-hp-section {
     width: min(520px,92%);
@@ -236,7 +228,7 @@ body {
     box-shadow: 0 0 8px rgba(255,55,55,.3);
 }
 
-/* ------------------------ COMBAT ------------------------- */
+
 #enemy-box {
     margin-top: 12px;
     padding: 14px;
@@ -306,7 +298,7 @@ body {
     box-shadow: 0 0 16px rgba(255,215,80,.45);
 }
 
-/* ---------------------- NOTIFICATIONS -------------------- */
+
 #notification {
     position: fixed;
     right: -380px;
@@ -335,7 +327,7 @@ body {
     font-size: 14px;
 }
 
-/* ---------------------- MERCHANT PAGE -------------------- */
+
 .merchant-shop {
     position: relative;
     overflow: hidden;
@@ -425,7 +417,6 @@ body {
     100% { left: 140%; opacity: 0; }
 }
 
-/* ----------------------- DARK SHOP ----------------------- */
 .dark-shop-page {
     background-image:
         linear-gradient(rgba(0,0,0,.46),rgba(0,0,0,.54)),
@@ -464,7 +455,7 @@ body {
     box-shadow: 0 8px 26px rgba(0,0,0,.78),0 0 22px rgba(130,0,0,.3);
 }
 
-/* ------------------------- DRAGON ------------------------ */
+
 .dragon-page {
     background-image:
         linear-gradient(rgba(0,0,0,.54),rgba(0,0,0,.60)),
@@ -499,7 +490,7 @@ body {
     box-shadow: 0 8px 28px rgba(0,0,0,.78),0 0 25px rgba(200,50,20,.3);
 }
 
-/* ----------------------- KEY HUNT ------------------------ */
+
 .keyhunt-page {
     background-image:
         linear-gradient(rgba(0,0,0,.36),rgba(0,0,0,.44)),
@@ -581,7 +572,7 @@ body {
     transform: translateY(-2px) scale(1.05);
 }
 
-/* --------------------- GAME OVER ------------------------- */
+
 .game-over {
     display: none;
     position: fixed;
@@ -648,7 +639,7 @@ body {
     transform: scale(1.04);
 }
 
-/* ---------------------- ENDINGS -------------------------- */
+
 .story-box.story-ending {
     height: auto !important;
     min-height: 0 !important;
@@ -790,7 +781,7 @@ body {
     100% { background-position: 100% 0; }
 }
 
-/* ---------------------- PEACE PAGE ----------------------- */
+
 .peace-page {
     min-height: 100vh;
     padding: 18px;
@@ -854,11 +845,7 @@ body {
     transform: translateY(-2px) scale(1.03);
 }
 
-/* --------------------- RESET BUTTON ---------------------- */
 
-/* =====================================================
-   CURSED WAND BUTTON
-   ===================================================== */
 
 .merchant-ending-choices {
     display: flex;
@@ -870,9 +857,6 @@ body {
 }
 
 
-/* -------------------------
-   CURSED WAND
-   ------------------------- */
 
 .cursed-wand-button {
     position: relative;
@@ -2643,4 +2627,546 @@ body {
     .firefly-link {
         animation: none;
     }
+}
+/* THE LOST FOREST — subtle button + frame polish only
+   Add this at the VERY END of your existing style.css.
+   Does not change backgrounds, images, text, layout, or game logic. */
+
+/* Softer antique-gold frame; keep the existing forest backdrop and panel. */
+.story-box {
+    border: 1px solid rgba(220, 202, 151, 0.72) !important;
+    box-shadow:
+        0 12px 35px rgba(0, 0, 0, 0.55),
+        inset 0 0 0 1px rgba(238, 222, 174, 0.08),
+        inset 0 0 24px rgba(255, 215, 0, 0.025) !important;
+}
+
+/* Main path choices and gameplay action buttons. */
+.story-box .choices a,
+.story-box .left-path-choices a,
+.story-box .action-panel button,
+.story-box .use-potion-button,
+.story-box .buy-potion-button,
+.story-box #combat-buttons button,
+.story-box .fight-again,
+.story-box .back-link,
+.story-box .back-button a,
+.reset-button {
+    border: 1px solid rgba(218, 194, 126, 0.78) !important;
+    border-radius: 8px !important;
+    box-shadow:
+        inset 0 1px 0 rgba(255, 245, 210, 0.10),
+        0 3px 9px rgba(0, 0, 0, 0.28) !important;
+    transition:
+        background 180ms ease,
+        border-color 180ms ease,
+        box-shadow 180ms ease,
+        color 180ms ease,
+        transform 180ms ease !important;
+}
+
+/* Keep the game's gold identity, but make the path buttons less plasticky. */
+.story-box .choices a,
+.story-box .left-path-choices a {
+    background: linear-gradient(180deg, #d9bd6e 0%, #bda052 100%) !important;
+    border-color: rgba(255, 235, 177, 0.88) !important;
+    color: #172219 !important;
+    text-shadow: none !important;
+}
+
+.story-box .choices a:hover,
+.story-box .left-path-choices a:hover {
+    background: linear-gradient(180deg, #ead18a 0%, #cfb568 100%) !important;
+    border-color: #f5e3ae !important;
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.20),
+        0 5px 14px rgba(0, 0, 0, 0.35),
+        0 0 12px rgba(220, 190, 112, 0.12) !important;
+    transform: translateY(-1px) !important;
+}
+
+/* A coordinated, quieter finish for the utility and action buttons. */
+.story-box .action-panel button,
+.story-box .use-potion-button,
+.story-box .buy-potion-button,
+.story-box #combat-buttons button,
+.story-box .fight-again,
+.reset-button {
+    background-image: linear-gradient(180deg, rgba(43, 67, 48, 0.97), rgba(21, 39, 28, 0.98)) !important;
+    border-color: rgba(201, 181, 119, 0.72) !important;
+    color: #eee3c3 !important;
+}
+
+.story-box .action-panel button:hover,
+.story-box .use-potion-button:hover,
+.story-box .buy-potion-button:hover,
+.story-box #combat-buttons button:hover,
+.story-box .fight-again:hover,
+.reset-button:hover {
+    background-image: linear-gradient(180deg, rgba(61, 87, 59, 0.99), rgba(30, 53, 36, 0.99)) !important;
+    border-color: #e4d19a !important;
+    color: #fff4d4 !important;
+    box-shadow:
+        inset 0 1px 0 rgba(255, 245, 210, 0.13),
+        0 5px 13px rgba(0, 0, 0, 0.35) !important;
+    transform: translateY(-1px) !important;
+}
+
+.story-box .choices a:active,
+.story-box .left-path-choices a:active,
+.story-box .action-panel button:active,
+.story-box .use-potion-button:active,
+.story-box .buy-potion-button:active,
+.story-box #combat-buttons button:active,
+.story-box .fight-again:active,
+.story-box .back-button a:active,
+.reset-button:active {
+    transform: translateY(0) !important;
+}
+
+.story-box .choices a:focus-visible,
+.story-box .left-path-choices a:focus-visible,
+.story-box .action-panel button:focus-visible,
+.story-box .use-potion-button:focus-visible,
+.story-box .buy-potion-button:focus-visible,
+.story-box #combat-buttons button:focus-visible,
+.story-box .fight-again:focus-visible,
+.story-box .back-button a:focus-visible,
+.reset-button:focus-visible {
+    outline: 2px solid #f0dfad !important;
+    outline-offset: 3px !important;
+}
+
+/* The reset action stays distinct without overpowering the page. */
+.reset-button {
+    border-color: rgba(190, 135, 113, 0.72) !important;
+}
+.reset-button:hover {
+    border-color: #d7a18b !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .story-box .choices a,
+    .story-box .left-path-choices a,
+    .story-box .action-panel button,
+    .story-box .use-potion-button,
+    .story-box .buy-potion-button,
+    .story-box #combat-buttons button,
+    .story-box .fight-again,
+    .story-box .back-button a,
+    .reset-button {
+        transition: none !important;
+    }
+}
+
+/* Back navigation remains secondary, but gets a deliberate hit area. */
+.story-box .back-button a,
+.story-box .back-link {
+    display: inline-block !important;
+    padding: 7px 12px !important;
+    background: rgba(17, 32, 23, 0.52) !important;
+    border-color: rgba(192, 179, 133, 0.48) !important;
+    color: #d9d8c9 !important;
+    text-decoration: none !important;
+}
+
+.story-box .back-button a:hover,
+.story-box .back-link:hover {
+    background: rgba(45, 65, 47, 0.72) !important;
+    border-color: rgba(226, 207, 150, 0.82) !important;
+    color: #f1e4b9 !important;
+}
+root {
+    --forest-ink: #09150f;
+    --forest-panel: rgba(13, 29, 21, 0.94);
+    --forest-panel-soft: rgba(23, 43, 31, 0.70);
+    --forest-line: rgba(210, 199, 150, 0.20);
+    --forest-line-strong: rgba(218, 202, 143, 0.42);
+    --forest-gold: #dfd09a;
+    --forest-gold-bright: #f1e5bc;
+    --forest-text: #e9e5d7;
+    --forest-muted: #b5c0ad;
+    --forest-dim: #849583;
+    --forest-serif: "Lora", Georgia, serif;
+    --forest-display: "Cinzel", Georgia, serif;
+}
+
+html { min-height: 100%; background: var(--forest-ink); }
+body.forest-page {
+    position: relative;
+    isolation: isolate;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    margin: 0;
+    padding: clamp(22px, 4vw, 54px) clamp(14px, 3vw, 34px);
+    overflow-x: hidden;
+    color: var(--forest-text);
+    font-family: var(--forest-serif);
+    background:
+        radial-gradient(ellipse at 50% -12%, rgba(94, 124, 76, 0.24), transparent 52%),
+        radial-gradient(ellipse at 5% 78%, rgba(37, 76, 48, 0.18), transparent 38%),
+        radial-gradient(ellipse at 98% 55%, rgba(113, 100, 57, 0.10), transparent 34%),
+        linear-gradient(150deg, #08140e 0%, #102219 48%, #0a1710 100%);
+    background-attachment: fixed;
+}
+body.forest-page::before {
+    content: "";
+    position: fixed;
+    z-index: -1;
+    pointer-events: none;
+    inset: 13px;
+    border: 1px solid rgba(218, 207, 166, 0.10);
+    border-radius: 17px;
+}
+body.forest-page::after {
+    content: "";
+    position: fixed;
+    z-index: -1;
+    pointer-events: none;
+    width: min(62vw, 680px);
+    height: min(62vw, 680px);
+    right: -24vw;
+    top: -30vw;
+    border: 1px solid rgba(219, 204, 151, 0.06);
+    border-radius: 50%;
+    box-shadow: 0 0 0 28px rgba(219, 204, 151, 0.018), 0 0 0 65px rgba(219, 204, 151, 0.015);
+}
+body.forest-page--deep {
+    background:
+        radial-gradient(ellipse at 50% -12%, rgba(90, 111, 82, 0.17), transparent 52%),
+        radial-gradient(ellipse at 10% 82%, rgba(45, 77, 57, 0.16), transparent 40%),
+        linear-gradient(150deg, #07110d 0%, #102018 51%, #09150f 100%);
+}
+body.forest-page--conifer {
+    background:
+        radial-gradient(ellipse at 72% -8%, rgba(155, 129, 68, 0.17), transparent 48%),
+        radial-gradient(ellipse at 8% 82%, rgba(51, 93, 56, 0.17), transparent 40%),
+        linear-gradient(150deg, #0a1710 0%, #17281b 50%, #0b1710 100%);
+}
+
+body.forest-page .story-box {
+    position: relative;
+    z-index: 1;
+    box-sizing: border-box;
+    width: min(780px, 100%);
+    max-width: 780px;
+    margin: auto;
+    padding: clamp(22px, 4.4vw, 46px);
+    overflow: hidden;
+    text-align: center;
+    border: 1px solid var(--forest-line-strong);
+    border-radius: 20px;
+    background: linear-gradient(145deg, rgba(19, 39, 27, 0.96), var(--forest-panel) 54%, rgba(11, 25, 18, 0.97));
+    box-shadow: 0 28px 90px rgba(0, 0, 0, 0.36), inset 0 1px 0 rgba(245, 235, 196, 0.055);
+    backdrop-filter: blur(12px);
+}
+body.forest-page .story-box::before {
+    content: "";
+    position: absolute;
+    pointer-events: none;
+    inset: 9px;
+    border: 1px solid rgba(224, 213, 172, 0.075);
+    border-radius: 13px;
+}
+body.forest-page .story-box > * { position: relative; }
+
+body.forest-page .stats {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 9px;
+    margin: 0 0 14px;
+    padding: 0;
+}
+body.forest-page .stats p {
+    min-width: 0;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 11px 7px;
+    border: 1px solid rgba(204, 199, 160, 0.13);
+    border-radius: 10px;
+    background: rgba(3, 12, 8, 0.23);
+    color: #d9decf;
+    font-family: var(--forest-serif);
+    font-size: clamp(10px, 1.4vw, 12px);
+    line-height: 1.5;
+    white-space: normal;
+}
+body.forest-page .stats p::first-letter { color: var(--forest-gold); }
+body.forest-page .utility-row {
+    display: flex;
+    justify-content: center;
+    margin: 0 0 20px;
+}
+body.forest-page .use-potion-button,
+body.forest-page .action-panel button,
+body.forest-page .reset-button {
+    border: 1px solid rgba(218, 204, 151, 0.28);
+    border-radius: 9px;
+    background: rgba(17, 37, 25, 0.88);
+    color: #e5dfc9;
+    font-family: var(--forest-display);
+    font-size: 11px;
+    letter-spacing: 0.035em;
+    cursor: pointer;
+    transition: background 180ms ease, border-color 180ms ease, transform 180ms ease, box-shadow 180ms ease;
+}
+body.forest-page .use-potion-button { padding: 9px 15px; }
+body.forest-page .use-potion-button:hover,
+body.forest-page .action-panel button:hover,
+body.forest-page .reset-button:hover {
+    transform: translateY(-1px);
+    border-color: rgba(233, 217, 160, 0.57);
+    background: rgba(45, 68, 43, 0.92);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+}
+body.forest-page button:focus-visible,
+body.forest-page a:focus-visible,
+body.forest-page summary:focus-visible {
+    outline: 2px solid #f0df9d;
+    outline-offset: 4px;
+}
+
+body.forest-page .story-header { margin: 0 auto 19px; }
+body.forest-page .story-eyebrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 11px;
+    margin: 0 0 13px;
+    color: #b8bd91;
+    font-family: var(--forest-display);
+    font-size: 9px;
+    letter-spacing: 0.21em;
+    line-height: 1.7;
+}
+body.forest-page .story-eyebrow span { color: #d5c58a; font-size: 10px; }
+body.forest-page h1 {
+    margin: 0 auto;
+    color: var(--forest-gold-bright);
+    font-family: var(--forest-display);
+    font-size: clamp(29px, 5vw, 47px);
+    font-weight: 500;
+    letter-spacing: 0.035em;
+    line-height: 1.22;
+    text-wrap: balance;
+    text-shadow: 0 4px 30px rgba(213, 195, 126, 0.10);
+}
+body.forest-page .story-deck {
+    max-width: 47ch;
+    margin: 13px auto 0;
+    color: #b9c3ae;
+    font-size: clamp(13px, 1.8vw, 15px);
+    font-style: italic;
+    line-height: 1.75;
+}
+body.forest-page .story-prose {
+    max-width: 60ch;
+    margin: 20px auto 0;
+}
+body.forest-page .story-prose p {
+    margin: 0 auto 11px;
+    color: #dddccf;
+    font-family: var(--forest-serif);
+    font-size: clamp(14px, 1.9vw, 16px);
+    font-weight: 400;
+    line-height: 1.9;
+    text-wrap: pretty;
+}
+body.forest-page .story-prose p:last-child { margin-bottom: 0; }
+body.forest-page .path-section { margin-top: 27px; }
+body.forest-page .section-heading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin: 0 0 13px;
+}
+body.forest-page .section-heading h2 {
+    flex: 0 0 auto;
+    margin: 0;
+    color: #c8c6a2;
+    font-family: var(--forest-display);
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    line-height: 1.6;
+    text-transform: uppercase;
+}
+body.forest-page .section-rule { width: min(68px, 13%); height: 1px; background: linear-gradient(90deg, transparent, rgba(213, 200, 145, 0.43)); }
+body.forest-page .section-rule:last-child { transform: rotate(180deg); }
+body.forest-page .choices.choices--paths {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+    width: 100%;
+    max-width: none;
+    margin: 0 auto;
+}
+body.forest-page .choice-card {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    box-sizing: border-box;
+    min-width: 0;
+    min-height: 84px;
+    padding: 16px 15px;
+    border: 1px solid rgba(202, 202, 157, 0.22);
+    border-radius: 12px;
+    background: linear-gradient(135deg, rgba(37, 59, 39, 0.62), rgba(11, 25, 17, 0.68));
+    color: var(--forest-text);
+    text-align: left;
+    text-decoration: none;
+    box-shadow: inset 0 1px 0 rgba(245, 239, 205, 0.025);
+    transition: transform 180ms ease, border-color 180ms ease, background 180ms ease, box-shadow 180ms ease;
+}
+body.forest-page .choice-card:hover {
+    transform: translateY(-3px);
+    border-color: rgba(228, 211, 151, 0.53);
+    background: linear-gradient(135deg, rgba(51, 76, 47, 0.78), rgba(17, 36, 23, 0.85));
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.17), inset 0 1px 0 rgba(245, 239, 205, 0.06);
+}
+body.forest-page .choice-symbol {
+    display: grid;
+    flex: 0 0 39px;
+    width: 39px;
+    height: 39px;
+    place-items: center;
+    border: 1px solid rgba(218, 204, 151, 0.20);
+    border-radius: 50%;
+    background: rgba(4, 15, 9, 0.27);
+    color: var(--forest-gold);
+    font-size: 21px;
+}
+body.forest-page .choice-copy { display: flex; flex: 1; flex-direction: column; gap: 5px; min-width: 0; }
+body.forest-page .choice-copy strong { color: #eee5c9; font-family: var(--forest-display); font-size: clamp(10px, 1.45vw, 12px); font-weight: 500; line-height: 1.5; }
+body.forest-page .choice-copy small { color: #aebaaa; font-family: var(--forest-serif); font-size: 11px; line-height: 1.55; }
+body.forest-page .choice-arrow { flex: 0 0 auto; align-self: flex-start; color: #c5bd92; font-size: 13px; opacity: 0.68; transition: transform 180ms ease, opacity 180ms ease; }
+body.forest-page .choice-card:hover .choice-arrow { transform: translate(2px, -2px); opacity: 1; }
+body.forest-page .choice-card--danger .choice-symbol { color: #d3b49a; border-color: rgba(179, 121, 88, 0.28); }
+body.forest-page .choice-card--lantern .choice-symbol,
+body.forest-page .choice-card--sunlit .choice-symbol,
+body.forest-page .choice-card--discovery .choice-symbol { color: #e4d296; }
+body.forest-page .choice-card--gate { border-color: rgba(194, 171, 110, 0.31); }
+
+body.forest-page .discoveries { margin-top: 24px; }
+body.forest-page .section-heading--quiet { margin-bottom: 10px; }
+body.forest-page .section-heading--quiet h2 { color: #9da990; font-size: 9px; letter-spacing: 0.12em; }
+body.forest-page .section-heading--quiet .section-rule { opacity: 0.66; }
+body.forest-page .game-firefly-invitation {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 8px;
+    width: 100%;
+    margin: 0;
+}
+body.forest-page .game-firefly-link {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 9px;
+    box-sizing: border-box;
+    min-width: 0;
+    max-width: none;
+    padding: 12px 10px;
+    border: 1px solid rgba(207, 202, 160, 0.15);
+    border-radius: 10px;
+    background: rgba(5, 17, 10, 0.28);
+    color: #e4dfca;
+    text-align: left;
+    text-decoration: none;
+    animation: none;
+    transition: background 180ms ease, border-color 180ms ease, transform 180ms ease;
+}
+body.forest-page .game-firefly-link:hover { transform: translateY(-2px); border-color: rgba(222, 208, 154, 0.42); background: rgba(37, 60, 39, 0.53); box-shadow: none; }
+body.forest-page .game-firefly-icon { flex: 0 0 auto; color: #d8c98f; font-size: 18px; line-height: 1; text-shadow: 0 0 12px rgba(232, 209, 133, 0.18); animation: none; }
+body.forest-page .game-firefly-copy { display: flex; flex: 1; flex-direction: column; gap: 4px; min-width: 0; }
+body.forest-page .game-firefly-copy strong { color: #ded9c1; font-family: var(--forest-display); font-size: 9px; font-weight: 500; line-height: 1.5; }
+body.forest-page .game-firefly-copy small { color: #98a895; font-family: var(--forest-serif); font-size: 10px; line-height: 1.45; }
+body.forest-page .game-firefly-arrow { flex: 0 0 auto; color: #bdb58b; font-size: 12px; opacity: 0.7; }
+
+body.forest-page .gate-warning {
+    display: flex;
+    align-items: flex-start;
+    gap: 13px;
+    max-width: 56ch;
+    margin: 24px auto 0;
+    padding: 15px 17px;
+    border: 1px solid rgba(190, 159, 99, 0.34);
+    border-left: 2px solid rgba(211, 181, 116, 0.70);
+    border-radius: 10px;
+    background: linear-gradient(100deg, rgba(102, 78, 40, 0.17), rgba(17, 32, 21, 0.28));
+    text-align: left;
+}
+body.forest-page .gate-warning__mark { display: grid; flex: 0 0 30px; width: 30px; height: 30px; place-items: center; border: 1px solid rgba(211, 181, 116, 0.22); border-radius: 8px; color: #e1c988; font-size: 18px; }
+body.forest-page .gate-warning__label { margin: 0 0 4px; color: #d4bf86; font-family: var(--forest-display); font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; }
+body.forest-page .gate-warning__text { margin: 0; color: #c8c7b5; font-size: 12px; line-height: 1.7; }
+body.forest-page .gate-warning__text strong { color: #e9dfc2; font-weight: 600; }
+
+body.forest-page .actions-disclosure { margin-top: 23px; border-top: 1px solid rgba(204, 199, 160, 0.12); padding-top: 16px; text-align: left; }
+body.forest-page .actions-disclosure summary { display: flex; align-items: center; justify-content: space-between; gap: 12px; color: #aeb69e; cursor: pointer; font-family: var(--forest-display); font-size: 10px; letter-spacing: 0.09em; list-style: none; }
+body.forest-page .actions-disclosure summary::-webkit-details-marker { display: none; }
+body.forest-page .actions-disclosure summary span { color: var(--forest-gold); font-size: 17px; transition: transform 180ms ease; }
+body.forest-page .actions-disclosure[open] summary span { transform: rotate(45deg); }
+body.forest-page .action-panel { display: grid; grid-template-columns: repeat(auto-fit, minmax(135px, 1fr)); gap: 8px; margin-top: 13px; }
+body.forest-page .action-panel button { min-height: 41px; padding: 9px 10px; font-size: 10px; }
+body.forest-page .back-navigation { margin-top: 27px; padding-top: 18px; border-top: 1px solid rgba(204, 199, 160, 0.12); }
+body.forest-page .back-navigation a { display: inline-flex; align-items: center; gap: 9px; color: #aebaa5; font-family: var(--forest-display); font-size: 10px; letter-spacing: 0.04em; text-decoration: none; transition: color 180ms ease; }
+body.forest-page .back-navigation a:hover { color: var(--forest-gold-bright); }
+body.forest-page .back-navigation a span { color: #d4c58e; font-size: 15px; }
+
+body.forest-page .reset-button {
+    position: relative;
+    z-index: 1;
+    align-self: center;
+    margin: 18px auto 0;
+    padding: 9px 14px;
+    font-size: 10px;
+    background: rgba(7, 18, 12, 0.68);
+}
+body.forest-page #notification {
+    z-index: 9500;
+    font-family: var(--forest-serif);
+}
+
+@media (max-width: 640px) {
+    body.forest-page { justify-content: flex-start; padding: 18px 12px 26px; }
+    body.forest-page::before { inset: 7px; border-radius: 12px; }
+    body.forest-page .story-box { padding: 23px 17px; border-radius: 15px; }
+    body.forest-page .story-box::before { inset: 6px; border-radius: 10px; }
+    body.forest-page .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 7px; }
+    body.forest-page .stats p { padding: 9px 7px; font-size: 11px; }
+    body.forest-page .story-eyebrow { font-size: 8px; letter-spacing: 0.14em; gap: 7px; }
+    body.forest-page .story-header { margin-bottom: 16px; }
+    body.forest-page .story-prose { margin-top: 17px; }
+    body.forest-page .path-section { margin-top: 23px; }
+    body.forest-page .choices.choices--paths { gap: 8px; }
+    body.forest-page .choice-card { align-items: flex-start; gap: 9px; min-height: 88px; padding: 12px 10px; }
+    body.forest-page .choice-symbol { flex-basis: 29px; width: 29px; height: 29px; font-size: 17px; }
+    body.forest-page .choice-copy strong { font-size: 9px; }
+    body.forest-page .choice-copy small { font-size: 10px; }
+    body.forest-page .choice-arrow { font-size: 11px; }
+    body.forest-page .game-firefly-invitation { grid-template-columns: 1fr; }
+    body.forest-page .game-firefly-link { padding: 11px 12px; }
+    body.forest-page .game-firefly-copy strong { font-size: 10px; }
+    body.forest-page .game-firefly-copy small { font-size: 10px; }
+}
+@media (max-width: 390px) {
+    body.forest-page .choices.choices--paths { grid-template-columns: 1fr; }
+    body.forest-page .choice-card { min-height: 70px; align-items: center; }
+    body.forest-page .section-heading { gap: 7px; }
+    body.forest-page .section-heading h2 { font-size: 9px; letter-spacing: 0.08em; }
+}
+@media (max-height: 740px) and (min-width: 641px) {
+    body.forest-page { justify-content: flex-start; }
+    body.forest-page .story-box { padding-top: 26px; padding-bottom: 26px; }
+    body.forest-page .story-header { margin-bottom: 14px; }
+    body.forest-page .path-section { margin-top: 20px; }
+    body.forest-page .game-firefly-link { padding-top: 9px; padding-bottom: 9px; }
+}
+@media (prefers-reduced-motion: reduce) {
+    body.forest-page *, body.forest-page *::before, body.forest-page *::after { scroll-behavior: auto !important; transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; }
 }

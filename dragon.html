@@ -23,6 +23,7 @@
 
     <link rel="stylesheet" href="style.css">
 
+    <script src="audio.js" defer></script>
 </head>
 
 <body class="dragon-page" data-enemy="dragon">
@@ -184,6 +185,38 @@
             </div>
 
         </div>
+        <div id="treasure-ending" class="treasure-ending" style="display:none;">
+
+                <h1>🐉 The Dragon Has Fallen</h1>
+
+                <p>
+                    The Ancient Dragon collapses, and the cavern becomes silent.
+                </p>
+
+                <p>
+                    Behind the dragon lies a chamber filled with unimaginable treasure.
+                    But something else catches your attention...
+                </p>
+
+                <p class="final-choice-text">
+                    The forest needs a guardian.
+                </p>
+
+                <h2>What will you choose?</h2>
+
+                <div class="dragon-ending-choices">
+
+                    <a href="treasure.html" class="treasure-choice-button">
+                        💎 CLAIM THE TREASURE
+                    </a>
+
+                    <a href="guardian.html" class="guardian-choice-button">
+                        🌲 NO EVIL
+                    </a>
+
+                </div>
+
+            </div>
 
 
         <!-- BACK -->
@@ -246,7 +279,221 @@
 
 
     <script src="script.js"></script>
+<!-- LOCAL VICTORY THEME: self-contained Web Audio; does not use audio.js -->
 
+<script>
+(() => {
+    "use strict";
+
+    const NAVIGATION_DELAY = 4400;
+    let transitionLocked = false;
+
+    // Creates a short note using the browser's built-in Web Audio API.
+    function playNote(ctx, master, frequency, delay, duration, volume, wave = "sine") {
+        const oscillator = ctx.createOscillator();
+        const envelope = ctx.createGain();
+        const start = ctx.currentTime + 0.06 + delay;
+
+        oscillator.type = wave;
+        oscillator.frequency.setValueAtTime(frequency, start);
+
+        envelope.gain.setValueAtTime(0.0001, start);
+        envelope.gain.exponentialRampToValueAtTime(
+            Math.max(0.0002, volume),
+            start + Math.min(0.04, duration * 0.2)
+        );
+        envelope.gain.exponentialRampToValueAtTime(
+            0.0001,
+            start + duration
+        );
+
+        oscillator.connect(envelope);
+        envelope.connect(master);
+        oscillator.start(start);
+        oscillator.stop(start + duration + 0.05);
+    }
+
+    function playEnding(kind) {
+        const AudioContextClass =
+            window.AudioContext || window.webkitAudioContext;
+
+        if (!AudioContextClass) return false;
+
+        let ctx;
+
+        try {
+            ctx = new AudioContextClass();
+
+            const master = ctx.createGain();
+            master.gain.value = 0.7;
+            master.connect(ctx.destination);
+
+            // Resume audio directly from the user's click.
+            if (ctx.state === "suspended") {
+                ctx.resume().catch(() => {});
+            }
+
+            if (kind === "treasure") {
+                // GRAND VICTORY: warm chord, rising bells, bright finish.
+                [
+                    [130.81, 0.045],
+                    [196.00, 0.035],
+                    [261.63, 0.035],
+                    [329.63, 0.025]
+                ].forEach(([frequency, volume]) => {
+                    playNote(ctx, master, frequency, 0, 3.6, volume);
+                });
+
+                [
+                    [523.25, 0.12, 0.34, 0.105],
+                    [659.25, 0.45, 0.34, 0.100],
+                    [783.99, 0.78, 0.42, 0.105],
+                    [1046.50, 1.17, 0.70, 0.105],
+                    [783.99, 1.75, 0.32, 0.080],
+                    [1046.50, 2.05, 0.36, 0.095],
+                    [1318.51, 2.38, 0.52, 0.075],
+                    [1567.98, 2.90, 0.80, 0.075]
+                ].forEach(([frequency, time, duration, volume]) => {
+                    playNote(ctx, master, frequency, time, duration, volume);
+                });
+            } else {
+                // NO EVIL: randomly choose one of five magical themes.
+                const variations = [
+                    {
+                        chord: [130.81, 196.00, 261.63],
+                        melody: [523.25, 659.25, 783.99, 1046.50, 783.99, 1318.51]
+                    },
+                    {
+                        chord: [146.83, 220.00, 293.66],
+                        melody: [587.33, 739.99, 880.00, 1174.66, 880.00, 1479.98]
+                    },
+                    {
+                        chord: [98.00, 146.83, 196.00],
+                        melody: [392.00, 523.25, 659.25, 783.99, 659.25, 1046.50]
+                    },
+                    {
+                        chord: [174.61, 261.63, 349.23],
+                        melody: [698.46, 880.00, 1046.50, 1396.91, 1046.50, 1760.00]
+                    },
+                    {
+                        chord: [164.81, 246.94, 329.63],
+                        melody: [659.25, 783.99, 987.77, 1318.51, 987.77, 1567.98]
+                    }
+                ];
+
+                const theme =
+                    variations[Math.floor(Math.random() * variations.length)];
+
+                theme.chord.forEach((frequency, index) => {
+                    playNote(
+                        ctx, master, frequency, 0,
+                        3.7, [0.040, 0.030, 0.025][index]
+                    );
+                });
+
+                theme.melody.forEach((frequency, index) => {
+                    playNote(
+                        ctx,
+                        master,
+                        frequency,
+                        0.15 + index * 0.43,
+                        index === 5 ? 0.70 : 0.34,
+                        index === 5 ? 0.085 : 0.095
+                    );
+                });
+            }
+
+            // Close the audio context after the scheduled melody.
+            window.setTimeout(() => {
+                ctx.close().catch(() => {});
+            }, 4100);
+
+            return true;
+        } catch (error) {
+            console.warn("Dragon ending audio could not play:", error);
+            try {
+                if (ctx && ctx.state !== "closed") {
+                    ctx.close().catch(() => {});
+                }
+            } catch (_) {}
+
+            return false;
+        }
+    }
+
+    document.addEventListener("click", event => {
+        const origin = event.target instanceof Element
+            ? event.target
+            : event.target?.parentElement;
+
+        const control = origin?.closest(
+            "a[href], button, [role='button']"
+        );
+
+        if (!control || control.matches(":disabled")) return;
+
+        // Preserve Ctrl-click, middle-click, and new-tab behaviour.
+        if (
+            event.button !== 0 ||
+            event.ctrlKey ||
+            event.metaKey ||
+            event.shiftKey ||
+            event.altKey ||
+            control.target === "_blank" ||
+            control.hasAttribute("download")
+        ) return;
+
+        const label = [
+            control.innerText,
+            control.textContent,
+            control.getAttribute("aria-label"),
+            control.getAttribute("title")
+        ].filter(Boolean).join(" ").replace(/\s+/g, " ").trim();
+
+        const isTreasure =
+            control.matches(".claim-treasure-button, .claim-treasure, [data-ending='treasure']") ||
+            /\bclaim\s+(?:the\s+)?treasure\b/i.test(label);
+
+        const isNoEvil =
+            control.matches(".no-evil-button, .no-evil, [data-ending='no-evil']") ||
+            /\bno\s+evil\b|\bchoose\s+good\b|\bspare\s+(?:the\s+)?dragon\b|\bbecome\s+(?:the\s+)?guardian\b/i.test(label);
+
+        if (!isTreasure && !isNoEvil) return;
+
+        // Only handle normal navigation links.
+        if (!control.matches("a[href]")) {
+            playEnding(isTreasure ? "treasure" : "no-evil");
+            return;
+        }
+
+        const destination = control.href;
+
+        if (
+            !destination ||
+            destination.startsWith("#") ||
+            control.getAttribute("href").toLowerCase().startsWith("javascript:")
+        ) return;
+
+        event.preventDefault();
+
+        if (transitionLocked) return;
+        transitionLocked = true;
+
+        const audioStarted = playEnding(
+            isTreasure ? "treasure" : "no-evil"
+        );
+
+        if (!audioStarted) {
+            window.location.assign(destination);
+            return;
+        }
+
+        window.setTimeout(() => {
+            window.location.assign(destination);
+        }, NAVIGATION_DELAY);
+    }, true);
+})();
+</script>
 </body>
-
 </html>
+

@@ -23,6 +23,7 @@
 
     <link rel="stylesheet" href="style.css">
 
+    <script src="audio.js" defer></script>
 </head>
 
 <body class="dark-shop-page" data-enemy="merchant">
@@ -137,35 +138,35 @@
 
         <!-- PEACE ENDING: HIDDEN AT START -->
 
-        <div
-            id="peace-ending"
-            class="peace-ending"
-            style="display: none;">
+        <div id="peace-ending" class="peace-ending">
 
-            <h1>✨ Peace Restored ✨</h1>
+                <h1>✨ Evil Merchant Defeated ✨</h1>
 
-            <p>
-                The Evil Merchant has been defeated.
-            </p>
+                <p>
+                    The merchant falls, and the darkness around the shop begins to fade.
+                </p>
 
-            <p>
-                The curse that darkened the forest
-                is finally broken.
-            </p>
+                <p>
+                    Behind him lies a strange wand pulsing with cursed energy.
+                </p>
 
-            <p>
-                But the story is not quite over...
-            </p>
+                <p>
+                    <strong>What will you do?</strong>
+                </p>
 
-            <a
-                href="peace.html"
-                class="restore-peace-button">
+                <div class="merchant-ending-choices">
 
-                🌿 RESTORE PEACE
+                    <a href="peace.html" class="restore-peace-button">
+                        🌿 RESTORE PEACE
+                    </a>
 
-            </a>
+                    <a href="bad-ending.html" class="cursed-wand-button">
+                        ☠️ TOUCH CURSED WAND
+                    </a>
 
-        </div>
+                </div>
+
+            </div>
 
 
         <div class="back-button">
@@ -228,6 +229,141 @@
 
 
     <script src="script.js"></script>
+
+<script>
+(() => {
+    "use strict";
+
+    let transitionLocked = false;
+
+    function playEndingTheme(kind) {
+        const AudioContextClass =
+            window.AudioContext || window.webkitAudioContext;
+
+        if (!AudioContextClass) return 0;
+
+        let ctx;
+
+        try {
+            ctx = new AudioContextClass();
+        } catch (error) {
+            console.warn("Could not start ending audio:", error);
+            return 0;
+        }
+
+        ctx.resume().catch(() => {});
+
+        const master = ctx.createGain();
+        master.gain.value = 0.65;
+        master.connect(ctx.destination);
+
+        const start = ctx.currentTime + 0.04;
+
+        function note(freq, offset, duration, volume, wave = "sine") {
+            const oscillator = ctx.createOscillator();
+            const envelope = ctx.createGain();
+            const when = start + offset;
+
+            oscillator.type = wave;
+            oscillator.frequency.setValueAtTime(freq, when);
+
+            envelope.gain.setValueAtTime(0.0001, when);
+            envelope.gain.exponentialRampToValueAtTime(
+                Math.max(0.0002, volume),
+                when + 0.035
+            );
+            envelope.gain.exponentialRampToValueAtTime(
+                0.0001,
+                when + duration
+            );
+
+            oscillator.connect(envelope);
+            envelope.connect(master);
+
+            oscillator.start(when);
+            oscillator.stop(when + duration + 0.1);
+        }
+
+        if (kind === "peace") {
+            // Warm, triumphant major-key ending.
+            note(130.81, 0, 3.8, 0.045);
+            note(196, 0, 3.7, 0.035);
+            note(261.63, 0, 3.4, 0.035);
+            note(329.63, 0.05, 3.2, 0.025);
+
+            [
+                [523.25, 0.15, 0.4],
+                [659.25, 0.52, 0.4],
+                [783.99, 0.90, 0.5],
+                [1046.50, 1.36, 0.7],
+                [783.99, 1.95, 0.35],
+                [1046.50, 2.28, 0.4],
+                [1318.51, 2.65, 0.65],
+                [1567.98, 3.15, 0.75]
+            ].forEach(([f, t, d]) => note(f, t, d, 0.09));
+
+            return 4300;
+        }
+
+        // Sad, descending minor-key melody for the evil ending.
+        note(110, 0, 4.65, 0.065, "triangle");
+        note(164.81, 0, 4.4, 0.035);
+        note(220, 0.05, 3.9, 0.025);
+
+        [
+            [440, 0.15, 0.65],
+            [392, 0.78, 0.65],
+            [349.23, 1.42, 0.75],
+            [293.66, 2.14, 0.9],
+            [261.63, 3.00, 1.1],
+            [196, 3.75, 1.0]
+        ].forEach(([f, t, d]) =>
+            note(f, t, d, 0.085, "triangle")
+        );
+
+        return 5200;
+    }
+
+    document.addEventListener("click", event => {
+        const target = event.target;
+
+        if (!(target instanceof Element)) return;
+
+        const link = target.closest(
+            "a.restore-peace-button, a.cursed-wand-button"
+        );
+
+        if (!link) return;
+
+        // Do not let the browser navigate before the music finishes.
+        event.preventDefault();
+
+        if (transitionLocked) return;
+        transitionLocked = true;
+
+        const kind = link.matches(".restore-peace-button")
+            ? "peace"
+            : "evil";
+
+        let delay = 0;
+
+        try {
+            delay = playEndingTheme(kind);
+        } catch (error) {
+            console.warn("Ending theme failed:", error);
+        }
+
+        if (!delay) {
+            window.location.assign(link.href);
+            return;
+        }
+
+        window.setTimeout(() => {
+            window.location.assign(link.href);
+        }, delay);
+    }, true);
+})();
+</script>
 
 </body>
 

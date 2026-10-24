@@ -11,9 +11,7 @@
     <link rel="stylesheet" href="title.css">
 
     <style>
-        /* =========================================
-           OPTIONAL MINIGAMES — TITLE SCREEN
-           ========================================= */
+        
 
         .title-content .forest-minigames {
             position: relative;
@@ -166,6 +164,7 @@
             }
         }
     </style>
+    <script src="audio.js" defer></script>
 </head>
 
 <body class="title-page">
@@ -251,6 +250,191 @@
         </div>
 
     </main>
+
+<script>
+(() => {
+    "use strict";
+
+    const NAVIGATION_DELAY = 5700;
+    let starting = false;
+
+    function playEpicOpening() {
+        const AudioContextClass =
+            window.AudioContext || window.webkitAudioContext;
+
+        if (!AudioContextClass) return false;
+
+        let ctx;
+
+        try {
+            ctx = new AudioContextClass();
+
+            const master = ctx.createGain();
+            master.gain.value = 0.72;
+            master.connect(ctx.destination);
+
+            if (ctx.state === "suspended") {
+                ctx.resume().catch(() => {});
+            }
+
+            const start = ctx.currentTime + 0.06;
+
+            function note(freq, time, length, volume, wave = "sine", endFreq = null) {
+                const oscillator = ctx.createOscillator();
+                const envelope = ctx.createGain();
+                const filter = ctx.createBiquadFilter();
+
+                const when = start + time;
+                const attack = Math.min(0.22, length * 0.25);
+
+                oscillator.type = wave;
+                oscillator.frequency.setValueAtTime(freq, when);
+
+                if (endFreq && endFreq > 0) {
+                    oscillator.frequency.exponentialRampToValueAtTime(
+                        endFreq, when + length
+                    );
+                }
+
+                filter.type = "lowpass";
+                filter.frequency.setValueAtTime(
+                    wave === "sawtooth" ? 1800 : 5000, when
+                );
+
+                envelope.gain.setValueAtTime(0.0001, when);
+                envelope.gain.exponentialRampToValueAtTime(
+                    Math.max(0.0002, volume), when + Math.max(0.02, attack)
+                );
+                envelope.gain.setTargetAtTime(
+                    0.0001,
+                    when + length * 0.72,
+                    Math.max(0.07, length * 0.16)
+                );
+
+                oscillator.connect(filter);
+                filter.connect(envelope);
+                envelope.connect(master);
+
+                oscillator.start(when);
+                oscillator.stop(when + length + 0.35);
+            }
+
+            function impact(time, volume = 0.16) {
+                note(90, time, 0.85, volume, "sine",  thirtyFive());
+            }
+
+            function thirtyFive() {
+                return 35;
+            }
+
+            // Deep opening impact and a low, sustained orchestral foundation.
+            impact(0, 0.21);
+            impact(1.65, 0.09);
+
+            [
+                [65.41, 0.10],
+                [98.00, 0.075],
+                [130.81, 0.065],
+                [196.00, 0.045],
+                [261.63, 0.035]
+            ].forEach(([freq, vol]) => {
+                note(freq, 0.05, 4.5, vol, "triangle");
+            });
+
+            // Rising heroic fanfare.
+            const fanfare = [
+                [392.00, 0.35, 0.30, 0.075],
+                [523.25, 0.67, 0.34, 0.085],
+                [659.25, 1.00, 0.36, 0.095],
+                [783.99, 1.35, 0.48, 0.105],
+                [1046.50, 1.82, 0.62, 0.11],
+                [987.77, 2.48, 0.32, 0.085],
+                [1174.66, 2.80, 0.40, 0.10],
+                [1318.51, 3.18, 0.52, 0.105],
+                [1567.98, 3.68, 0.85, 0.085]
+            ];
+
+            fanfare.forEach(([freq, time, len, vol]) => {
+                note(freq, time, len, vol, "sawtooth");
+                note(freq * 2, time + 0.025, len * 0.72, vol * 0.18);
+            });
+
+            // Final, glowing major chord.
+            [
+                [523.25, 4.05, 1.35, 0.085],
+                [659.25, 4.05, 1.30, 0.075],
+                [783.99, 4.05, 1.40, 0.075],
+                [1046.50, 4.12, 1.45, 0.065],
+                [1567.98, 4.20, 1.20, 0.035]
+            ].forEach(([freq, time, len, vol]) => {
+                note(freq, time, len, vol);
+            });
+
+            window.setTimeout(() => {
+                ctx.close().catch(() => {});
+            }, 5500);
+
+            return true;
+        } catch (error) {
+            console.warn("Epic opening theme failed:", error);
+
+            try {
+                if (ctx && ctx.state !== "closed") {
+                    ctx.close().catch(() => {});
+                }
+            } catch (_) {}
+
+            return false;
+        }
+    }
+
+    document.addEventListener("click", event => {
+        const origin = event.target instanceof Element
+            ? event.target
+            : event.target?.parentElement;
+
+        const link = origin?.closest("a[href]");
+
+        if (!link) return;
+
+        const label = (link.innerText || link.textContent || "")
+            .replace(/\s+/g, " ")
+            .trim();
+
+        if (!/\bstart\s+(?:the\s+)?adventure\b/i.test(label)) return;
+
+        // Preserve browser shortcuts such as Ctrl-click and opening new tabs.
+        if (
+            event.button !== 0 ||
+            event.ctrlKey ||
+            event.metaKey ||
+            event.shiftKey ||
+            event.altKey ||
+            link.target === "_blank" ||
+            link.hasAttribute("download")
+        ) return;
+
+        if (starting) {
+            event.preventDefault();
+            event.stopImmediatePropagation();
+            return;
+        }
+
+        const destination = link.href;
+        const started = playEpicOpening();
+
+        if (!started) return;
+
+        event.preventDefault();
+        event.stopImmediatePropagation();
+        starting = true;
+
+        window.setTimeout(() => {
+            window.location.assign(destination);
+        }, NAVIGATION_DELAY);
+    }, true);
+})();
+</script>
 
 </body>
 </html>

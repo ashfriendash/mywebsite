@@ -3,38 +3,86 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Left Path</title>
+    <meta name="theme-color" content="#102219">
+    <title>The Left Path | The Lost Forest</title>
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Lora:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+
+    <style>
+       
+        body.left-path-page {
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            height: auto;
+            min-height: 100vh;
+            min-height: 100dvh;
+            overflow-x: hidden;
+            overflow-y: auto;
+            padding: clamp(10px, 2.2vh, 18px);
+        }
+
+        body.left-path-page > .story-box {
+            box-sizing: border-box;
+            flex: 0 0 auto;
+            margin: 0 auto 12px;
+            max-width: 100%;
+        }
+
+        body.left-path-page .choices,
+        body.left-path-page .back-button {
+            max-width: 100%;
+        }
+
+        body.left-path-page .choices {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        body.left-path-page .choices a {
+            max-width: 100%;
+            box-sizing: border-box;
+        }
+
+        @media (max-width: 480px) {
+            body.left-path-page {
+                padding: 10px;
+            }
+
+            body.left-path-page > .story-box {
+                width: 100%;
+            }
+        }
+    </style>
+
+    <script src="audio.js" defer></script>
 </head>
-<body>
-
-    <body>
-
-    <div class="story-box">
-
+<body class="left-path-page">
+    <main class="story-box">
         <div class="stats">
-
             <p id="health">❤️ Health: 100</p>
             <p id="gold">💰 Gold: 0</p>
             <p id="keys">🗝️ Keys: 0</p>
             <p id="potion-count">🧪 Potions: 0</p>
-
         </div>
 
-        <button class="use-potion-button" onclick="Heal()">
-            🧪 Use Potion
-        </button>
+        <div class="utility-row">
+            <button type="button" class="use-potion-button" onclick="Heal()">
+                🧪 Use Potion
+            </button>
+        </div>
 
         <h1>The Deep Forest</h1>
 
-        <p>
-            You venture deeper into the forest.
-        </p>
+        <p>You venture deeper into the forest.</p>
 
         <p>
             The path divides ahead.
@@ -43,39 +91,20 @@
         </p>
 
         <div class="choices">
-
-            <a href="wolf.html">
-                🐺 Face the Wolf
-            </a>
-
-            <a href="merchant.html">
-                🧙 Visit the Merchant
-            </a>
-
+            <a href="wolf.html">🐺 Face the Wolf</a>
+            <a href="merchant.html">🧙 Visit the Merchant</a>
         </div>
 
         <div class="back-button">
-
-            <a href="index.html">
-                ← Return to Forest Entrance
-            </a>
-
+            <a href="game.html">← Return to Forest Entrance</a>
         </div>
+    </main>
 
-    </div>
-
-
-    <div id="notification">
-
+    <div id="notification" role="status" aria-live="polite">
         <div id="notifTitle"></div>
         <div id="notifText"></div>
-
     </div>
 
-
     <script src="script.js"></script>
-
 </body>
-
-</body>       
 </html>

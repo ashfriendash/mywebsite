@@ -1,31 +1,18 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#102219">
-
-    <title>The Adventure | The Lost Forest</title>
+    <title>The Lost Forest</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-    <link
-        href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap"
-        rel="stylesheet">
-
-    <link
-        href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500&display=swap"
-        rel="stylesheet">
-
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 
     <style>
-        /* =========================================
-           OPTIONAL FOREST DISCOVERIES
-           ========================================= */
-
         .game-firefly-invitation {
             display: flex;
             justify-content: center;
@@ -46,31 +33,19 @@
             min-width: 0;
             gap: 9px;
             padding: 7px 11px;
-
             border: 1px solid rgba(224, 211, 164, 0.25);
             border-radius: 999px;
             background: rgba(12, 29, 20, 0.48);
             color: #e7e0c7;
-
             text-decoration: none;
             text-align: left;
-
-            transition:
-                background 0.25s ease,
-                border-color 0.25s ease,
-                box-shadow 0.25s ease,
-                transform 0.25s ease;
-
+            transition: background 0.25s ease, border-color 0.25s ease,
+                        box-shadow 0.25s ease, transform 0.25s ease;
             animation: gameFireflyGlow 4s ease-in-out infinite;
         }
 
-        .game-firefly-link:nth-child(2) {
-            animation-delay: 1s;
-        }
-
-        .game-firefly-link:nth-child(3) {
-            animation-delay: 2s;
-        }
+        .game-firefly-link:nth-child(2) { animation-delay: 1s; }
+        .game-firefly-link:nth-child(3) { animation-delay: 2s; }
 
         .game-firefly-link:hover {
             background: rgba(37, 61, 40, 0.78);
@@ -130,58 +105,26 @@
         }
 
         @keyframes gameFireflyGlow {
-            0%, 100% {
-                box-shadow: 0 0 8px rgba(221, 201, 132, 0.02);
-            }
-
-            50% {
-                box-shadow: 0 0 15px rgba(221, 201, 132, 0.08);
-            }
+            0%, 100% { box-shadow: 0 0 8px rgba(221, 201, 132, 0.02); }
+            50% { box-shadow: 0 0 15px rgba(221, 201, 132, 0.08); }
         }
 
         @keyframes gameFireflyFlicker {
-            0%, 100% {
-                opacity: 0.7;
-            }
-
-            50% {
-                opacity: 1;
-            }
+            0%, 100% { opacity: 0.7; }
+            50% { opacity: 1; }
         }
 
         @media (max-height: 680px) {
-            .game-firefly-invitation {
-                margin-top: 6px;
-                gap: 5px;
-            }
-
-            .game-firefly-link {
-                padding: 5px 8px;
-            }
+            .game-firefly-invitation { margin-top: 6px; gap: 5px; }
+            .game-firefly-link { padding: 5px 8px; }
         }
 
         @media (max-width: 420px) {
-            .game-firefly-invitation {
-                gap: 6px;
-            }
-
-            .game-firefly-link {
-                flex-basis: 135px;
-                padding: 7px 9px;
-                gap: 7px;
-            }
-
-            .game-firefly-copy strong {
-                font-size: 9px;
-            }
-
-            .game-firefly-copy small {
-                font-size: 8px;
-            }
-
-            .game-firefly-icon {
-                font-size: 16px;
-            }
+            .game-firefly-invitation { gap: 6px; }
+            .game-firefly-link { flex-basis: 135px; padding: 7px 9px; gap: 7px; }
+            .game-firefly-copy strong { font-size: 9px; }
+            .game-firefly-copy small { font-size: 8px; }
+            .game-firefly-icon { font-size: 16px; }
         }
 
         @media (prefers-reduced-motion: reduce) {
@@ -191,14 +134,30 @@
                 transition: none;
             }
         }
+
+        body.game-home-page {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            height: auto;
+            min-height: 100vh;
+            min-height: 100dvh;
+            overflow-x: hidden;
+            overflow-y: auto;
+            padding: clamp(10px, 2.2vh, 18px);
+        }
+
+        body.game-home-page > .story-box {
+            flex: 0 0 auto;
+            margin: 0 auto 12px;
+        }
     </style>
+
+    <script src="audio.js" defer></script>
 </head>
-
-<body>
-
+<body class="game-home-page">
     <main class="story-box">
-
-        <!-- PLAYER STATS -->
         <div class="stats">
             <p id="health">❤️ Health: 100</p>
             <p id="gold">💰 Gold: 0</p>
@@ -206,118 +165,60 @@
             <p id="potion-count">🧪 Potions: 0</p>
         </div>
 
-        <!-- POTION BUTTON -->
         <div class="utility-row">
-            <button
-                type="button"
-                class="use-potion-button"
-                onclick="Heal()">
+            <button type="button" class="use-potion-button" onclick="Heal()">
                 🧪 Use Potion
             </button>
         </div>
 
-        <!-- STORY INTRODUCTION -->
         <h1>The Lost Forest</h1>
-
-        <p>
-            You wake up in a mysterious forest.
-        </p>
-
+        <p>You wake up in a mysterious forest.</p>
         <p>
             Two paths stretch before you.
             One disappears into darkness.
             The other glows with warm sunlight.
         </p>
 
-        <!-- MAIN ADVENTURE CHOICES -->
         <div class="choices">
             <a href="left.html">Go Left</a>
             <a href="right.html">Go Right</a>
         </div>
 
-        <!-- OPTIONAL FOREST DISCOVERIES -->
         <div class="game-firefly-invitation">
-
-            <!-- FIREFLY MINIGAME -->
             <a href="firefly.html" class="game-firefly-link">
                 <span class="game-firefly-icon" aria-hidden="true">✧</span>
-
                 <span class="game-firefly-copy">
                     <strong>Follow the Firefly</strong>
                     <small>A little forest secret</small>
                 </span>
-
                 <span class="game-firefly-arrow" aria-hidden="true">↗</span>
             </a>
 
-            <!-- MEMORY MINIGAME -->
             <a href="memory.html" class="game-firefly-link">
                 <span class="game-firefly-icon" aria-hidden="true">❖</span>
-
                 <span class="game-firefly-copy">
                     <strong>Remember the Forest</strong>
                     <small>A five-level memory challenge</small>
                 </span>
-
                 <span class="game-firefly-arrow" aria-hidden="true">↗</span>
             </a>
 
-            <!-- FOREST JOURNAL -->
             <a href="journal.html" class="game-firefly-link">
                 <span class="game-firefly-icon" aria-hidden="true">📖</span>
-
                 <span class="game-firefly-copy">
                     <strong>Forest Journal</strong>
                     <small>Memories you've found</small>
                 </span>
-
                 <span class="game-firefly-arrow" aria-hidden="true">↗</span>
             </a>
-
         </div>
-
-        <!-- EXISTING GAME ACTIONS -->
-        <div class="action-panel">
-
-            <button type="button" onclick="LooseHealth(20)">
-                🪨 Cursed Stone
-            </button>
-
-            <button type="button" onclick="GainGold(25)">
-                💰 Pick Up Gold
-            </button>
-
-            <button type="button" onclick="FindKey()">
-                🗝️ Find Key
-            </button>
-
-            <button type="button" onclick="Heal()">
-                🧪 Drink Potion
-            </button>
-
-            <button type="button" onclick="OpenChest()">
-                📦 Open Chest
-            </button>
-
-        </div>
-
     </main>
 
-    <!-- NOTIFICATIONS -->
     <div id="notification">
         <div id="notifTitle"></div>
         <div id="notifText"></div>
     </div>
 
-    <!-- RESET GAME -->
-    <button
-        type="button"
-        class="reset-button"
-        onclick="ResetGame()">
-        🔄 Reset Game
-    </button>
-
     <script src="script.js"></script>
-
 </body>
 </html>
