@@ -26,9 +26,6 @@
 
     <style>
 
-        /* =================================================
-           TREASURE ROOM
-           ================================================= */
 
         body.treasure-page {
 
@@ -60,7 +57,7 @@
                     rgba(18, 8, 0, 0.38)
                 ),
 
-                url("images/treasure-room-bg.png");
+                url("images/treasure-room-bg.jpg");
 
             background-size: cover;
 
@@ -69,10 +66,6 @@
             background-repeat: no-repeat;
         }
 
-
-        /* =================================================
-           GOLDEN LIGHT OVERLAY
-           ================================================= */
 
         body.treasure-page::before {
 
@@ -94,10 +87,6 @@
             z-index: 0;
         }
 
-
-        /* =================================================
-           MAIN WINDOW
-           ================================================= */
 
         body.treasure-page .story-box {
 
@@ -146,10 +135,6 @@
         }
 
 
-        /* =================================================
-           STATS
-           ================================================= */
-
         body.treasure-page .stats {
 
             gap: 22px;
@@ -166,10 +151,6 @@
             white-space: nowrap;
         }
 
-
-        /* =================================================
-           TITLE
-           ================================================= */
 
         body.treasure-page h1 {
 
@@ -193,10 +174,6 @@
         }
 
 
-        /* =================================================
-           SUBTITLE
-           ================================================= */
-
         .treasure-subtitle {
 
             margin: 0 auto 10px;
@@ -210,10 +187,6 @@
             letter-spacing: 1px;
         }
 
-
-        /* =================================================
-           STORY
-           ================================================= */
 
         .treasure-intro {
 
@@ -230,10 +203,6 @@
             color: #f8f1dd;
         }
 
-
-        /* =================================================
-           TREASURE DISPLAY
-           ================================================= */
 
         .treasure-display {
 
@@ -275,10 +244,9 @@
                 rgba(255, 205, 55, 0.08);
         }
 
-
         .treasure-display::before {
 
-            content: "💰  💎  👑  💎  💰";
+            content: "  💎  👑  💎  ";
 
             position: absolute;
 
@@ -297,10 +265,9 @@
                 treasureFloat 3s ease-in-out infinite;
         }
 
-
         .treasure-display::after {
 
-            content: "✦  ✧  ✦  ✧  ✦";
+            content: "        ";
 
             position: absolute;
 
@@ -316,7 +283,6 @@
                 sparkle 2s infinite ease-in-out;
         }
 
-
         @keyframes treasureFloat {
 
             0%,
@@ -328,7 +294,6 @@
                 transform: translateY(-7px);
             }
         }
-
 
         @keyframes sparkle {
 
@@ -342,10 +307,6 @@
             }
         }
 
-
-        /* =================================================
-           LEGENDARY REWARD PANEL
-           ================================================= */
 
         .treasure-reward {
 
@@ -380,7 +341,6 @@
                 rgba(255, 220, 90, 0.05);
         }
 
-
         .treasure-reward h2 {
 
             margin: 0 0 7px;
@@ -396,7 +356,6 @@
                 rgba(255, 210, 70, 0.6);
         }
 
-
         .treasure-reward p {
 
             margin: 5px auto;
@@ -410,10 +369,6 @@
             color: #f8efd3;
         }
 
-
-        /* =================================================
-           LEGENDARY BADGE
-           ================================================= */
 
         .legendary-badge {
 
@@ -443,10 +398,6 @@
                 rgba(255, 215, 70, 0.2);
         }
 
-
-        /* =================================================
-           FINAL BUTTON
-           ================================================= */
 
         .treasure-return-button {
 
@@ -504,7 +455,6 @@
             transition: 0.25s ease;
         }
 
-
         .treasure-return-button:hover {
 
             transform:
@@ -523,7 +473,6 @@
                 rgba(255, 255, 255, 0.65);
         }
 
-
         @keyframes treasureShine {
 
             0% {
@@ -539,16 +488,10 @@
             }
         }
 
-
-        /* =================================================
-           BACK
-           ================================================= */
-
         body.treasure-page .back-button {
 
             margin-top: 8px;
         }
-
 
         body.treasure-page .back-button a {
 
@@ -559,16 +502,11 @@
             text-decoration: none;
         }
 
-
         body.treasure-page .back-button a:hover {
 
             color: #ffe27a;
         }
 
-
-        /* =================================================
-           SMALL HEIGHT
-           ================================================= */
 
         @media (max-height: 700px) {
 
@@ -650,102 +588,85 @@
     <div class="story-box">
 
 
-        <!-- STATS -->
 
         <div class="stats">
 
             <p id="health">
-                ❤️ Health: 100
+                 Health: 100
             </p>
 
             <p id="gold">
-                💰 Gold: 0
+                 Gold: 0
             </p>
 
             <p id="keys">
-                🗝️ Keys: 0
+                 Keys: 0
             </p>
 
             <p id="potion-count">
-                🧪 Potions: 0
+                 Potions: 0
             </p>
 
         </div>
 
 
-        <!-- TITLE -->
 
         <div class="legendary-badge">
-            ✦ LEGENDARY REWARD ✦
+             LEGENDARY REWARD 
         </div>
 
 
         <h1>
-            💎 THE DRAGON'S TREASURE
+             THE DRAGON TREASUREs
         </h1>
 
 
         <div class="treasure-subtitle">
-            THE FOREST'S GREATEST SECRET
+            The forest was protected for THIS?
         </div>
 
 
-        <!-- STORY -->
 
         <p class="treasure-intro">
-
-            You step beyond the dragon's lair
-            and enter a chamber untouched for centuries.
+            This is proof that old is GOLD
 
         </p>
 
 
         <p class="treasure-intro">
-
-            Gold covers the ancient floor.
-            Jewels shimmer in the darkness.
-            Forgotten weapons and royal relics
-            surround an ancient throne.
+            This room resembles a golder court making you wonder about past
 
         </p>
 
 
-        <!-- GOLDEN DISPLAY -->
 
         <div class="treasure-display">
         </div>
 
 
-        <!-- REWARD -->
-
         <div class="treasure-reward">
 
             <h2>
-                👑 THE LEGENDARY TREASURE IS YOURS
+                THE LEGENDARY TREASURE IS YOURS
             </h2>
 
             <p>
-                The dragon guarded this chamber
-                for generations.
+                The dragon is defeated and you are here now
             </p>
 
             <p>
-                You defeated its guardian,
-                unlocked its secrets,
-                and reached what countless adventurers
-                could never find.
+                Rich but alone
             </p>
 
         </div>
 
 
-        <!-- FINAL BUTTON -->
 
         <a
             href="index.html"
             class="treasure-return-button">
 
-            ✨ RETURN TO THE FOREST
+             RETURN TO THE FOREST
 
         </a>
 
@@ -753,7 +674,7 @@
         <div class="back-button">
 
             <a href="right.html">
-                ← Back to Coniferous Path
+                 Back to Coniferous Path
             </a>
 
         </div>
@@ -762,7 +683,6 @@
     </div>
 
 
-    <!-- NOTIFICATION -->
 
     <div id="notification">
 

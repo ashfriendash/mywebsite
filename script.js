@@ -1,5 +1,3 @@
-
-
 let health =
     Number(localStorage.getItem("health")) || 100;
 
@@ -222,7 +220,7 @@ function UpdateStats() {
     if (healthDisplay) {
 
         healthDisplay.innerHTML =
-            "❤️ Health: " + health;
+            " Health: " + health;
     }
 
 
@@ -230,7 +228,7 @@ function UpdateStats() {
     if (goldDisplay) {
 
         goldDisplay.innerHTML =
-            "💰 Gold: " + gold;
+            " Gold: " + gold;
     }
 
 
@@ -238,7 +236,7 @@ function UpdateStats() {
     if (keysDisplay) {
 
         keysDisplay.innerHTML =
-            "🗝️ Keys: " + keys;
+            " Keys: " + keys;
     }
 
 
@@ -246,7 +244,7 @@ function UpdateStats() {
     if (potionDisplay) {
 
         potionDisplay.innerHTML =
-            "🧪 Potions: " + potions;
+            " Potions: " + potions;
     }
 
 
@@ -300,7 +298,7 @@ function UpdateStats() {
             );
 
             dragonButton.innerHTML =
-                "🐉 Enter Dragon's Den — UNLOCKED!";
+                " Enter Dragon's Den - UNLOCKED!";
 
             dragonButton.onclick = null;
 
@@ -315,7 +313,7 @@ function UpdateStats() {
             );
 
             dragonButton.innerHTML =
-                "🔒 Dragon's Den — " +
+                " Dragon's Den - " +
                 keys +
                 " / 15 Keys";
 
@@ -326,7 +324,7 @@ function UpdateStats() {
                     event.preventDefault();
 
                     ShowNotification(
-                        "🔒 Gate Locked",
+                        " Gate Locked",
                         "You need 15 keys to enter."
                     );
                 };
@@ -421,7 +419,7 @@ function LooseHealth(amount) {
     if (health > 0) {
 
         ShowNotification(
-            "💔 Damage Taken",
+            " Damage Taken",
             "You lost " +
             amount +
             " health."
@@ -436,7 +434,7 @@ function LooseHealth(amount) {
         } else {
 
             ShowNotification(
-                "💔 No Health",
+                " No Health",
                 "Your health reached zero."
             );
         }
@@ -565,7 +563,7 @@ function ReviveGame() {
 
 
         ShowNotification(
-            "✨ Revived!",
+            " Revived!",
             "The battle begins again."
         );
     }
@@ -582,7 +580,7 @@ function GainGold(amount) {
 
 
     ShowNotification(
-        "💰 Gold Collected!",
+        " Gold Collected!",
         "You gained " +
         amount +
         " gold."
@@ -601,7 +599,7 @@ function FindKey() {
 
 
     ShowNotification(
-        "🗝️ Key Found!",
+        " Key Found!",
         "You picked up a rusty key."
     );
 }
@@ -633,14 +631,14 @@ function Heal() {
 
 
         ShowNotification(
-            "🧪 Potion Used",
+            " Potion Used",
             "You restored 20 health."
         );
 
     } else {
 
         ShowNotification(
-            "🧪 No Potions",
+            " No Potions",
             "You don't have a potion."
         );
     }
@@ -666,28 +664,28 @@ function BuyPotion() {
         if (potionsBought === 1) {
 
             ShowNotification(
-                "🧪 Potion Purchased!",
+                " Potion Purchased!",
                 "You spent 40 gold. Two more..."
             );
 
         } else if (potionsBought === 2) {
 
             ShowNotification(
-                "🧪 Potion Purchased!",
+                " Potion Purchased!",
                 "You spent 40 gold. One more..."
             );
 
         } else if (potionsBought >= 3) {
 
             ShowNotification(
-                "🌑 Secret Unlocked!",
+                " Secret Unlocked!",
                 "The merchant reveals a hidden door."
             );
 
         } else {
 
             ShowNotification(
-                "🧪 Potion Purchased!",
+                " Potion Purchased!",
                 "You spent 40 gold."
             );
         }
@@ -695,7 +693,7 @@ function BuyPotion() {
     } else {
 
         ShowNotification(
-            "💰 Not Enough Gold",
+            " Not Enough Gold",
             "You need 40 gold."
         );
     }
@@ -716,14 +714,14 @@ function OpenChest() {
 
 
         ShowNotification(
-            "📦 Treasure Opened!",
+            " Treasure Opened!",
             "You found 100 gold!"
         );
 
     } else {
 
         ShowNotification(
-            "📦 Chest",
+            " Chest",
             "The chest is empty."
         );
     }
@@ -744,7 +742,7 @@ function EnemyAttack() {
 
 
         ShowNotification(
-            "🐺 Wolf Attack!",
+            " Wolf Attack!",
             "The Forest Wolf dealt 10 damage."
         );
 
@@ -755,7 +753,7 @@ function EnemyAttack() {
 
 
         ShowNotification(
-            "👿 Evil Merchant Attack!",
+            "Evil Merchant Attack!",
             "The Evil Merchant dealt 15 damage."
         );
 
@@ -766,7 +764,7 @@ function EnemyAttack() {
 
 
         ShowNotification(
-            "🐉 Dragon Attack!",
+            " Dragon Attack!",
             "The Ancient Dragon dealt 20 damage."
         );
     }
@@ -803,7 +801,7 @@ function SwordAttack() {
 
 
     ShowNotification(
-        "🗡️ Sword Slash",
+        " Sword Slash",
         "You dealt 10 damage!"
     );
 
@@ -849,7 +847,7 @@ function HeavyAttack() {
 
 
     ShowNotification(
-        "💥 Heavy Attack",
+        " Heavy Attack",
         "You dealt 20 damage!"
     );
 
@@ -885,22 +883,22 @@ function WinBattle() {
 
             enemyBox.innerHTML =
 
-                "<h2>🏆 Wolf Defeated!</h2>" +
+                "<h2>Wolf Defeated!</h2>" +
 
                 "<p>You found 20 gold.</p>" +
 
                 '<a href="wolf.html" class="fight-again">' +
-                "⚔️ Fight Again" +
+                " Fight Again" +
                 "</a>" +
 
                 '<a href="left.html" class="back-link">' +
-                "← Back to Deep Forest" +
+                " Back to Deep Forest" +
                 "</a>";
         }
 
 
         ShowNotification(
-            "🐺 Wolf Defeated!",
+            " Wolf Defeated!",
             "+20 Gold"
         );
 
@@ -992,7 +990,7 @@ function WinBattle() {
 
 
         ShowNotification(
-            "✨ Peace Restored!",
+            "Peace Restored!",
             "The curse has been broken."
         );
 
@@ -1046,7 +1044,7 @@ function WinBattle() {
 
 
     ShowNotification(
-        "🏆 Dragon is Slain!",
+        " Dragon is Slain!",
         "You feel accomplished yet incomplete"
     );
 
@@ -1068,7 +1066,7 @@ function RunAway() {
         "index.html";
 
     let backText =
-        "← Back";
+        " Back";
 
 
     if (enemyType === "wolf") {
@@ -1080,7 +1078,7 @@ function RunAway() {
             "left.html";
 
         backText =
-            "← Back to Deep Forest";
+            " Back to Deep Forest";
 
 
     } else if (enemyType === "merchant") {
@@ -1092,7 +1090,7 @@ function RunAway() {
             "merchant.html";
 
         backText =
-            "← Back to Merchant Shop";
+            " Back to Merchant Shop";
 
 
     } else if (enemyType === "dragon") {
@@ -1104,12 +1102,12 @@ function RunAway() {
             "right.html";
 
         backText =
-            "← Back to Coniferous Path";
+            " Back to Coniferous Path";
     }
 
 
     ShowNotification(
-        "🏃 Escaped!",
+        " Escaped!",
         "You escaped from the " +
         enemyName +
         "."
@@ -1126,7 +1124,7 @@ function RunAway() {
 
         enemyBox.innerHTML =
 
-            "<h2>🌲 You Escaped</h2>" +
+            "<h2> You Escaped</h2>" +
 
             "<p>You escaped from the " +
             enemyName +
@@ -1155,7 +1153,7 @@ function SearchForKey() {
 
 
         ShowNotification(
-            "🗝️ Key Found!",
+            " Key Found!",
             "You discovered a key!"
         );
 

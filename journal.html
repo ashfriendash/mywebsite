@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Forest Journal| The Lost Forest
+    <title>Forest Journal minigame logger
     </title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -54,7 +54,6 @@
             text-decoration: none;
             opacity: 0.85;
             transition: color .2s,opacity .2s;
-
 
         }
         .journal-back:hover {
@@ -394,17 +393,16 @@
     <main class="journal-shell">
 
         <nav class="journal-topbar" aria-label="Journal navigation">
-            <a class="journal-back" href="game.html">← Back to the forest</a>
-            <span class="journal-label">YOUR PERSONAL COLLECTION</span>
+            <a class="journal-back" href="game.html"> Back to the forest</a>
+            <span class="journal-label">LETS SEE HOW WELL U DID</span>
         </nav>
 
         <header class="journal-heading">
-            <div class="journal-ornament" aria-hidden="true">✧ ❦ ✧</div>
-            <p class="journal-eyebrow">A record of little discoveries</p>
+            <div class="journal-ornament" aria-hidden="true"> ❦ </div>
+            <p class="journal-eyebrow">What you done:</p>
             <h1>The Forest Journal</h1>
             <p class="journal-subtitle">
-                Not every treasure can be held. Some are moments,
-                memories, and quiet things the forest chooses to share.
+                Secrets you done with
             </p>
         </header>
 
@@ -428,80 +426,76 @@
 
         <section class="journal-grid" aria-label="Forest memories">
 
-            <!-- FIREFLY MEMORY -->
+        
             <article
                 class="journal-entry is-locked"
                 id="entry-firefly"
                 data-memory-key="forestMemory_firefly">
 
                 <div class="journal-entry-top">
-                    <span class="journal-entry-icon" aria-hidden="true">✧</span>
+                    <span class="journal-entry-icon" aria-hidden="true"></span>
                     <span class="journal-entry-state">NOT YET FOUND</span>
                 </div>
 
                 <h2>The Golden Light</h2>
 
                 <p class="journal-entry-description">
-                    A little light wandered between the trees.
-                    You followed it, even when the forest grew quiet.
+                    A golden light is the FIREFLY MASTer's Desire.
                 </p>
 
                 <div class="journal-locked-message">
-                    <strong>Memory sleeping</strong>
+                    <strong>Locked</strong>
                     Catch all ten golden fireflies to uncover this entry.
                 </div>
 
                 <div class="journal-unlocked-content" hidden>
                     <blockquote>
-                        “Even the oldest trees remember those who were kind to them.”
+                        “The GOAT of fireflies did it”
                     </blockquote>
 
                     <p class="journal-source">
-                        Remembered in the Firefly Clearing.
+                        Remembered in Firefly minigame.
                     </p>
 
                     <a class="journal-revisit" href="firefly.html">
-                        <span aria-hidden="true">✧</span>
-                        Visit the clearing
+                        <span aria-hidden="true"></span>
+                        Visit firefly
                     </a>
                 </div>
             </article>
-
-            <!-- MEMORY GROVE ENTRY -->
             <article
                 class="journal-entry is-locked"
                 id="entry-grove"
                 data-memory-key="forestMemory_grove">
 
                 <div class="journal-entry-top">
-                    <span class="journal-entry-icon" aria-hidden="true">❖</span>
+                    <span class="journal-entry-icon" aria-hidden="true"></span>
                     <span class="journal-entry-state">NOT YET FOUND</span>
                 </div>
 
-                <h2>The Woodland Whisper</h2>
+                <h2>The Memory Grove Secret</h2>
 
                 <p class="journal-entry-description">
-                    Six woodland symbols kept an old pattern.
-                    Patient eyes and a steady memory revealed their secret.
+                    You repeated every pattern of the six symbols without a mistake.
                 </p>
 
                 <div class="journal-locked-message">
-                    <strong>Memory sleeping</strong>
+                    <strong>Locked</strong>
                     Complete all five levels of the Memory Grove to uncover this entry.
                 </div>
 
                 <div class="journal-unlocked-content" hidden>
                     <blockquote>
-                        “The forest remembers every kindness, even the ones no one else sees.”
-                    </blockquote>
+                        “Even the dev is surprised yoy completed this”
+                    </blockquote
 
                     <p class="journal-source">
-                        Remembered in the Memory Grove.
+                        Remembered in Memory minigame
                     </p>
 
                     <a class="journal-revisit" href="memory.html">
-                        <span aria-hidden="true">❖</span>
-                        Return to the grove
+                        <span aria-hidden="true"></span>
+                        Return to the minigame
                     </a>
                 </div>
             </article>
@@ -509,12 +503,12 @@
         </section>
 
         <footer class="journal-closing">
-            There is no need to hurry. The forest keeps what you discover.
+            These are here whenever you want to do them
 
             <br>
 
             <a class="journal-footer-link" href="game.html">
-                Return to your adventure →
+                Return to your adventure
             </a>
         </footer>
 
@@ -542,7 +536,6 @@
                         unlocked =
                             localStorage.getItem(entry.dataset.memoryKey) === "true";
                     } catch (error) {
-                        // Keep the journal view usable if storage is unavailable.
                     }
 
                     if (unlocked) found++;
@@ -574,7 +567,6 @@
 
             updateJournal();
 
-            // Update if a minigame unlocks a memory in another tab.
             window.addEventListener("storage", updateJournal);
         })();
     </script>

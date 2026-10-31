@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#102219">
-    <title>The Memory Grove | The Lost Forest</title>
+    <title>Memory Minigame</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -137,7 +137,6 @@
             line-height: 1.5;
         }
 
-        /* Five-step level indicator */
 
         .memory-level-row {
             display: flex;
@@ -211,7 +210,6 @@
             text-align: right;
         }
 
-        /* Six woodland symbols */
 
         .memory-board {
             display: grid;
@@ -367,7 +365,7 @@
             cursor: default;
         }
 
-        /* Final, optional lore reward */
+        
 
         .memory-reward {
             margin-top: 14px;
@@ -422,7 +420,7 @@
             }
         }
 
-        /* Short displays */
+    
 
         @media (max-height: 650px) {
             body.memory-page {
@@ -551,18 +549,17 @@
     <main class="memory-shell">
 
         <nav class="memory-topbar" aria-label="Game navigation">
-            <a class="memory-back" href="game.html">← Back to the forest</a>
-            <span class="memory-kicker">AN OPTIONAL FOREST SECRET</span>
+            <a class="memory-back" href="game.html"> Back to the forest</a>
+            <span class="memory-kicker">OPTIONAL BONUS GAME</span>
         </nav>
 
         <section class="memory-card" aria-labelledby="memory-title">
 
             <header class="memory-heading">
-                <p class="memory-eyebrow">Listen to the old woodland</p>
-                <h1 id="memory-title">The Memory Grove</h1>
+                <p class="memory-eyebrow">Memory game</p>
+                <h1 id="memory-title">Memory Grove</h1>
                 <p>
-                    Watch the woodland symbols awaken, then repeat their
-                    pattern in the same order.
+                    They will blink. keep same order
                 </p>
             </header>
 
@@ -583,11 +580,11 @@
 
             <div class="memory-meta">
                 <span id="memory-pattern-size">Pattern length: 3 symbols</span>
-                <span id="memory-phase">A QUIET BEGINNING</span>
+                <span id="memory-phase">READY</span>
             </div>
 
             <div class="memory-board" id="memory-board"
-                 aria-label="Six woodland symbols">
+                 aria-label="Six symbols">
 
                 <button class="memory-tile" type="button" data-index="0"
                         aria-label="Leaf" disabled>
@@ -628,29 +625,27 @@
             </div>
 
             <p class="memory-status" id="memory-status" aria-live="polite">
-                When the symbols light up, remember their order.
-                Then repeat the pattern.
+                Be ready and dont worry theres unlimited tries
             </p>
 
             <div class="memory-actions">
                 <button class="memory-primary" id="memory-action" type="button">
-                    Begin the memory walk
+                    Start
                 </button>
             </div>
 
             <section class="memory-reward" id="memory-reward" hidden>
-                <p class="memory-reward-label">A MEMORY KEPT SAFE</p>
+                <p class="memory-reward-label">SECRET UNLOCKED</p>
                 <blockquote>
-                    “The forest remembers every kindness, even the ones
-                    no one else sees.”
+                    “This is apece of cake for the MASTER of MEMORY.”
                 </blockquote>
-                <p>Five patterns remembered. A little magic to carry with you.</p>
+                <p>You finished all five levels.</p>
             </section>
 
         </section>
 
         <p class="memory-footer">
-            Five levels · Six woodland symbols · One quiet little secret
+            why are you reading this?
         </p>
 
     </main>
@@ -706,8 +701,6 @@
                 while (result.length < length) {
                     const next = Math.floor(Math.random() * tiles.length);
 
-                    // Avoid identical symbols back-to-back so the
-                    // sequence stays clear and fair.
                     if (
                         result.length === 0 ||
                         result[result.length - 1] !== next
@@ -733,13 +726,13 @@
                         : `Pattern length: ${current.length} symbols`;
 
                 const phaseLabels = {
-                    idle: "A QUIET BEGINNING",
+                    idle: "READY",
                     watching: "WATCH CAREFULLY",
                     input: "YOUR TURN",
-                    checking: "MEMORY TAKING SHAPE",
-                    failed: "THE PATTERN SLIPPED",
-                    between: "LEVEL REMEMBERED",
-                    complete: "MEMORY KEEPER"
+                    checking: "CHECKING",
+                    failed: "WRONG PATTERN",
+                    between: "LEVEL COMPLETE",
+                    complete: "COMPLETE"
                 };
 
                 phaseDisplay.textContent = phaseLabels[phase];
@@ -761,13 +754,13 @@
                 });
 
                 const actionLabels = {
-                    idle: "Begin the memory walk",
+                    idle: "Start",
                     watching: "Watch the pattern…",
                     input: "Repeat the pattern",
-                    checking: "Remembering…",
+                    checking: "Checking...",
                     failed: "Try this level again",
                     between: `Continue to level ${levelIndex + 2} →`,
-                    complete: "Play the memory walk again"
+                    complete: "Play again"
                 };
 
                 action.textContent = actionLabels[phase];
@@ -847,7 +840,7 @@
                     clearLights();
 
                     status.textContent =
-                        "The pattern slipped away. Take a breath and try this level again.";
+                        "Wrong pattern. Try this level again.";
 
                     render();
                     return;
@@ -858,14 +851,14 @@
 
                 if (answers.length < sequence.length) {
                     status.textContent =
-                        `Well remembered. ${answers.length} of ${sequence.length} symbols correct.`;
+                        `${answers.length} of ${sequence.length} symbols correct.`;
 
                     render();
                     return;
                 }
 
                 phase = "checking";
-                status.textContent = "The last symbol settles into place…";
+                status.textContent = "Checking...";
                 render();
 
                 const token = roundToken;
@@ -885,12 +878,12 @@
                         }
 
                         status.textContent =
-                            "All five levels complete. The forest has shared its little secret with you.";
+                            "All five levels complete. You unlocked a secret.";
                     } else {
                         phase = "between";
 
                         status.textContent =
-                            `Beautifully remembered. Level ${levelIndex + 1} is complete. The next pattern will be longer and quicker.`;
+                            `Level ${levelIndex + 1} complete. The next pattern is longer and faster.`;
                     }
 
                     render();
@@ -907,8 +900,6 @@
                 if (phase === "idle") {
                     startLevel(0);
                 } else if (phase === "failed") {
-                    // Retry the same pattern, so the player can
-                    // learn it rather than losing all progress.
                     startLevel(levelIndex, true);
                 } else if (phase === "between") {
                     startLevel(levelIndex + 1);

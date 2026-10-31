@@ -177,7 +177,7 @@
 
             <div class="title-ornament">
                 <span></span>
-                <i>✦</i>
+                <i></i>
                 <span></span>
             </div>
 
@@ -188,36 +188,34 @@
 
             <div class="title-divider">
                 <span></span>
-                <b>◆</b>
+                <b></b>
                 <span></span>
             </div>
 
-            <!-- MAIN ADVENTURE -->
             <a href="game.html" class="start-button">
                 <span class="start-icon">▶</span>
                 <span>START ADVENTURE</span>
             </a>
 
-            <!-- OPTIONAL MINIGAMES -->
             <div class="forest-minigames">
 
                 <a href="firefly.html" class="forest-minigame-link">
-                    <span class="forest-minigame-icon" aria-hidden="true">✧</span>
+                    <span class="forest-minigame-icon" aria-hidden="true"></span>
 
                     <span class="forest-minigame-copy">
                         <strong>Follow the Firefly</strong>
-                        <small>A little forest secret</small>
+                        <small>A bonus game</small>
                     </span>
 
                     <span class="forest-minigame-arrow" aria-hidden="true">↗</span>
                 </a>
 
                 <a href="memory.html" class="forest-minigame-link">
-                    <span class="forest-minigame-icon" aria-hidden="true">❖</span>
+                    <span class="forest-minigame-icon" aria-hidden="true"></span>
 
                     <span class="forest-minigame-copy">
                         <strong>Remember the Forest</strong>
-                        <small>A five-level memory walk</small>
+                        <small>A five-level memory game</small>
                     </span>
 
                     <span class="forest-minigame-arrow" aria-hidden="true">↗</span>
@@ -227,13 +225,11 @@
 
         </section>
 
-        <!-- DECORATIVE CORNERS -->
         <div class="corner corner-top-left"></div>
         <div class="corner corner-top-right"></div>
         <div class="corner corner-bottom-left"></div>
         <div class="corner corner-bottom-right"></div>
 
-        <!-- AMBIENT PARTICLES -->
         <div class="particles" aria-hidden="true">
             <span></span>
             <span></span>
@@ -327,7 +323,6 @@
                 return 35;
             }
 
-            // Deep opening impact and a low, sustained orchestral foundation.
             impact(0, 0.21);
             impact(1.65, 0.09);
 
@@ -341,7 +336,6 @@
                 note(freq, 0.05, 4.5, vol, "triangle");
             });
 
-            // Rising heroic fanfare.
             const fanfare = [
                 [392.00, 0.35, 0.30, 0.075],
                 [523.25, 0.67, 0.34, 0.085],
@@ -359,7 +353,6 @@
                 note(freq * 2, time + 0.025, len * 0.72, vol * 0.18);
             });
 
-            // Final, glowing major chord.
             [
                 [523.25, 4.05, 1.35, 0.085],
                 [659.25, 4.05, 1.30, 0.075],
@@ -403,7 +396,6 @@
 
         if (!/\bstart\s+(?:the\s+)?adventure\b/i.test(label)) return;
 
-        // Preserve browser shortcuts such as Ctrl-click and opening new tabs.
         if (
             event.button !== 0 ||
             event.ctrlKey ||

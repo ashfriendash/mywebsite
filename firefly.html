@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#102219">
 
-    <title>Follow the Firefly | The Lost Forest</title>
+    <title>Firefly Minigame</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -164,7 +164,7 @@
             font-variant-numeric: tabular-nums;
         }
 
-        /* The little meadow */
+        
 
         .firefly-field {
             position: relative;
@@ -288,7 +288,7 @@
             opacity: 0;
         }
 
-        /* Golden target */
+    
 
         .golden-firefly {
             position: absolute;
@@ -408,7 +408,7 @@
             text-align: center;
         }
 
-        /* The tiny story reward */
+      
 
         .firefly-memory {
             margin-top: 10px;
@@ -478,7 +478,7 @@
             }
         }
 
-        /* Compact layout for shorter displays */
+       
 
         @media (max-height: 680px) {
             body.firefly-page {
@@ -573,15 +573,15 @@
 
         <nav class="firefly-topbar" aria-label="Game navigation">
             <a href="index.html" class="firefly-back">
-                ← Back to the forest
+                 Back to the forest
             </a>
-            <span class="firefly-label">A QUIET LITTLE SECRET</span>
+            <span class="firefly-label">BONUS GAME</span>
         </nav>
 
         <header class="firefly-heading">
-            <p class="firefly-eyebrow">Some magic is easy to miss</p>
+            <p class="firefly-eyebrow">For fun DUDE!</p>
             <h1>Follow the Firefly</h1>
-            <p>Ten golden lights. One little memory.</p>
+            <p>Catch the golden fireflies.</p>
         </header>
 
         <section class="firefly-panel" aria-label="Firefly minigame">
@@ -610,8 +610,8 @@
                 <span class="ambient-light" aria-hidden="true"></span>
 
                 <p class="firefly-field-message" id="field-message">
-                    <strong>Listen to the quiet.</strong>
-                    When you're ready, follow the golden light.
+                    <strong>Ready?</strong>
+                    Click button to start
                 </p>
 
                 <button
@@ -621,14 +621,14 @@
                     aria-label="Catch the golden firefly"
                     title="Catch the firefly"
                     hidden>
-                    <span aria-hidden="true">✦</span>
+                    <span aria-hidden="true"></span>
                 </button>
 
             </div>
 
             <div class="firefly-actions">
                 <button class="firefly-start" id="start-fireflies" type="button">
-                    Begin quietly
+                    Start
                 </button>
             </div>
 
@@ -636,20 +636,20 @@
                 class="firefly-status"
                 id="firefly-status"
                 aria-live="polite">
-                Catch ten golden fireflies before the 25 seconds are up.
+                Catch ten golden fireflies in 25.
             </p>
 
             <div class="firefly-memory" id="firefly-memory" hidden>
-                <p class="firefly-memory-title">A MEMORY LEFT BY THE FOREST</p>
+                <p class="firefly-memory-title">A MEMORY FROM THE FOREST</p>
                 <p>
-                    “Even the oldest trees remember those who were kind to them.”
+                    “You are the firefly MASTER!”
                 </p>
             </div>
 
         </section>
 
         <p class="firefly-footer">
-            No quest to finish. No treasure to chase. Just a little moment of magic.
+            This game is optional.
         </p>
 
     </main>
@@ -715,21 +715,21 @@
                     updateStats();
 
                     fieldMessage.innerHTML =
-                        "<strong>A little forest secret.</strong>" +
-                        "You found something worth remembering.";
+                        "<strong>You found a secret.</strong>" +
+                        "It has been added to your journal.";
 
                     status.textContent =
-                        "For a moment, the forest seems to breathe with you.";
+                        "Well done, you caught them all.";
 
                     memory.hidden = false;
                     startButton.textContent = "Visit again";
                 } else {
                     fieldMessage.innerHTML =
                         "<strong>The lights have drifted away.</strong>" +
-                        "The forest will be here if you wish to try again.";
+                        "Press the button to try again.";
 
                     status.textContent =
-                        "No hurry. Some little things are worth a second look.";
+                        "Time ran out. Give it another go.";
 
                     startButton.textContent = "Try again";
                 }
@@ -738,7 +738,6 @@
             function placeTarget() {
                 if (!running) return;
 
-                // Keep the firefly safely inside the meadow.
                 const x = 15 + Math.random() * 70;
                 const y = 20 + Math.random() * 60;
 
@@ -756,7 +755,7 @@
                     target.classList.remove("is-visible");
 
                     status.textContent =
-                        "A little too quick! Watch for the next golden glow.";
+                        "Too slow! Watch for the next one.";
 
                     hideTimeout = setTimeout(() => {
                         target.hidden = true;
@@ -785,7 +784,7 @@
                     "Catch ten before they drift away.";
 
                 status.textContent =
-                    "The fireflies are shy. Keep your eyes on the meadow.";
+                    "Keep your eyes on the meadow.";
 
                 startButton.textContent = "Start over";
 
@@ -821,10 +820,10 @@
 
                 if (caught === 1) {
                     status.textContent =
-                        "One little light found its way to you. Nine more.";
+                        "One caught. Nine more.";
                 } else if (caught === goal - 1) {
                     status.textContent =
-                        "Nine lights gathered. Just one more.";
+                        "Nine caught. Just one more.";
                 } else {
                     status.textContent =
                         `${caught} golden lights gathered. ` +

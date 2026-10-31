@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#102219">
-    <title>The Coniferous Path | The Lost Forest</title>
+    <title>The Coniferous Path</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,8 +13,6 @@
     <link rel="stylesheet" href="style.css">
 
     <style>
-        /* Page-only screen fix: retain the existing style.css and artwork,
-           but allow this page to scroll instead of clipping its content. */
         body.right-path-page {
             box-sizing: border-box;
             display: flex;
@@ -68,59 +66,50 @@
 </head>
 <body class="right-path-page">
     <main class="story-box">
-        <!-- PLAYER STATS -->
         <div class="stats">
-            <p id="health">❤️ Health: 100</p>
-            <p id="gold">💰 Gold: 0</p>
-            <p id="keys">🗝️ Keys: 0</p>
-            <p id="potion-count">🧪 Potions: 0</p>
+            <p id="health"> Health: 100</p>
+            <p id="gold"> Gold: 0</p>
+            <p id="keys"> Keys: 0</p>
+            <p id="potion-count"> Potions: 0</p>
         </div>
 
         <div class="utility-row">
             <button type="button" class="use-potion-button" onclick="Heal()">
-                🧪 Use Potion
+                Drink Potion
             </button>
         </div>
 
-        <!-- STORY -->
         <h1>The Coniferous Path</h1>
 
         <p>
-            You leave the forest entrance and enter a vast
-            coniferous woodland.
+            Theres cones around you DAMNIt
         </p>
 
         <p>
-            Towering evergreens surround you as the path
-            splits in two.
+            do you wanna go down the muddy path or the ominous one
         </p>
 
         <p>
-            One route leads toward scattered objects hidden
-            among the trees. The other ends at an enormous
-            ancient gate.
+            Choose randomly or not bro
         </p>
 
         <p>
             <strong>
-                ⚠️ The Dragon's Den is locked.
+                The DragonDen is locked.
                 You need 15 keys to open the gate.
             </strong>
         </p>
 
-        <!-- MAIN CHOICES -->
         <div class="choices">
-            <a href="keyhunt.html">🔑 Key Hunt</a>
-            <a href="dragon.html">🐉 Dragon's Den</a>
+            <a href="keyhunt.html"> Key Hunt</a>
+            <a href="dragon.html">DragonDen</a>
         </div>
 
-        <!-- BACK -->
         <div class="back-button">
-            <a href="game.html">← Return to Forest Entrance</a>
+            <a href="game.html"> Return to Forest Entrance</a>
         </div>
     </main>
 
-    <!-- EXISTING NOTIFICATION ELEMENTS -->
     <div id="notification" role="status" aria-live="polite">
         <div id="notifTitle"></div>
         <div id="notifText"></div>

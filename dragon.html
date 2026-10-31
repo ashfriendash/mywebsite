@@ -8,7 +8,7 @@
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0">
 
-    <title>Dragon's Den</title>
+    <title>DragonDen</title>
 
     <link rel="preconnect"
           href="https://fonts.googleapis.com">
@@ -28,27 +28,24 @@
 
 <body class="dragon-page" data-enemy="dragon">
 
-    <!-- MAIN GAME -->
 
     <div class="story-box">
 
-        <!-- PLAYER STATS -->
-
         <div class="stats">
 
-            <p id="health">❤️ Health: 100</p>
+            <p id="health"> Health: 100</p>
 
-            <p id="gold">💰 Gold: 0</p>
+            <p id="gold"> Gold: 0</p>
 
-            <p id="keys">🗝️ Keys: 0</p>
+            <p id="keys"> Keys: 0</p>
 
-            <p id="potion-count">🧪 Potions: 0</p>
+            <p id="potion-count"> Potions: 0</p>
 
         </div>
         <div class="hp-section">
 
     <div class="hp-label">
-        ❤️ Your Health
+         You Health
         <span id="player-health-text">100 / 100</span>
     </div>
 
@@ -59,39 +56,35 @@
     </div>
 
 
-        <!-- USE POTION -->
 
         <button
             class="use-potion-button"
             onclick="Heal()">
 
-            🧪 Use Potion
+            Drink Potion
 
         </button>
 
 
-        <!-- TITLE -->
 
-        <h1>🐉 Dragon's Den</h1>
+        <h1> Dragon's Den</h1>
 
-
-        <!-- LOCKED GATE -->
 
         <div id="dragon-lock">
 
-            <h2>🔒 The Dragon's Den Is Locked</h2>
+            <h2> The DragonDen Lock need opening</h2>
 
             <p>
-                An ancient gate blocks your path.
+                Gate has a lock with keyholes.
             </p>
 
             <p>
-                The lock is covered in countless keyholes.
+                To unlock it complete the quest 
             </p>
 
             <p>
                 <strong>
-                    ⚠️ You need 15 keys to open the gate.
+                    You need 15 keys to open the gate.
                 </strong>
             </p>
 
@@ -103,7 +96,7 @@
             <div class="choices">
 
                 <a href="keyhunt.html">
-                    🔑 Hunt for Keys
+                     Hunt for Keys
                 </a>
 
             </div>
@@ -111,43 +104,39 @@
         </div>
 
 
-        <!-- DRAGON FIGHT -->
-
         <div id="dragon-fight" style="display: none;">
 
-            <h2>🔥 The Gate Opens...</h2>
+            <h2> Its open now YAY!</h2>
 
             <p>
-                You have collected enough keys.
-                The ancient gate slowly opens.
+                
             </p>
 
             <p>
-                Something enormous waits beyond it.
+                Uh oh theres a monster
             </p>
 
 
-            <!-- DRAGON IMAGE -->
+
 
             <div class="dragon-image">
 
                 <img
-                    src="images/dragon.png"
+                    src="images/dragon.jpg"
                     alt="Ancient Dragon">
 
             </div>
 
 
-            <!-- ENEMY -->
 
             <div id="enemy-box">
 
-                <h2>🐉 Ancient Dragon</h2>
+                <h2> Ancient Dragon</h2>
 
                 <div class="enemy-hp-section">
 
                     <div class="hp-label">
-                        🐉 Dragon Health
+                        Dragon Health
                         <span id="enemy-health-text">100 / 100</span>
                     </div>
 
@@ -162,21 +151,21 @@
 
                     <button onclick="SwordAttack()">
 
-                        🗡️ Sword Slash
+                         Sword Slash
 
                     </button>
 
 
                     <button onclick="HeavyAttack()">
 
-                        💥 Heavy Attack
+                         Heavy Attack
 
                     </button>
 
 
                     <button onclick="RunAway()">
 
-                        🏃 Run Away
+                         Run Away
 
                     </button>
 
@@ -187,19 +176,18 @@
         </div>
         <div id="treasure-ending" class="treasure-ending" style="display:none;">
 
-                <h1>🐉 The Dragon Has Fallen</h1>
+                <h1> The Dragon Has Fallen</h1>
 
                 <p>
-                    The Ancient Dragon collapses, and the cavern becomes silent.
+                    The dragon oofs and you are victory
                 </p>
 
                 <p>
-                    Behind the dragon lies a chamber filled with unimaginable treasure.
-                    But something else catches your attention...
+                    There are 2 ways behind the cave:A necklace and a Treasure ROOM!
                 </p>
 
                 <p class="final-choice-text">
-                    The forest needs a guardian.
+                    Necklace
                 </p>
 
                 <h2>What will you choose?</h2>
@@ -207,11 +195,11 @@
                 <div class="dragon-ending-choices">
 
                     <a href="treasure.html" class="treasure-choice-button">
-                        💎 CLAIM THE TREASURE
+                        me need TREASURE
                     </a>
 
                     <a href="guardian.html" class="guardian-choice-button">
-                        🌲 NO EVIL
+                        Necklace
                     </a>
 
                 </div>
@@ -219,12 +207,11 @@
             </div>
 
 
-        <!-- BACK -->
 
         <div class="back-button">
 
             <a href="right.html">
-                ← Back to Coniferous Path
+                Back to Coniferous Path
             </a>
 
         </div>
@@ -232,21 +219,19 @@
     </div>
 
 
-    <!-- GAME OVER -->
 
     <div id="game-over" class="game-over">
 
         <div class="game-over-card">
 
-            <h1>💀 You Have Fallen</h1>
+            <h1>You Died LOL</h1>
 
             <p>
-                Your health has reached zero.
+                Revivng is EZ
             </p>
 
             <p>
-                Your gold, keys, potions and other
-                progress are safe.
+                You cant lose in this game
             </p>
 
             <p id="revive-count">
@@ -258,7 +243,7 @@
                 class="revive-button"
                 onclick="ReviveGame()">
 
-                ✨ Click to Revive
+                SpamClick to Revive broski
 
             </button>
 
@@ -266,8 +251,6 @@
 
     </div>
 
-
-    <!-- STEAM-STYLE NOTIFICATION -->
 
     <div id="notification">
 
@@ -279,221 +262,8 @@
 
 
     <script src="script.js"></script>
-<!-- LOCAL VICTORY THEME: self-contained Web Audio; does not use audio.js -->
 
-<script>
-(() => {
-    "use strict";
 
-    const NAVIGATION_DELAY = 4400;
-    let transitionLocked = false;
-
-    // Creates a short note using the browser's built-in Web Audio API.
-    function playNote(ctx, master, frequency, delay, duration, volume, wave = "sine") {
-        const oscillator = ctx.createOscillator();
-        const envelope = ctx.createGain();
-        const start = ctx.currentTime + 0.06 + delay;
-
-        oscillator.type = wave;
-        oscillator.frequency.setValueAtTime(frequency, start);
-
-        envelope.gain.setValueAtTime(0.0001, start);
-        envelope.gain.exponentialRampToValueAtTime(
-            Math.max(0.0002, volume),
-            start + Math.min(0.04, duration * 0.2)
-        );
-        envelope.gain.exponentialRampToValueAtTime(
-            0.0001,
-            start + duration
-        );
-
-        oscillator.connect(envelope);
-        envelope.connect(master);
-        oscillator.start(start);
-        oscillator.stop(start + duration + 0.05);
-    }
-
-    function playEnding(kind) {
-        const AudioContextClass =
-            window.AudioContext || window.webkitAudioContext;
-
-        if (!AudioContextClass) return false;
-
-        let ctx;
-
-        try {
-            ctx = new AudioContextClass();
-
-            const master = ctx.createGain();
-            master.gain.value = 0.7;
-            master.connect(ctx.destination);
-
-            // Resume audio directly from the user's click.
-            if (ctx.state === "suspended") {
-                ctx.resume().catch(() => {});
-            }
-
-            if (kind === "treasure") {
-                // GRAND VICTORY: warm chord, rising bells, bright finish.
-                [
-                    [130.81, 0.045],
-                    [196.00, 0.035],
-                    [261.63, 0.035],
-                    [329.63, 0.025]
-                ].forEach(([frequency, volume]) => {
-                    playNote(ctx, master, frequency, 0, 3.6, volume);
-                });
-
-                [
-                    [523.25, 0.12, 0.34, 0.105],
-                    [659.25, 0.45, 0.34, 0.100],
-                    [783.99, 0.78, 0.42, 0.105],
-                    [1046.50, 1.17, 0.70, 0.105],
-                    [783.99, 1.75, 0.32, 0.080],
-                    [1046.50, 2.05, 0.36, 0.095],
-                    [1318.51, 2.38, 0.52, 0.075],
-                    [1567.98, 2.90, 0.80, 0.075]
-                ].forEach(([frequency, time, duration, volume]) => {
-                    playNote(ctx, master, frequency, time, duration, volume);
-                });
-            } else {
-                // NO EVIL: randomly choose one of five magical themes.
-                const variations = [
-                    {
-                        chord: [130.81, 196.00, 261.63],
-                        melody: [523.25, 659.25, 783.99, 1046.50, 783.99, 1318.51]
-                    },
-                    {
-                        chord: [146.83, 220.00, 293.66],
-                        melody: [587.33, 739.99, 880.00, 1174.66, 880.00, 1479.98]
-                    },
-                    {
-                        chord: [98.00, 146.83, 196.00],
-                        melody: [392.00, 523.25, 659.25, 783.99, 659.25, 1046.50]
-                    },
-                    {
-                        chord: [174.61, 261.63, 349.23],
-                        melody: [698.46, 880.00, 1046.50, 1396.91, 1046.50, 1760.00]
-                    },
-                    {
-                        chord: [164.81, 246.94, 329.63],
-                        melody: [659.25, 783.99, 987.77, 1318.51, 987.77, 1567.98]
-                    }
-                ];
-
-                const theme =
-                    variations[Math.floor(Math.random() * variations.length)];
-
-                theme.chord.forEach((frequency, index) => {
-                    playNote(
-                        ctx, master, frequency, 0,
-                        3.7, [0.040, 0.030, 0.025][index]
-                    );
-                });
-
-                theme.melody.forEach((frequency, index) => {
-                    playNote(
-                        ctx,
-                        master,
-                        frequency,
-                        0.15 + index * 0.43,
-                        index === 5 ? 0.70 : 0.34,
-                        index === 5 ? 0.085 : 0.095
-                    );
-                });
-            }
-
-            // Close the audio context after the scheduled melody.
-            window.setTimeout(() => {
-                ctx.close().catch(() => {});
-            }, 4100);
-
-            return true;
-        } catch (error) {
-            console.warn("Dragon ending audio could not play:", error);
-            try {
-                if (ctx && ctx.state !== "closed") {
-                    ctx.close().catch(() => {});
-                }
-            } catch (_) {}
-
-            return false;
-        }
-    }
-
-    document.addEventListener("click", event => {
-        const origin = event.target instanceof Element
-            ? event.target
-            : event.target?.parentElement;
-
-        const control = origin?.closest(
-            "a[href], button, [role='button']"
-        );
-
-        if (!control || control.matches(":disabled")) return;
-
-        // Preserve Ctrl-click, middle-click, and new-tab behaviour.
-        if (
-            event.button !== 0 ||
-            event.ctrlKey ||
-            event.metaKey ||
-            event.shiftKey ||
-            event.altKey ||
-            control.target === "_blank" ||
-            control.hasAttribute("download")
-        ) return;
-
-        const label = [
-            control.innerText,
-            control.textContent,
-            control.getAttribute("aria-label"),
-            control.getAttribute("title")
-        ].filter(Boolean).join(" ").replace(/\s+/g, " ").trim();
-
-        const isTreasure =
-            control.matches(".claim-treasure-button, .claim-treasure, [data-ending='treasure']") ||
-            /\bclaim\s+(?:the\s+)?treasure\b/i.test(label);
-
-        const isNoEvil =
-            control.matches(".no-evil-button, .no-evil, [data-ending='no-evil']") ||
-            /\bno\s+evil\b|\bchoose\s+good\b|\bspare\s+(?:the\s+)?dragon\b|\bbecome\s+(?:the\s+)?guardian\b/i.test(label);
-
-        if (!isTreasure && !isNoEvil) return;
-
-        // Only handle normal navigation links.
-        if (!control.matches("a[href]")) {
-            playEnding(isTreasure ? "treasure" : "no-evil");
-            return;
-        }
-
-        const destination = control.href;
-
-        if (
-            !destination ||
-            destination.startsWith("#") ||
-            control.getAttribute("href").toLowerCase().startsWith("javascript:")
-        ) return;
-
-        event.preventDefault();
-
-        if (transitionLocked) return;
-        transitionLocked = true;
-
-        const audioStarted = playEnding(
-            isTreasure ? "treasure" : "no-evil"
-        );
-
-        if (!audioStarted) {
-            window.location.assign(destination);
-            return;
-        }
-
-        window.setTimeout(() => {
-            window.location.assign(destination);
-        }, NAVIGATION_DELAY);
-    }, true);
-})();
-</script>
 </body>
 </html>
 
