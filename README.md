@@ -1,7 +1,8 @@
 # The Lost Forest: 
 A choose your own adventure style game with multiple endings.
 # Screenshot:
-
+![screenshot1](https://github.com/ashfriendash/mywebsite/blob/main/Screenshot%202026-10-31%20221638.png?raw=true)
+![screenshot2](https://github.com/ashfriendash/mywebsite/blob/main/Screenshot%202026-10-31%20221716.png?raw=true)
 # Try it:
 https://ashfriendash.github.io/mywebsite/
 # Quick start:
