@@ -4,7 +4,13 @@ html, body {
     width: 100%;
     height: 100%;
 }
-
+@font-face {
+    font-family: "Projekt Blackbird";
+    src: url("./Projekt Blackbird v2.otf") format("opentype");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
 *, *::before, *::after {
     box-sizing: border-box;
 }
@@ -20,7 +26,7 @@ body {
     background:
         linear-gradient(rgba(0,0,0,.18), rgba(0,0,0,.28)),
         url("images/forest.png") center / cover no-repeat fixed;
-    font-family: "Lora", serif;
+    font-family:"Projekt Blackbird",Arial,sans-serif;
 }
 
 .story-box {
@@ -38,7 +44,7 @@ body {
 .story-box h1 {
     margin: 8px 0 14px;
     color: #ffd84d;
-    font-family: "Cinzel", serif;
+    font-family:"Projekt Blackbird",Arial,sans-serif;
     font-size: clamp(34px, 5vw, 46px);
     line-height: 1.1;
     letter-spacing: 1.5px;
@@ -46,7 +52,7 @@ body {
 }
 
 .story-box h2 {
-    font-family: "Cinzel", serif;
+    font-family:"Projekt Blackbird",Arial,sans-serif;
 }
 
 .story-box > p {
@@ -79,7 +85,7 @@ body {
 .back-link {
     color: #d8d8d8;
     text-decoration: none;
-    font-family: "Lora", serif;
+    font-family:"Projekt Blackbird",Arial,sans-serif;
     font-size: 13px;
     transition: .2s ease;
 }
@@ -112,7 +118,7 @@ body {
     border: 1px solid #fff0a0;
     border-radius: 11px;
     text-decoration: none;
-    font-family: "Cinzel", serif;
+    font-family:"Projekt Blackbird",Arial,sans-serif;
     font-size: 16px;
     font-weight: 700;
     box-shadow: 0 5px 12px rgba(0,0,0,.35), inset 0 0 8px rgba(255,255,255,.18);
@@ -145,7 +151,7 @@ body {
     padding: 7px 16px;
     margin: 4px auto 7px;
     border-radius: 9px;
-    font-family: "Lora", serif;
+    font-family:"Projekt Blackbird",Arial,sans-serif;
     font-size: 13px;
     font-weight: 600;
     cursor: pointer;
@@ -173,7 +179,7 @@ body {
     background: linear-gradient(135deg,#173b28,#287249,#173b28);
     color: #ddffe7;
     border: 1px solid #65d692;
-    font-family: "Cinzel", serif;
+    font-family:"Projekt Blackbird",Arial,sans-serif;
 }
 
 .buy-potion-button:hover {
@@ -197,7 +203,7 @@ body {
     gap: 12px;
     margin-bottom: 6px;
     color: #eee;
-    font-family: "Cinzel", serif;
+    font-family:"Projekt Blackbird",Arial,sans-serif;
     font-size: 13px;
     font-weight: 700;
 }
@@ -259,7 +265,7 @@ body {
     color: #f0f0f0;
     border: 1px solid rgba(190,55,55,.70);
     border-radius: 8px;
-    font-family: "Lora", serif;
+    font-family:"Projekt Blackbird",Arial,sans-serif;
     font-size: 13px;
     font-weight: 600;
     cursor: pointer;
@@ -280,7 +286,7 @@ body {
     padding: 9px 18px;
     border-radius: 8px;
     text-decoration: none;
-    font-family: "Cinzel", serif;
+    font-family:"Projekt Blackbird",Arial,sans-serif;
     transition: .2s ease;
 }
 
@@ -312,7 +318,7 @@ body {
 
 #notifTitle {
     color: #ffd84d;
-    font-family: "Cinzel", serif;
+    font-family:"Projekt Blackbird",Arial,sans-serif;
     font-size: 17px;
     font-weight: 700;
 }
@@ -351,7 +357,7 @@ body {
 
 #potion-purchases {
     color: #ffe58c;
-    font-family: "Cinzel", serif;
+    font-family:"Projekt Blackbird",Arial,sans-serif;
     font-size: 14px;
     font-weight: 700;
 }
@@ -370,7 +376,7 @@ body {
     border: 1px solid #a762d5;
     border-radius: 10px;
     text-decoration: none;
-    font-family: "Cinzel", serif;
+    font-family:"Projekt Blackbird",Arial,sans-serif;
     font-size: 15px;
     font-weight: 700;
     box-shadow: 0 0 10px rgba(145,65,220,.3);
@@ -505,7 +511,7 @@ body {
 #key-click-progress {
     margin: 4px 0 12px;
     color: #f6dc78;
-    font-family: "Cinzel", serif;
+    font-family:"Projekt Blackbird",Arial,sans-serif;
     font-size: 19px;
     font-weight: 700;
 }
@@ -516,7 +522,7 @@ body {
     color: #fff;
     border: 2px solid #d4af37;
     border-radius: 11px;
-    font-family: "Cinzel", serif;
+    font-family:"Projekt Blackbird",Arial,sans-serif;
     font-size: 16px;
     font-weight: 700;
     cursor: pointer;
@@ -537,7 +543,7 @@ body {
     padding: 12px 20px;
     border-radius: 11px;
     text-decoration: none;
-    font-family: "Cinzel", serif;
+    font-family:"Projekt Blackbird",Arial,sans-serif;
     font-size: 15px;
     font-weight: 700;
     transition: .25s ease;
@@ -590,7 +596,7 @@ body {
 .game-over-card h1 {
     margin: 0 0 13px;
     color: #e05a5a;
-    font-family: "Cinzel", serif;
+    font-family:"Projekt Blackbird",Arial,sans-serif;
     font-size: 30px;
     text-shadow: 0 0 12px rgba(220,50,50,.5);
 }
@@ -604,7 +610,7 @@ body {
 #revive-count {
     margin-top: 20px;
     color: #f5d76e;
-    font-family: "Cinzel", serif;
+    font-family:"Projekt Blackbird",Arial,sans-serif;
     font-size: 15px;
     font-weight: 700;
 }
@@ -616,7 +622,7 @@ body {
     color: #e7dcff;
     border: 2px solid #8d6aff;
     border-radius: 10px;
-    font-family: "Cinzel", serif;
+    font-family:"Projekt Blackbird",Arial,sans-serif;
     font-size: 16px;
     font-weight: 700;
     cursor: pointer;
@@ -662,7 +668,7 @@ body {
 .peace-ending h1,
 .treasure-ending h1 {
     margin: 0 0 12px;
-    font-family: "Cinzel", serif;
+    font-family:"Projekt Blackbird",Arial,sans-serif;
     font-size: 30px;
 }
 
@@ -695,7 +701,7 @@ body {
     border: 2px solid #83ffa2;
     border-radius: 11px;
     text-decoration: none;
-    font-family: "Cinzel", serif;
+    font-family:"Projekt Blackbird",Arial,sans-serif;
     font-size: 17px;
     font-weight: 700;
     letter-spacing: .7px;
@@ -749,7 +755,7 @@ body {
     border: 2px solid #fff1a2;
     border-radius: 12px;
     text-decoration: none;
-    font-family: "Cinzel", serif;
+    font-family:"Projekt Blackbird",Arial,sans-serif;
     font-size: 18px;
     font-weight: 700;
     letter-spacing: .8px;
@@ -793,7 +799,7 @@ body {
 .peace-content h1 {
     margin: 0 0 18px;
     color: #d0ffd8;
-    font-family: "Cinzel", serif;
+    font-family:"Projekt Blackbird",Arial,sans-serif;
     font-size: clamp(38px,5vw,52px);
     letter-spacing: 2px;
     text-shadow: 0 0 15px rgba(120,255,150,.43);
@@ -819,7 +825,7 @@ body {
     border: 1px solid #8bf0a0;
     border-radius: 10px;
     text-decoration: none;
-    font-family: "Cinzel", serif;
+    font-family:"Projekt Blackbird",Arial,sans-serif;
     font-size: 14px;
     font-weight: 700;
     transition: .25s ease;
@@ -868,7 +874,7 @@ body {
 
     text-decoration: none;
 
-    font-family: "Cinzel", serif;
+    font-family:"Projekt Blackbird",Arial,sans-serif;
     font-size: 16px;
     font-weight: bold;
 
@@ -988,7 +994,7 @@ body {
 
     overflow: hidden;
 
-    font-family: "Lora", serif;
+    font-family:"Projekt Blackbird",Arial,sans-serif;
 
     background:
         linear-gradient(
@@ -1077,7 +1083,7 @@ body {
 .bad-ending-label {
     margin: 8px 0 4px;
 
-    font-family: "Cinzel", serif;
+    font-family:"Projekt Blackbird",Arial,sans-serif;
 
     font-size: 14px;
 
@@ -1092,7 +1098,7 @@ body {
 .bad-ending-content h1 {
     margin: 5px 0 15px;
 
-    font-family: "Cinzel", serif;
+    font-family:"Projekt Blackbird",Arial,sans-serif;
 
     font-size: clamp(35px, 6vw, 58px);
 
@@ -1176,7 +1182,7 @@ body {
 
     padding: 14px;
 
-    font-family: "Cinzel", serif;
+    font-family:"Projekt Blackbird",Arial,sans-serif;
 
     font-size: clamp(14px, 2vw, 18px);
 
@@ -1224,7 +1230,7 @@ body {
 
     text-decoration: none;
 
-    font-family: "Cinzel", serif;
+    font-family:"Projekt Blackbird",Arial,sans-serif;
 
     font-size: 15px;
 
@@ -1337,7 +1343,7 @@ body {
 
     text-decoration: none;
 
-    font-family: "Cinzel", serif;
+    font-family:"Projekt Blackbird",Arial,sans-serif;
     font-size: 16px;
     font-weight: bold;
 
@@ -1415,7 +1421,7 @@ body {
 
     text-decoration: none;
 
-    font-family: "Cinzel", serif;
+    font-family:"Projekt Blackbird",Arial,sans-serif;
     font-size: 16px;
     font-weight: bold;
 
@@ -1469,7 +1475,7 @@ body {
 .final-choice-text {
     color: #a6ffb8;
 
-    font-family: "Cinzel", serif;
+    font-family:"Projekt Blackbird",Arial,sans-serif;
 
     font-weight: bold;
 
@@ -1526,7 +1532,7 @@ body {
 
     overflow: hidden;
 
-    font-family: "Lora", serif;
+    font-family:"Projekt Blackbird",Arial,sans-serif;
 
     color: #eaffef;
 
@@ -1608,7 +1614,7 @@ body {
 .guardian-label {
     margin: 8px 0 4px;
 
-    font-family: "Cinzel", serif;
+    font-family:"Projekt Blackbird",Arial,sans-serif;
 
     font-size: 14px;
 
@@ -1620,7 +1626,7 @@ body {
 .guardian-content h1 {
     margin: 5px 0 15px;
 
-    font-family: "Cinzel", serif;
+    font-family:"Projekt Blackbird",Arial,sans-serif;
 
     font-size: clamp(35px, 6vw, 58px);
 
@@ -1701,7 +1707,7 @@ body {
     border-top: 1px solid rgba(119, 255, 152, 0.3);
     border-bottom: 1px solid rgba(119, 255, 152, 0.3);
 
-    font-family: "Cinzel", serif;
+    font-family:"Projekt Blackbird",Arial,sans-serif;
 
     font-size: clamp(15px, 2vw, 20px);
 
@@ -1743,7 +1749,7 @@ body {
 
     text-decoration: none;
 
-    font-family: "Cinzel", serif;
+    font-family:"Projekt Blackbird",Arial,sans-serif;
 
     font-size: 15px;
 
@@ -1843,7 +1849,7 @@ body {
     top: 35%;
     z-index: 20;
     transform: translate(-50%,0);
-    font-family: "Cinzel", serif;
+    font-family:"Projekt Blackbird",Arial,sans-serif;
     font-size: 27px;
     font-weight: bold;
     color: #ffdfdf;
@@ -2434,7 +2440,7 @@ body {
 
 .firefly-link-copy strong {
     color: #f0e5c4;
-    font-family: "Cinzel", serif;
+    font-family:"Projekt Blackbird",Arial,sans-serif;
     font-size: 11px;
     font-weight: 600;
     letter-spacing: .025em;
@@ -2442,7 +2448,7 @@ body {
 
 .firefly-link-copy small {
     color: #bfcbb5;
-    font-family: "Lora", serif;
+    font-family:"Projekt Blackbird",Arial,sans-serif;
     font-size: 10px;
 }
 
@@ -2622,4 +2628,20 @@ body {
     border-color: rgba(226, 207, 150, 0.82) !important;
     color: #f1e4b9 !important;
 }
-                           
+/* PROJECT-WIDE FONT */
+body,
+body *,
+body *::before,
+body *::after {
+    font-family: "Projekt Blackbird", Arial, sans-serif !important;
+}
+/* Force Projekt Blackbird on the opening title */
+#openingTitle,
+#opening-title,
+.opening-title,
+.title-screen h1,
+.opening-screen h1,
+.intro-screen h1,
+h1.game-title {
+    font-family: "Projekt Blackbird", Arial, sans-serif !important;
+}

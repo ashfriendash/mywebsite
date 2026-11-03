@@ -12,7 +12,7 @@
     min-height: 100vh;
     overflow: hidden;
 
-    font-family: "Lora", Georgia, serif;
+    font-family: "Projekt Blackbird", Arial, sans-serif;
     background: #07130d;
     color: white;
 }
@@ -118,7 +118,7 @@
 .title-ornament i {
     font-style: normal;
 
-    font-family: "Cinzel", serif;
+    font-family:"Projekt Blackbird",Arial,sans-serif;
 
     font-size: 18px;
 
@@ -133,7 +133,7 @@
 .title-content h1 {
     margin: 0;
 
-    font-family: "Cinzel", Georgia, serif;
+    font-family: "Projekt Blackbird", Arial, sans-serif;
 
     font-weight: 700;
 
@@ -243,7 +243,7 @@
 
     text-decoration: none;
 
-    font-family: "Cinzel", Georgia, serif;
+    font-family: "Projekt Blackbird", Arial, sans-serif;
 
     font-size: clamp(15px, 1.6vw, 21px);
 
@@ -689,4 +689,14 @@
         animation: none;
     }
 
+}
+/* Force Projekt Blackbird on the opening title */
+#openingTitle,
+#opening-title,
+.opening-title,
+.title-screen h1,
+.opening-screen h1,
+.intro-screen h1,
+h1.game-title {
+    font-family: "Projekt Blackbird", Arial, sans-serif !important;
 }
